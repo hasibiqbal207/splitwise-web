@@ -3,4 +3,4 @@ import ExpenseModel from "./expense.model.js";
 import GroupModel from "./group.model.js";
 import SettlementModel from "./settlement.model.js";
 
-export { UserModel, ExpenseModel, GroupModel, SettlementModel };
+export default { UserModel, ExpenseModel, GroupModel, SettlementModel };

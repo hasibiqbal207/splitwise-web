@@ -1,0 +1,36 @@
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T00:03:27.601Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T00:10:07.477Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T00:10:54.841Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T00:11:28.846Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T00:11:42.942Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:26:43.257Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:28:39.034Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | staus : undefined | message: Cannot read properties of undefined (reading 'findOne')","timestamp":"2024-06-22T20:28:43.048Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"500\",\"responseTime\":\"2.437\"}","timestamp":"2024-06-22T20:28:43.051Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:29:31.134Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"-\",\"responseTime\":\"-\"}","timestamp":"2024-06-22T20:29:51.960Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:32:24.323Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"1.951\"}","timestamp":"2024-06-22T20:32:52.672Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:33:50.564Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:35:52.776Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"2.828\"}","timestamp":"2024-06-22T20:35:57.116Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T20:49:10.960Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T21:01:35.917Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T21:01:48.590Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | staus : undefined | message: Cannot read properties of undefined (reading 'findOne')","timestamp":"2024-06-22T21:01:53.479Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"500\",\"responseTime\":\"2.413\"}","timestamp":"2024-06-22T21:01:53.482Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T21:03:05.213Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | staus : undefined | message: Cannot read properties of undefined (reading 'create')","timestamp":"2024-06-22T21:03:08.763Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"500\",\"responseTime\":\"71.653\"}","timestamp":"2024-06-22T21:03:08.767Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T21:06:28.134Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"86.199\"}","timestamp":"2024-06-22T21:06:33.540Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | staus : 400 | message: Email Id already present please login!","timestamp":"2024-06-22T21:39:37.843Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"15.009\"}","timestamp":"2024-06-22T21:39:37.844Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T22:15:11.249Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T22:21:10.351Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T22:21:22.995Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-22T22:24:39.858Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Email Id already present, please login!","timestamp":"2024-06-22T22:24:48.715Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"30.307\"}","timestamp":"2024-06-22T22:24:48.724Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"85.254\"}","timestamp":"2024-06-22T22:24:55.940Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-23T01:34:58.949Z"}

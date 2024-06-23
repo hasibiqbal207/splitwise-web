@@ -1,13 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
-import logger from "./logger";
 import morgan from "morgan";
 
+import logger from "../config/logger.config.js";
+import connectDB from "../config/database.config.js";
+import routes from "./routes/index.js";
+
 dotenv.config();
+
+// Connect to the database
+connectDB();
+
 const app = express();
 
 const port = process.env.PORT || 3000;
 const morganFormat = ":method :url :status :response-time ms";
+
+//parse json request url
+app.use(express.json());
 
 app.use(
   morgan(morganFormat, {
@@ -24,6 +34,9 @@ app.use(
     },
   })
 );
+
+//api v1 routes
+app.use("/api/v1", routes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
