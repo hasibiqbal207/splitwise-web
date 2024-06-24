@@ -143,3 +143,42 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-23T20:22:44.318Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/auth/loginUser\",\"status\":\"200\",\"responseTime\":\"68.963\"}","timestamp":"2024-06-23T20:22:48.182Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:34:00.036Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:40:33.598Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:40:37.041Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/auth/loginUser\",\"status\":\"200\",\"responseTime\":\"113.153\"}","timestamp":"2024-06-24T17:40:43.889Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Email Id already present, please login!","timestamp":"2024-06-24T17:41:18.214Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"13.548\"}","timestamp":"2024-06-24T17:41:18.215Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:41:57.061Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"12.361\"}","timestamp":"2024-06-24T17:41:57.062Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:42:09.780Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"25.472\"}","timestamp":"2024-06-24T17:42:09.782Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:42:59.180Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"emailId":"test@gmail.com","firstName":"John","lastName":"Dao","password":"TestPassword@123"},"timestamp":"2024-06-24T17:43:01.524Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:43:01.540Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"18.487\"}","timestamp":"2024-06-24T17:43:01.544Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:43:20.399Z"}
+{"level":"\u001b[32minfo\u001b[39m","timestamp":"2024-06-24T17:43:22.153Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:43:22.171Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"21.501\"}","timestamp":"2024-06-24T17:43:22.178Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:43:43.558Z"}
+{"level":"\u001b[32minfo\u001b[39m","timestamp":"2024-06-24T17:43:46.542Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:43:46.557Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"16.358\"}","timestamp":"2024-06-24T17:43:46.559Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:44:18.012Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"John","timestamp":"2024-06-24T17:44:20.162Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:44:20.177Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"16.925\"}","timestamp":"2024-06-24T17:44:20.180Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"John","timestamp":"2024-06-24T17:44:55.890Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:44:55.902Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"12.328\"}","timestamp":"2024-06-24T17:44:55.902Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:45:32.307Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"John","timestamp":"2024-06-24T17:45:35.261Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:45:35.277Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"18.418\"}","timestamp":"2024-06-24T17:45:35.280Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-24T17:46:43.969Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/registerUser | status : 400 | message: Invalid input data","timestamp":"2024-06-24T17:46:48.049Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"400\",\"responseTime\":\"17.901\"}","timestamp":"2024-06-24T17:46:48.052Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"89.414\"}","timestamp":"2024-06-24T17:47:00.866Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/loginUser | staus : 404 | message: Invalid credentials. NotFoundError: Invalid credentials.\n    at signUser (file:///media/hasib/Metarial/Development%20Box/02.OnGoing%20Projects/splitwise-web/backend/src/services/authentication.service.js:32:36)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async loginUser (file:///media/hasib/Metarial/Development%20Box/02.OnGoing%20Projects/splitwise-web/backend/src/controllers/authentication.controller.js:66:18)","timestamp":"2024-06-24T17:47:23.085Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/auth/loginUser\",\"status\":\"404\",\"responseTime\":\"13.117\"}","timestamp":"2024-06-24T17:47:23.086Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/auth/loginUser\",\"status\":\"200\",\"responseTime\":\"60.241\"}","timestamp":"2024-06-24T17:47:32.776Z"}

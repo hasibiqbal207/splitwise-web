@@ -9,18 +9,19 @@ import validator from "../utils/validation.js"; // Assuming there's a validator 
 /**
  * User Registration function
  *
- * Accepts: firstName, lastName, emailId, password
+ * Accepts: firstName, lastName, email, password
  * Validation: firstname, lastname not Null
- *             emailID - contain '@' and '.com'
+ *             email - contain '@' and '.com'
  *             password - min 8, lowercase, uppercase, special character, numbers
  * API: /auth/registerUser
  */
 export const registerUser = async (req, res) => {
   try {
-    const { firstName, lastName, emailId, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
+    console.log( firstName, lastName, email, password )
 
     // Checking if email ID already present in database
-    const existingUser = await findUserByEmail(emailId);
+    const existingUser = await findUserByEmail(email);
     if (existingUser) {
       const err = new Error("Email Id already present, please login!");
       err.status = 400;
@@ -31,7 +32,7 @@ export const registerUser = async (req, res) => {
     if (
       !validator.notNull(firstName) ||
       !validator.notNull(lastName) ||
-      !validator.emailValidation(emailId) ||
+      !validator.emailValidation(email) ||
       !validator.passwordValidation(password)
     ) {
       const err = new Error("Invalid input data");
@@ -40,7 +41,7 @@ export const registerUser = async (req, res) => {
     }
 
     // Creating user data object
-    const newUser = { firstName, lastName, emailId, password };
+    const newUser = { firstName, lastName, email, password };
 
     // Storing user details in DB
     const createdUser = await createUser(newUser);
@@ -61,16 +62,16 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { emailId, password } = req.body;
-    const user = await signUser(emailId, password);
+    const { email, password } = req.body;
+    const user = await signUser(email, password);
 
-    // const accessToken = apiAuth.generateAccessToken(req.body.emailId)
+    // const accessToken = apiAuth.generateAccessToken(req.body.email)
 
     res.status(200).json({
       status: "Success",
       message: "User Login Success",
       userId: user.id,
-      emailId: user.emailId,
+      email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
       // accessToken

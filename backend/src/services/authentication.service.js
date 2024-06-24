@@ -3,8 +3,8 @@ import { UserModel } from "../models/index.js";
 import bcrypt from "bcrypt";
 
 // Function to check if email ID already exists
-export const findUserByEmail = async (emailId) => {
-  return await UserModel.findOne({ emailId });
+export const findUserByEmail = async (email) => {
+  return await UserModel.findOne({ email });
 };
 
 // Function to create a new user
@@ -26,7 +26,7 @@ export const createUser = async (userData) => {
  */
 export const signUser = async (email, password) => {
   console.log(email, password);
-  const user = await UserModel.findOne({ emailId: email });
+  const user = await UserModel.findOne({ email: email });
 
   //check if user exist
   if (!user) throw createHttpError.NotFound("Invalid credentials.");
