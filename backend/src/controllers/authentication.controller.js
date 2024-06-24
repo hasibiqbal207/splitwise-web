@@ -1,17 +1,21 @@
-import { findUserByEmail, createUser } from "../services/authentication.service.js";
+import {
+  findUserByEmail,
+  createUser,
+  signUser,
+} from "../services/authentication.service.js";
 import logger from "../../config/logger.config.js";
 import validator from "../utils/validation.js"; // Assuming there's a validator module
 
 /**
  * User Registration function
- * 
- * Accepts: firstName, lastName, emailId, password 
- * Validation: firstname, lastname not Null 
- *             emailID - contain '@' and '.com' 
+ *
+ * Accepts: firstName, lastName, emailId, password
+ * Validation: firstname, lastname not Null
+ *             emailID - contain '@' and '.com'
  *             password - min 8, lowercase, uppercase, special character, numbers
- * API: /user/register
+ * API: /auth/registerUser
  */
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, emailId, password } = req.body;
 
@@ -55,7 +59,28 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {};
+export const loginUser = async (req, res) => {
+  try {
+    const { emailId, password } = req.body;
+    const user = await signUser(emailId, password);
 
+    // const accessToken = apiAuth.generateAccessToken(req.body.emailId)
 
-export default { registerUser };
+    res.status(200).json({
+      status: "Success",
+      message: "User Login Success",
+      userId: user.id,
+      emailId: user.emailId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      // accessToken
+    });
+  } catch (error) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${error.status} | message: ${error.message} ${error.stack}`
+    );
+    res.status(error.status || 500).json({
+      message: error.message,
+    });
+  }
+};
