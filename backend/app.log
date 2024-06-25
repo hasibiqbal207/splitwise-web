@@ -250,3 +250,5 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T14:44:04.819Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"20.902\"}","timestamp":"2024-06-25T14:44:07.556Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T14:44:27.329Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T15:28:43.236Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T16:08:49.916Z"}

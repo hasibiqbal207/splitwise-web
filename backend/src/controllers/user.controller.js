@@ -3,7 +3,6 @@ import logger from "../../config/logger.config.js";
 
 import { fetchUserByEmail } from "../services/user.service.js";
 
-
 export const viewUserProfile = async (req, res) => {
     try {
         const { email} = req.body;
