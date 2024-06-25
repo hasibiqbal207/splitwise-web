@@ -1,12 +1,14 @@
 import express from "express";
 
-import { registerUser, loginUser } from "../controllers/authentication.controller.js";
+import { viewUserProfile, updateUserProfile, deleteUser } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.route("/deleteUser").delete(registerUser)
-router.route("/userProfile").get(loginUser)
-router.route("/userProfile").put(loginUser)
+router.route("/userProfile").get(viewUserProfile)
+
+router.route("/userProfile").put(updateUserProfile)
+
+router.route("/deleteUser").delete(deleteUser)
 // router.route("/allUser").get(loginUser)
 
 

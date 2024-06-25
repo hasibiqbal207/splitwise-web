@@ -10,7 +10,7 @@ const validateToken = (req, res, next) => {
 };
 
 // [check]
- const validateUser = (user, email) => {
+const validateUser = (user, email) => {
   return true;
 };
 
