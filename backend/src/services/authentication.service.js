@@ -1,6 +1,7 @@
 import createHttpError from "http-errors";
 import { UserModel } from "../models/index.js";
 import bcrypt from "bcrypt";
+import validator from "../utils/validation.js";
 
 // Function to check if email ID already exists
 export const findUserByEmail = async (email) => {
@@ -41,4 +42,40 @@ export const signUser = async (email, password) => {
     );
 
   return user;
+};
+
+
+export const updatePasswordInDatabase = async (email, oldPassword, newPassword) => {
+  // Checking if email is present in the database
+  const user = await findUserByEmail(email);
+
+  if (!user) {
+    const error = new Error("User does not exist!");
+    error.status = 400;
+    throw error;
+  }
+
+  // Performing basic validations
+  validator.notNull(oldPassword);
+  validator.passwordValidation(newPassword);
+
+  // Validating the old password using bcrypt
+  const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+  if (!isPasswordValid) {
+    const error = new Error("Old password does not match");
+    error.status = 400;
+    throw error;
+  }
+
+  // Encrypting the new password using bcrypt
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+  // Updating the user's password in the database
+  const updateResponse = await UserModel.updateOne(
+    { email },
+    { $set: { password: hashedPassword } }
+  );
+
+  return updateResponse;
 };

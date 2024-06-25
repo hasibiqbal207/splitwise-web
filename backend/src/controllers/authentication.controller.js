@@ -2,9 +2,11 @@ import {
   findUserByEmail,
   createUser,
   signUser,
+  updatePasswordInDatabase
 } from "../services/authentication.service.js";
 import logger from "../../config/logger.config.js";
 import validator from "../utils/validation.js"; // Assuming there's a validator module
+import apiAuth from "../utils/apiAuthentication.js";
 
 /**
  * User Registration function
@@ -18,7 +20,7 @@ import validator from "../utils/validation.js"; // Assuming there's a validator 
 export const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
-    console.log( firstName, lastName, email, password )
+    console.log(firstName, lastName, email, password);
 
     // Checking if email ID already present in database
     const existingUser = await findUserByEmail(email);
@@ -85,3 +87,32 @@ export const loginUser = async (req, res) => {
     });
   }
 };
+
+export const updatePassword = async (req, res) => {
+  try {
+    const { email, oldPassword, newPassword } = req.body;
+
+    // Check if the logged-in user is the same as the requested user
+    apiAuth.validateUser(req.user, email);
+
+    // Call the service to update the password
+    const updateResponse = await updatePasswordInDatabase(email, oldPassword, newPassword);
+
+    res.status(200).json({
+      status: "Success",
+      message: "Password updated successfully",
+      userId: updateResponse,
+    });
+  } catch (err) {
+    logger.error(
+      `URL: ${req.originalUrl} | status: ${err.status} | message: ${err.message} ${err.stack}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+// export const resetPassword = async (req, res) => {};
+// export const logout = async (req, res) => {};
+// export const refreshToken = async (req, res) => {};
