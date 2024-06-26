@@ -1,4 +1,4 @@
-import {findUserByEmail} from "../services/authentication.service.js";
+import { findUserByEmail } from "../services/authentication.service.js";
 
 // Function to check if a value is not null or undefined
 export const notNull = (value) => {
@@ -20,7 +20,21 @@ export const passwordValidation = (password) => {
 
 export const userValidation = async (email) => {
   const user = await findUserByEmail(email);
-  return !(!user);
+  return !!user;
+};
+
+export const currencyValidation = (currency) => {
+  if (
+    (currency && currency == "USD" ||
+    currency == "EUR" ||
+    currency == "BDT")
+  ) {
+    return true;
+  } else {
+    const err = new Error("Currency validation fail!!");
+    err.status = 400;
+    throw err;
+  }
 };
 
 export default {
@@ -28,4 +42,5 @@ export default {
   emailValidation,
   passwordValidation,
   userValidation,
+  currencyValidation,
 };
