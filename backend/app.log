@@ -339,3 +339,12 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T17:46:38.905Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T17:46:43.934Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/v1/group/deleteGroup\",\"status\":\"200\",\"responseTime\":\"32.168\"}","timestamp":"2024-06-26T17:47:14.891Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T17:48:50.941Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:03:19.974Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:32:19.156Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:34:49.457Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:50:25.381Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:53:11.334Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/group/getUserGroups\",\"status\":\"200\",\"responseTime\":\"40.773\"}","timestamp":"2024-06-26T18:53:13.486Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/group/createGroup\",\"status\":\"200\",\"responseTime\":\"63.273\"}","timestamp":"2024-06-26T18:53:26.810Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/group/getUserGroups\",\"status\":\"200\",\"responseTime\":\"23.253\"}","timestamp":"2024-06-26T18:53:30.909Z"}

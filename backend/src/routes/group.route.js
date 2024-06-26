@@ -5,7 +5,11 @@ import {
   viewGroup,
   editGroup,
   deleteGroup,
-  findGroup,
+  findGroupsbyUser
+//   findGroup,
+//   splitNewExpense,
+//   clearLastSplit,
+//   initiateSettlement
 } from "../controllers/group.controller.js";
 
 const router = express.Router();
@@ -14,6 +18,12 @@ router.route("/createGroup").post(createGroup);
 router.route("/viewGroup").get(viewGroup);
 router.route("/editGroup").put(editGroup);
 router.route("/deleteGroup").delete(deleteGroup);
-router.route("/findGroup").get(findGroup);
+
+router.route("/getUserGroups").get(findGroupsbyUser);
+
+// router.route("/splitNewExpense").get(splitNewExpense);
+// router.route("/clearLastSplit").get(clearLastSplit);
+// router.route("/initiateSettlement").get(initiateSettlement);
+// router.route("/splitExpense").get(viewGroup);
 
 export default router;

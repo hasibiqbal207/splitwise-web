@@ -29,3 +29,9 @@ export const updateGroupinDB = async (groupData) => {
 export const deleteGroupinDB = async (groupId) => {
   return await GroupModel.deleteOne({ _id: groupId });
 }
+
+export const getUserGroups = async (email) => {
+  return await GroupModel.find({ groupMembers: email }).sort({
+    $natural: -1, //to get the newest first
+  });;
+}
