@@ -8,3 +8,7 @@ export const fetchUserByEmail = async (email) => {
     }
   );
 };
+
+export const deleteUserByEmail = async (email) => {
+  return await UserModel.deleteOne({ email });
+};
