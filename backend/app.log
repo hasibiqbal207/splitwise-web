@@ -253,3 +253,26 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T15:28:43.236Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T16:08:49.916Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-25T16:11:42.632Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T00:49:59.138Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T00:50:27.288Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T00:52:14.536Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"27.269\"}","timestamp":"2024-06-26T00:52:36.850Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"32.444\"}","timestamp":"2024-06-26T00:52:40.739Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"12.535\"}","timestamp":"2024-06-26T00:52:57.777Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T13:37:29.636Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"98.419\"}","timestamp":"2024-06-26T13:38:42.590Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/auth/loginUser | staus : 404 | message: Invalid credentials. Password does not match. NotFoundError: Invalid credentials. Password does not match.\n    at signUser (file:///media/hasib/Metarial/Development%20Box/02.OnGoing%20Projects/splitwise-web/backend/src/services/authentication.service.js:40:27)\n    at async loginUser (file:///media/hasib/Metarial/Development%20Box/02.OnGoing%20Projects/splitwise-web/backend/src/controllers/authentication.controller.js:68:18)","timestamp":"2024-06-26T13:41:00.999Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/loginUser\",\"status\":\"404\",\"responseTime\":\"61.310\"}","timestamp":"2024-06-26T13:41:01.000Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/loginUser\",\"status\":\"200\",\"responseTime\":\"59.235\"}","timestamp":"2024-06-26T13:41:13.370Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/updatePassword\",\"status\":\"200\",\"responseTime\":\"142.843\"}","timestamp":"2024-06-26T13:45:51.414Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"14.539\"}","timestamp":"2024-06-26T13:51:04.487Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/user/userProfile | staus : undefined | message: userValidation.notNull is not a function","timestamp":"2024-06-26T13:52:37.629Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"500\",\"responseTime\":\"14.018\"}","timestamp":"2024-06-26T13:52:37.630Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T13:55:28.974Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"43.838\"}","timestamp":"2024-06-26T13:55:30.822Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T13:56:19.979Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/user/userProfile\",\"status\":\"200\",\"responseTime\":\"36.235\"}","timestamp":"2024-06-26T13:56:21.594Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/user/deleteUser | staus : undefined | message: userValidation is not defined","timestamp":"2024-06-26T13:57:34.740Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/v1/user/deleteUser\",\"status\":\"500\",\"responseTime\":\"0.845\"}","timestamp":"2024-06-26T13:57:34.741Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T13:57:56.878Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/v1/user/deleteUser\",\"status\":\"200\",\"responseTime\":\"37.740\"}","timestamp":"2024-06-26T13:57:58.800Z"}

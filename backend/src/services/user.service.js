@@ -12,3 +12,17 @@ export const fetchUserByEmail = async (email) => {
 export const deleteUserByEmail = async (email) => {
   return await UserModel.deleteOne({ email });
 };
+
+export const updateUserData = async (firstName, lastName, email) => {
+  return await UserModel.updateOne(
+    {
+      email,
+    },
+    {
+      $set: {
+        firstName,
+        lastName,
+      },
+    }
+  );
+}
