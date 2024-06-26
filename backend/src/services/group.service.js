@@ -7,3 +7,25 @@ export const createGroupinDB = async (groupData) => {
 export const findGroupinDB = async (groupId) => {
   return await GroupModel.findOne({ _id: groupId });
 };
+
+export const updateGroupinDB = async (groupData) => {
+  return await GroupModel.updateOne(
+    {
+      _id: groupData.id,
+    },
+    {
+      $set: {
+        groupName: groupData.groupName,
+        groupDescription: groupData.groupDescription,
+        groupCurrency: groupData.groupCurrency,
+        groupMembers: groupData.groupMembers,
+        groupCategory: groupData.groupCategory,
+        split: groupData.split,
+      },
+    }
+  );
+};
+
+export const deleteGroupinDB = async (groupId) => {
+  return await GroupModel.deleteOne({ _id: groupId });
+}

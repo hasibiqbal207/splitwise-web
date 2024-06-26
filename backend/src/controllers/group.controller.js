@@ -2,7 +2,7 @@ import apiAuth from "../utils/apiAuthentication.js";
 import logger from "../../config/logger.config.js";
 import * as validator from "../utils/validation.js";
 
-import { createGroupinDB, findGroupinDB } from "../services/group.service.js";
+import { createGroupinDB, findGroupinDB, updateGroupinDB, deleteGroupinDB } from "../services/group.service.js";
 
 export const createGroup = async (req, res) => {
   try {
@@ -71,29 +71,116 @@ export const createGroup = async (req, res) => {
 };
 
 export const viewGroup = async (req, res) => {
-    try {
-        const { groupId } = req.body
-        const group = await findGroupinDB(groupId)
+  try {
+    const { groupId } = req.body;
+    const group = await findGroupinDB(groupId);
 
-        if (!group || groupId == null) {
-            const err = new Error('Invalid Group Id')
+    if (!group || groupId == null) {
+      const err = new Error("Invalid Group Id");
+      err.status = 400;
+      throw err;
+    }
+    res.status(200).json({
+      status: "Success",
+      group: group,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const editGroup = async (req, res) => {
+  try {
+    const  groupId  = req.body.id;
+    const group = await findGroupinDB(groupId);
+
+    //Validation to check if the group exists
+    if (!group || groupId == null) {
+      const err = new Error("Invalid Group Id");
+      err.status = 400;
+      throw err;
+    }
+
+    const updatedGroup = req.body;
+
+    //Passing the existing split to the edit group
+    updatedGroup.split = group.split;
+
+    if (
+      validator.notNull(updatedGroup.groupName) &&
+      validator.currencyValidation(updatedGroup.groupCurrency)
+    ) {
+        for (const memberEmail of updatedGroup.groupMembers) {
+        // Validate that the group member exists in the database
+        const isMemberValid = await validator.userValidation(memberEmail);
+        if (!isMemberValid) {
+          const error = new Error("Invalid member email");
+          error.status = 400;
+          throw error;
+        }
+
+        //Check if a new group member is added to the gorup and missing in the split
+        //split[0] is used since json is stored as an array in the DB - ideally there should only be one element in the split array hence we are using the index number
+        if (!updatedGroup.split[0].hasOwnProperty(memberEmail)) {
+          //adding the missing members to the split and init with value 0
+          updatedGroup.split[0][memberEmail] = 0;
+        }
+      }
+
+      // Validate that the group owner exists in the database
+      const isOwnerValid = await validator.userValidation(updatedGroup.groupOwner);
+      if (!isOwnerValid) {
+        const error = new Error("Invalid owner email");
+        error.status = 400;
+        throw error;
+      }
+
+      const updatedResponse = updateGroupinDB(updatedGroup);
+
+      res.status(200).json({
+        status: "Success",
+        message: "Group updated successfully!",
+        response: updatedResponse,
+      });
+    }
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const deleteGroup = async (req, res) => {
+    try {
+        const { groupId } = req.body;
+        const group = await findGroupinDB(groupId);
+
+        if (!group) {
+            const err = new Error("Invalid Group Id")
             err.status = 400
             throw err
         }
+
+        const deleteGroupResponse = await deleteGroupinDB(groupId)
         res.status(200).json({
+            message: "Group deleted successfully!",
             status: "Success",
-            group: group,
+            response: deleteGroupResponse
         })
-    } catch(err) {
+    } catch (err) {
         logger.error(`URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`)
         res.status(err.status || 500).json({
             message: err.message
         })
     }
 };
-
-export const editGroup = async (req, res) => {};
-
-export const deleteGroup = async (req, res) => {};
 
 export const findGroup = async (req, res) => {};
