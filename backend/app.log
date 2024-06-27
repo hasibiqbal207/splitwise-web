@@ -348,3 +348,13 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/group/getUserGroups\",\"status\":\"200\",\"responseTime\":\"40.773\"}","timestamp":"2024-06-26T18:53:13.486Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/group/createGroup\",\"status\":\"200\",\"responseTime\":\"63.273\"}","timestamp":"2024-06-26T18:53:26.810Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/group/getUserGroups\",\"status\":\"200\",\"responseTime\":\"23.253\"}","timestamp":"2024-06-26T18:53:30.909Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:56:55.890Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-26T18:56:58.805Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T00:13:35.961Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T00:13:40.404Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T00:17:53.545Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T00:18:32.730Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T12:24:32.025Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:01:35.519Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: 400 | message: Invalid Group ID","timestamp":"2024-06-27T13:01:37.387Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"400\",\"responseTime\":\"19.138\"}","timestamp":"2024-06-27T13:01:37.390Z"}

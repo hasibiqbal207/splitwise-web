@@ -8,11 +8,10 @@ import {
   findGroupinDB,
   updateGroupinDB,
   deleteGroupinDB,
-  getUserGroups
+  getUserGroups,
 } from "../services/group.service.js";
 
-import {
-  findUserByEmail } from "../services/authentication.service.js";
+import { findUserByEmail } from "../services/authentication.service.js";
 
 export const createGroup = async (req, res) => {
   try {
@@ -201,7 +200,7 @@ export const findGroupsbyUser = async (req, res) => {
   try {
     const userEmail = req.body.email;
     const user = await findUserByEmail(userEmail);
-  
+
     if (!user) {
       const err = new Error("User Id not found !");
       err.status = 400;

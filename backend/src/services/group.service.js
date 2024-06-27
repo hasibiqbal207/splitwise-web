@@ -28,10 +28,20 @@ export const updateGroupinDB = async (groupData) => {
 
 export const deleteGroupinDB = async (groupId) => {
   return await GroupModel.deleteOne({ _id: groupId });
-}
+};
 
 export const getUserGroups = async (email) => {
   return await GroupModel.find({ groupMembers: email }).sort({
     $natural: -1, //to get the newest first
-  });;
-}
+  });
+};
+
+export const getGroupUsers = async (groupId) => {
+  return await GroupModel.findOne(
+    { _id: groupId },
+    {
+      groupMembers: 1,
+      _id: 0,
+    }
+  );
+};

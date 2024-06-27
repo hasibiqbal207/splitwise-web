@@ -11,7 +11,7 @@ const groupSchema = new mongoose.Schema(
     },
     groupCurrency: {
       type: String,
-      default: "INR",
+      default: "EUR",
     },
     groupOwner: {
       type: String,

@@ -1,4 +1,6 @@
 import { findUserByEmail } from "../services/authentication.service.js";
+import logger from "../../config/logger.config.js";
+import { getGroupUsers } from "../services/group.service.js";
 
 // Function to check if a value is not null or undefined
 export const notNull = (value) => {
@@ -25,9 +27,8 @@ export const userValidation = async (email) => {
 
 export const currencyValidation = (currency) => {
   if (
-    (currency && currency == "USD" ||
-    currency == "EUR" ||
-    currency == "BDT")
+    currency &&
+    (currency == "USD" || currency == "EUR" || currency == "BDT")
   ) {
     return true;
   } else {
@@ -36,6 +37,18 @@ export const currencyValidation = (currency) => {
     throw err;
   }
 };
+
+export const groupUserValidation = async (email, groupId) => {
+  let groupMembers = await getGroupUsers(groupId);
+
+  groupMembers = groupMembers['groupMembers']
+  if (groupMembers.includes(email))
+      return true
+  else{
+      logger.warn([`Group User Valdation fail : Group ID : [${groupId}] | user : [${email}]`])
+      return false
+  }
+}
 
 export default {
   notNull,
