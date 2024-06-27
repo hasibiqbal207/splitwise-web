@@ -358,3 +358,83 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:01:35.519Z"}
 {"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: 400 | message: Invalid Group ID","timestamp":"2024-06-27T13:01:37.387Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"400\",\"responseTime\":\"19.138\"}","timestamp":"2024-06-27T13:01:37.390Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:10:59.081Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:24:38.345Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:28:16.118Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:39:42.490Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:39:53.013Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:40:39.609Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:41:04.476Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T13:46:32.487Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:39:08.723Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:40:25.787Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:40:38.902Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:41:03.707Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:41:38.114Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:42:50.937Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:43:21.296Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T14:43:51.799Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/registerUser\",\"status\":\"200\",\"responseTime\":\"99.769\"}","timestamp":"2024-06-27T14:49:28.449Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/group/createGroup\",\"status\":\"200\",\"responseTime\":\"54.170\"}","timestamp":"2024-06-27T14:50:05.772Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/group/viewGroup | staus : 400 | message: Invalid Group Id","timestamp":"2024-06-27T14:54:28.775Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/group/viewGroup\",\"status\":\"400\",\"responseTime\":\"11.622\"}","timestamp":"2024-06-27T14:54:28.775Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/group/viewGroup\",\"status\":\"200\",\"responseTime\":\"13.478\"}","timestamp":"2024-06-27T14:54:48.115Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: 400 | message: Invalid Group ID","timestamp":"2024-06-27T14:55:28.810Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"400\",\"responseTime\":\"13.607\"}","timestamp":"2024-06-27T14:55:28.813Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: undefined | message: value.trim is not a function","timestamp":"2024-06-27T14:55:45.225Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"500\",\"responseTime\":\"13.221\"}","timestamp":"2024-06-27T14:55:45.226Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T15:47:40.267Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":5000,"expenseDescription":"Fooding with Francis","expenseMembers":["test1@gmail.com","test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:47:41.900Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: undefined | message: value.trim is not a function","timestamp":"2024-06-27T15:47:41.918Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"500\",\"responseTime\":\"20.597\"}","timestamp":"2024-06-27T15:47:41.921Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T15:54:55.812Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":5000,"expenseDescription":"Fooding with Francis","expenseMembers":["test1@gmail.com","test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:55:16.451Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"-\",\"responseTime\":\"-\"}","timestamp":"2024-06-27T15:55:52.212Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T15:56:18.552Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":5000,"expenseDescription":"Fooding with Francis","expenseMembers":["test1@gmail.com","test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:56:20.443Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"-\",\"responseTime\":\"-\"}","timestamp":"2024-06-27T15:57:10.328Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T15:57:27.678Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":5000,"expenseDescription":"Fooding with Francis","expenseMembers":["test1@gmail.com","test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:57:29.320Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":["Group User Valdation fail : Group ID : [667c63a60bb4948c0039d664] | user : [test1@gmail.com]"],"timestamp":"2024-06-27T15:57:29.425Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: 400 | message: Please ensure the members exist in the group","timestamp":"2024-06-27T15:57:29.425Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"400\",\"responseTime\":\"107.976\"}","timestamp":"2024-06-27T15:57:29.429Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":5000,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:57:55.481Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/addExpense | status: undefined | message: groupDAO is not defined","timestamp":"2024-06-27T15:57:55.552Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"500\",\"responseTime\":\"72.262\"}","timestamp":"2024-06-27T15:57:55.553Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T15:58:37.954Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":5000,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:58:39.963Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"139.156\"}","timestamp":"2024-06-27T15:58:40.104Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":6300,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-27T15:59:28.739Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"99.689\"}","timestamp":"2024-06-27T15:59:28.839Z"}
+{"level":"\u001b[33mwarn\u001b[39m","message":["Group User Valdation fail : Group ID : [667c63a60bb4948c0039d664] | user : [test-mail@gmail.com]"],"timestamp":"2024-06-27T16:09:57.345Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: 400 | message: Please provide a valid group owner","timestamp":"2024-06-27T16:09:57.345Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"400\",\"responseTime\":\"34.070\"}","timestamp":"2024-06-27T16:09:57.348Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:10:24.240Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"51.604\"}","timestamp":"2024-06-27T16:10:24.243Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:14:30.432Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"55.700\"}","timestamp":"2024-06-27T16:14:30.435Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:17:05.125Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":2400,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food D&","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664","id":"667d8c6038f7ea96339b9f7d"},"timestamp":"2024-06-27T16:17:06.601Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:17:06.664Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"74.655\"}","timestamp":"2024-06-27T16:17:06.684Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:17:47.082Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:17:49.240Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"57.621\"}","timestamp":"2024-06-27T16:17:49.243Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:23:37.722Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"52.810\"}","timestamp":"2024-06-27T16:23:37.722Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:24:09.574Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:24:14.763Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"52.738\"}","timestamp":"2024-06-27T16:24:14.766Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:25:32.457Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:25:34.392Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"209.538\"}","timestamp":"2024-06-27T16:25:34.406Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:29:09.033Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL: /api/v1/expense/editExpense | status: undefined | message: expense is not defined","timestamp":"2024-06-27T16:29:10.672Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"500\",\"responseTime\":\"79.236\"}","timestamp":"2024-06-27T16:29:10.686Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:31:32.709Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"200\",\"responseTime\":\"175.403\"}","timestamp":"2024-06-27T16:31:34.863Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T16:40:05.832Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"200\",\"responseTime\":\"171.482\"}","timestamp":"2024-06-27T16:40:08.149Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"200\",\"responseTime\":\"171.579\"}","timestamp":"2024-06-27T16:46:59.901Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/viewExpense\",\"status\":\"200\",\"responseTime\":\"62.154\"}","timestamp":"2024-06-27T16:50:16.013Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/v1/expense/deleteExpense\",\"status\":\"200\",\"responseTime\":\"76.667\"}","timestamp":"2024-06-27T16:57:20.753Z"}

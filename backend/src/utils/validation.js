@@ -4,7 +4,7 @@ import { getGroupUsers } from "../services/group.service.js";
 
 // Function to check if a value is not null or undefined
 export const notNull = (value) => {
-  return value !== null && value !== undefined && value.trim() !== "";
+  return value !== null && value !== undefined; // && value.trim() !== ""
 };
 
 // Function to validate email format

@@ -272,7 +272,7 @@ export const splitNewExpense = async (
   }
 };
 
-export const revertLastSplit = async (
+export const revertSplit = async (
   groupId,
   expenseAmount,
   expenseOwner,
