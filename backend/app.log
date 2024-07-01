@@ -499,3 +499,31 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"132.335\"}","timestamp":"2024-07-01T13:42:39.870Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"12.121\"}","timestamp":"2024-07-01T13:42:44.030Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/dailyExpense\",\"status\":\"200\",\"responseTime\":\"26.641\"}","timestamp":"2024-07-01T13:42:51.148Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/dailyExpense\",\"status\":\"200\",\"responseTime\":\"15.988\"}","timestamp":"2024-07-01T15:18:49.569Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T15:19:08.324Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/dailyExpense\",\"status\":\"200\",\"responseTime\":\"16.094\"}","timestamp":"2024-07-01T15:19:09.524Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:06:37.718Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:09:02.496Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:12:43.360Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/expenseByCategory\",\"status\":\"200\",\"responseTime\":\"15.996\"}","timestamp":"2024-07-01T16:14:38.215Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:16:06.015Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/expenseByCategory\",\"status\":\"200\",\"responseTime\":\"15.284\"}","timestamp":"2024-07-01T16:16:09.985Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"12.186\"}","timestamp":"2024-07-01T16:16:20.138Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:30:13.691Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:30:15.503Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:30:23.058Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:30:35.571Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:31:36.416Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/group | staus : 400 | message: No expense present for the group","timestamp":"2024-07-01T16:34:46.335Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group\",\"status\":\"400\",\"responseTime\":\"18.749\"}","timestamp":"2024-07-01T16:34:46.339Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/dailyExpense\",\"status\":\"200\",\"responseTime\":\"14.470\"}","timestamp":"2024-07-01T16:34:54.617Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:35:20.763Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/group | staus : 400 | message: No expense present for the group","timestamp":"2024-07-01T16:35:22.045Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group\",\"status\":\"400\",\"responseTime\":\"18.419\"}","timestamp":"2024-07-01T16:35:22.049Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:36:05.878Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:37:07.012Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/group | staus : 400 | message: No expense present for the group","timestamp":"2024-07-01T16:37:09.086Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group\",\"status\":\"400\",\"responseTime\":\"25.596\"}","timestamp":"2024-07-01T16:37:09.100Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:37:17.728Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group\",\"status\":\"200\",\"responseTime\":\"43.178\"}","timestamp":"2024-07-01T16:37:33.567Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T16:39:16.439Z"}

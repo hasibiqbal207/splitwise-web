@@ -8,8 +8,11 @@ import {
   updateExpense,
   getDailyExpense,
   getMonthlyExpense,
+  getUserExpenseByCategory,
+  getGroupExpensesById,
   getGroupDailyExpense,
-  getGroupMonthlyExpense
+  getGroupMonthlyExpense,
+  getGroupExpenseByCategory,
 } from "../services/expense.service.js";
 import { revertSplit, splitNewExpense } from "./group.controller.js";
 
@@ -30,7 +33,7 @@ export const addExpense = async (req, res) => {
       validator.notNull(expenseData.expenseName) &&
       validator.notNull(expenseData.expenseAmount) &&
       validator.notNull(expenseData.expenseOwner) &&
-      validator.notNull(expenseData.expenseMembers) 
+      validator.notNull(expenseData.expenseMembers)
       // &&
       // validator.notNull(expenseData.expenseDate)
     ) {
@@ -116,7 +119,7 @@ export const editExpense = async (req, res) => {
       validator.notNull(newExpenseData.expenseName) &&
       validator.notNull(newExpenseData.expenseAmount) &&
       validator.notNull(newExpenseData.expenseOwner) &&
-      validator.notNull(newExpenseData.expenseMembers) 
+      validator.notNull(newExpenseData.expenseMembers)
       // validator.notNull(newExpenseData.expenseDate)
     ) {
       // Validate the expense owner
@@ -145,10 +148,10 @@ export const editExpense = async (req, res) => {
         }
       }
 
-      console.log("Check mark", newExpenseData)
-      
+      console.log("Check mark", newExpenseData);
+
       const updatedExpenseData = await updateExpense(newExpenseData);
-      
+
       //Updating the group split values
       await revertSplit(
         previousExpense.groupId,
@@ -261,7 +264,7 @@ export const userDailyExpense = async (req, res) => {
 export const userMonthlyExpense = async (req, res) => {
   try {
     const { userEmail } = req.body;
-    
+
     const expenses = await getMonthlyExpense(userEmail);
     res.status(200).json({
       status: "Success",
@@ -283,7 +286,7 @@ export const groupDailyExpense = async (req, res) => {
     const expenses = await getGroupDailyExpense(groupId);
     res.status(200).json({
       status: "Success",
-      expenses: expenses,
+      responseData: expenses,
     });
   } catch (err) {
     logger.error(
@@ -301,7 +304,74 @@ export const groupMonthlyExpense = async (req, res) => {
     const expenses = await getGroupMonthlyExpense(groupId);
     res.status(200).json({
       status: "Success",
+      responseData: expenses,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const userExpenseByCategory = async (req, res) => {
+  try {
+    const { userEmail } = req.body;
+    const expenses = await getUserExpenseByCategory(userEmail);
+    res.status(200).json({
+      status: "Success",
+      responseData: expenses,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const groupExpenseByCategory = async (req, res) => {
+  try {
+    const { groupId } = req.body;
+    const expenses = await getGroupExpenseByCategory(groupId);
+    res.status(200).json({
+      status: "Success",
+      responseData: expenses,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const getGroupExpenses = async (req, res) => {
+  try {
+    const { groupId } = req.body;
+    const expenses = await getGroupExpensesById(groupId);
+
+    if (expenses.length == 0) {
+      const err = new Error("No expense present for the group");
+      err.status = 400;
+      throw err;
+    }
+
+    let totalAmount = 0;
+    for (const expense of expenses) {
+      totalAmount += expense["expenseAmount"];
+    }
+
+    res.status(200).json({
+      status: "Success",
       expenses: expenses,
+      total: totalAmount,
     });
   } catch (err) {
     logger.error(

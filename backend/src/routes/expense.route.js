@@ -7,8 +7,11 @@ import {
   deleteExpense,
   userDailyExpense,
   userMonthlyExpense,
+  userExpenseByCategory,
+  getGroupExpenses,
   groupDailyExpense,
-  groupMonthlyExpense
+  groupMonthlyExpense,
+  groupExpenseByCategory
 } from "../controllers/expense.controller.js";
 
 const router = express.Router();
@@ -25,8 +28,14 @@ router.route("/user/dailyExpense").get(userDailyExpense);
 
 router.route("/user/monthlyExpense").get(userMonthlyExpense);
 
+router.route("/user/expenseByCategory").get(userExpenseByCategory);
+
+router.route("/group").get(getGroupExpenses);
+ 
 router.route("/group/dailyExpense").get(groupDailyExpense);
 
 router.route("/group/monthlyExpense").get(groupMonthlyExpense);
+
+router.route("/group/expenseByCategory").get(groupExpenseByCategory);
 
 export default router;

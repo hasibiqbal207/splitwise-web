@@ -8,6 +8,12 @@ export const getExpenseById = async (expenseId) => {
   return await ExpenseModel.findOne({ _id: expenseId });
 };
 
+export const getGroupExpensesById = async (groupId) => {
+  return await ExpenseModel.find({ groupId: groupId }).sort({
+    expenseDate: -1,
+  });
+};
+
 export const deleteExpenseById = async (expenseId) => {
   return await ExpenseModel.deleteOne({ _id: expenseId });
 };
@@ -150,5 +156,43 @@ export const getGroupMonthlyExpense = async (groupId) => {
       },
     },
     { $sort: { "_id.month": 1 } },
+  ]);
+};
+
+export const getUserExpenseByCategory = async (userEmail) => {
+  return await ExpenseModel.aggregate([
+    {
+      $match: {
+        expenseMembers: userEmail,
+      },
+    },
+    {
+      $group: {
+        _id: "$expenseCategory",
+        amount: {
+          $sum: "$expensePerMember",
+        },
+      },
+    },
+    { $sort: { _id: 1 } },
+  ]);
+};
+
+export const getGroupExpenseByCategory = async (groupId) => {
+  return await ExpenseModel.aggregate([
+    {
+      $match: {
+        groupId: groupId,
+      },
+    },
+    {
+      $group: {
+        _id: "$expenseCategory",
+        amount: {
+          $sum: "$expenseAmount",
+        },
+      },
+    },
+    { $sort: { _id: 1 } },
   ]);
 };
