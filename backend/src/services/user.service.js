@@ -25,4 +25,14 @@ export const updateUserData = async (firstName, lastName, email) => {
       },
     }
   );
-}
+};
+
+export const fetchAllUsers = async () => {
+  return await UserModel.find(
+    {},
+    {
+      email: 1,
+      _id: 0,
+    }
+  );
+};

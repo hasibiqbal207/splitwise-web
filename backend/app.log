@@ -539,3 +539,18 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/recentExpenses\",\"status\":\"200\",\"responseTime\":\"24.562\"}","timestamp":"2024-07-01T18:07:49.291Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T18:08:22.660Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/recentExpenses\",\"status\":\"200\",\"responseTime\":\"31.415\"}","timestamp":"2024-07-01T18:08:25.307Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T18:17:28.018Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T20:55:40.232Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T20:57:39.535Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T20:57:55.140Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T20:58:04.688Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/users\",\"status\":\"404\",\"responseTime\":\"1.705\"}","timestamp":"2024-07-01T20:58:12.980Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T20:59:34.600Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/users\",\"status\":\"200\",\"responseTime\":\"24.132\"}","timestamp":"2024-07-01T20:59:36.435Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T21:00:21.094Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T21:00:25.947Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T21:00:26.708Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/users\",\"status\":\"200\",\"responseTime\":\"18.883\"}","timestamp":"2024-07-01T21:00:28.070Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T21:01:06.383Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T21:01:13.730Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/user/users\",\"status\":\"200\",\"responseTime\":\"41.496\"}","timestamp":"2024-07-01T21:01:15.727Z"}

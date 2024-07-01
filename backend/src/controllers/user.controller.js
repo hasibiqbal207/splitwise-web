@@ -5,6 +5,7 @@ import {
   deleteUserByEmail,
   fetchUserByEmail,
   updateUserData,
+  fetchAllUsers,
 } from "../services/user.service.js";
 import * as validator from "../utils/validation.js";
 
@@ -51,9 +52,8 @@ export const updateUserProfile = async (req, res) => {
 
     // Performing validations
     if (validator.notNull(firstName) && validator.notNull(lastName)) {
-      
-        //storing user details in DB
-      const updatedResponse = await updateUserData(firstName, lastName, email); 
+      //storing user details in DB
+      const updatedResponse = await updateUserData(firstName, lastName, email);
       res.status(200).json({
         status: "Success",
         message: "User update Success",
@@ -88,6 +88,35 @@ export const deleteUser = async (req, res) => {
       status: "Success",
       message: "User Account deleted!",
       response: deleteUserResponse,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await fetchAllUsers();
+
+    if (!users) {
+      const err = new Error("User does not exist!");
+      err.status = 400;
+      throw err;
+    }
+
+    let emailList = [];
+    for (const user of users) {
+      emailList.push(user.email);
+    }
+
+    res.status(200).json({
+      status: "Success",
+      users: emailList,
     });
   } catch (err) {
     logger.error(
