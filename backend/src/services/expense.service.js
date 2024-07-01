@@ -14,6 +14,11 @@ export const getGroupExpensesById = async (groupId) => {
   });
 };
 
+export const getExpensesByUser = async (userEmail) =>
+  await ExpenseModel.find({ expenseMembers: userEmail }).sort({
+    expenseDate: -1,
+  });
+
 export const deleteExpenseById = async (expenseId) => {
   return await ExpenseModel.deleteOne({ _id: expenseId });
 };
@@ -195,4 +200,10 @@ export const getGroupExpenseByCategory = async (groupId) => {
     },
     { $sort: { _id: 1 } },
   ]);
+};
+
+export const getRecentExpensesByUser = async (userEmail) => {
+  return await ExpenseModel.find({ expenseMembers: userEmail }).sort({
+    expenseDate: -1,
+  });
 };

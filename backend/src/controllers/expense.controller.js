@@ -6,6 +6,7 @@ import {
   getExpenseById,
   deleteExpenseById,
   updateExpense,
+  getExpensesByUser,
   getDailyExpense,
   getMonthlyExpense,
   getUserExpenseByCategory,
@@ -13,6 +14,7 @@ import {
   getGroupDailyExpense,
   getGroupMonthlyExpense,
   getGroupExpenseByCategory,
+  getRecentExpensesByUser,
 } from "../services/expense.service.js";
 import { revertSplit, splitNewExpense } from "./group.controller.js";
 
@@ -352,6 +354,37 @@ export const groupExpenseByCategory = async (req, res) => {
   }
 };
 
+export const getUserExpenses = async (req, res) => {
+  try {
+    const { userEmail } = req.body;
+    const expenses = await getExpensesByUser(userEmail);
+
+    if (expenses.length == 0) {
+      const err = new Error("No expense present for the group");
+      err.status = 400;
+      throw err;
+    }
+
+    let totalAmount = 0;
+    for (const expense of expenses) {
+      totalAmount += expense["expenseAmount"];
+    }
+
+    res.status(200).json({
+      status: "Success",
+      expenses: expenses,
+      total: totalAmount,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
 export const getGroupExpenses = async (req, res) => {
   try {
     const { groupId } = req.body;
@@ -372,6 +405,25 @@ export const getGroupExpenses = async (req, res) => {
       status: "Success",
       expenses: expenses,
       total: totalAmount,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const getRecentUserExpenses = async (req, res) => {
+  try {
+    const { userEmail } = req.body;
+    const expenses = await getRecentExpensesByUser(userEmail);
+    console.log(expenses.length);
+    res.status(200).json({
+      status: "Success",
+      expenses: expenses,
     });
   } catch (err) {
     logger.error(

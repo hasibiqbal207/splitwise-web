@@ -5,6 +5,8 @@ import {
   editExpense,
   viewExpense,
   deleteExpense,
+  getUserExpenses,
+  getRecentUserExpenses,
   userDailyExpense,
   userMonthlyExpense,
   userExpenseByCategory,
@@ -23,6 +25,10 @@ router.route("/editExpense").put(editExpense);
 router.route("/viewExpense").get(viewExpense);
 
 router.route("/deleteExpense").delete(deleteExpense);
+
+router.route("/user").get(getUserExpenses);
+
+router.route("/user/recentExpenses").get(getRecentUserExpenses);
 
 router.route("/user/dailyExpense").get(userDailyExpense);
 
