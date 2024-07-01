@@ -6,6 +6,8 @@ import {
   getExpenseById,
   deleteExpenseById,
   updateExpense,
+  getDailyExpense,
+  getMonthlyExpense
 } from "../services/expense.service.js";
 import { revertSplit, splitNewExpense } from "./group.controller.js";
 
@@ -225,6 +227,79 @@ export const deleteExpense = async (req, res) => {
       status: "Success",
       message: "Expense is deleted",
       response: deleteExpenseResponse,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const userDailyExpense = async (req, res) => {
+  try {
+    const { userEmail } = req.body;
+    const expenses = await getDailyExpense(userEmail);
+    res.status(200).json({
+      status: "Success",
+      responseData: expenses,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const userMonthlyExpense = async (req, res) => {
+  try {
+    const { userEmail } = req.body;
+    
+    const expenses = await getMonthlyExpense(userEmail);
+    res.status(200).json({
+      status: "Success",
+      responseData: expenses,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const groupDailyExpense = async (req, res) => {
+  try {
+    const { groupId } = req.body;
+    const expenses = await getGroupDailyExpense(groupId);
+    res.status(200).json({
+      status: "Success",
+      expenses: expenses,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const groupMonthlyExpense = async (req, res) => {
+  try {
+    const { groupId } = req.body;
+    const expenses = await getGroupMonthlyExpense(groupId);
+    res.status(200).json({
+      status: "Success",
+      expenses: expenses,
     });
   } catch (err) {
     logger.error(

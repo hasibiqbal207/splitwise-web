@@ -438,3 +438,50 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PUT\",\"url\":\"/api/v1/expense/editExpense\",\"status\":\"200\",\"responseTime\":\"171.579\"}","timestamp":"2024-06-27T16:46:59.901Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/viewExpense\",\"status\":\"200\",\"responseTime\":\"62.154\"}","timestamp":"2024-06-27T16:50:16.013Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/v1/expense/deleteExpense\",\"status\":\"200\",\"responseTime\":\"76.667\"}","timestamp":"2024-06-27T16:57:20.753Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-27T22:22:26.648Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T17:33:52.296Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/viewExpense | staus : 400 | message: No expense present for the Id","timestamp":"2024-06-30T17:33:55.314Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/viewExpense\",\"status\":\"400\",\"responseTime\":\"15.970\"}","timestamp":"2024-06-30T17:33:55.317Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/viewExpense | staus : 400 | message: No expense present for the Id","timestamp":"2024-06-30T17:34:49.591Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/viewExpense\",\"status\":\"400\",\"responseTime\":\"11.933\"}","timestamp":"2024-06-30T17:34:49.592Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/viewExpense\",\"status\":\"200\",\"responseTime\":\"22.400\"}","timestamp":"2024-06-30T17:35:04.293Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"DELETE\",\"url\":\"/api/v1/expense/deleteExpense\",\"status\":\"200\",\"responseTime\":\"75.106\"}","timestamp":"2024-06-30T17:35:50.428Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:42:36.784Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:44:34.239Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:45:05.379Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"19.371\"}","timestamp":"2024-06-30T23:48:15.455Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":6300,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-30T23:48:31.813Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"159.061\"}","timestamp":"2024-06-30T23:48:31.973Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"13.133\"}","timestamp":"2024-06-30T23:48:35.359Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/viewExpense | staus : 400 | message: No expense present for the Id","timestamp":"2024-06-30T23:48:48.222Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/viewExpense\",\"status\":\"400\",\"responseTime\":\"12.602\"}","timestamp":"2024-06-30T23:48:48.222Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":300,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-30T23:50:16.429Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"101.135\"}","timestamp":"2024-06-30T23:50:16.532Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":8300,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-06-30T23:50:21.414Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"103.074\"}","timestamp":"2024-06-30T23:50:21.518Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"12.299\"}","timestamp":"2024-06-30T23:50:50.677Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:51:16.181Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"15.399\"}","timestamp":"2024-06-30T23:51:17.604Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:51:51.247Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"16.429\"}","timestamp":"2024-06-30T23:51:53.558Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:53:25.922Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"16.092\"}","timestamp":"2024-06-30T23:53:28.459Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/user/dailyExpense | staus : undefined | message: Cannot destructure property 'email' of 'req.body.user' as it is undefined.","timestamp":"2024-06-30T23:53:57.995Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"500\",\"responseTime\":\"0.901\"}","timestamp":"2024-06-30T23:53:57.996Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:54:24.239Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:54:25.179Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"25.857\"}","timestamp":"2024-06-30T23:54:26.667Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-06-30T23:55:33.814Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"15.998\"}","timestamp":"2024-06-30T23:59:04.226Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"14.073\"}","timestamp":"2024-07-01T00:06:22.868Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:53:23.987Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"18.269\"}","timestamp":"2024-07-01T01:53:56.413Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:54:01.253Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/dailyExpense\",\"status\":\"200\",\"responseTime\":\"19.296\"}","timestamp":"2024-07-01T01:54:02.829Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:57:44.995Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:58:17.580Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:58:53.690Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/user/monthlyExpense | staus : undefined | message: getMonthlyExpense is not defined","timestamp":"2024-07-01T01:59:35.858Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/monthlyExpense\",\"status\":\"500\",\"responseTime\":\"2.164\"}","timestamp":"2024-07-01T01:59:35.862Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:59:48.057Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"14.803\"}","timestamp":"2024-07-01T01:59:49.862Z"}
