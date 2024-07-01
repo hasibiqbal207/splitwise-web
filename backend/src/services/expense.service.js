@@ -93,3 +93,62 @@ export const getMonthlyExpense = async (userEmail) => {
     { $sort: { "_id.month": 1 } },
   ]);
 };
+
+export const getGroupDailyExpense = async (groupId) => {
+  return await ExpenseModel.aggregate([
+    {
+      $match: {
+        groupId: groupId,
+        expenseDate: {
+          $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+          $lte: new Date(),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          date: {
+            $dayOfMonth: "$expenseDate",
+          },
+          month: {
+            $month: "$expenseDate",
+          },
+          year: {
+            $year: "$expenseDate",
+          },
+        },
+        amount: {
+          $sum: "$expenseAmount",
+        },
+      },
+    },
+    { $sort: { "_id.month": 1, "_id.date": 1 } },
+  ]);
+};
+
+export const getGroupMonthlyExpense = async (groupId) => {
+  return await ExpenseModel.aggregate([
+    {
+      $match: {
+        groupId: groupId,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          month: {
+            $month: "$expenseDate",
+          },
+          year: {
+            $year: "$expenseDate",
+          },
+        },
+        amount: {
+          $sum: "$expenseAmount",
+        },
+      },
+    },
+    { $sort: { "_id.month": 1 } },
+  ]);
+};

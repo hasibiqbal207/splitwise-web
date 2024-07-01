@@ -7,7 +7,9 @@ import {
   deleteExpenseById,
   updateExpense,
   getDailyExpense,
-  getMonthlyExpense
+  getMonthlyExpense,
+  getGroupDailyExpense,
+  getGroupMonthlyExpense
 } from "../services/expense.service.js";
 import { revertSplit, splitNewExpense } from "./group.controller.js";
 

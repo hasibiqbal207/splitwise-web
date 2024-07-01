@@ -485,3 +485,17 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/monthlyExpense\",\"status\":\"500\",\"responseTime\":\"2.164\"}","timestamp":"2024-07-01T01:59:35.862Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T01:59:48.057Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"14.803\"}","timestamp":"2024-07-01T01:59:49.862Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T02:03:33.387Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T13:35:16.703Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/user/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"46.524\"}","timestamp":"2024-07-01T13:35:18.596Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T13:38:26.240Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T13:39:46.116Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"URL : /api/v1/expense/group/monthlyExpense | staus : undefined | message: getGroupMonthlyExpense is not defined","timestamp":"2024-07-01T13:41:59.022Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/monthlyExpense\",\"status\":\"500\",\"responseTime\":\"2.468\"}","timestamp":"2024-07-01T13:41:59.025Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T13:42:25.363Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"MongoDB connected","timestamp":"2024-07-01T13:42:26.691Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"15.945\"}","timestamp":"2024-07-01T13:42:28.162Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":{"expenseAmount":8300,"expenseDescription":"Fooding with Francis","expenseMembers":["test2@gmail.com","test3@gmail.com"],"expenseName":"Food","expenseOwner":"test@gmail.com","groupId":"667c63a60bb4948c0039d664"},"timestamp":"2024-07-01T13:42:39.738Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/expense/addExpense\",\"status\":\"200\",\"responseTime\":\"132.335\"}","timestamp":"2024-07-01T13:42:39.870Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/monthlyExpense\",\"status\":\"200\",\"responseTime\":\"12.121\"}","timestamp":"2024-07-01T13:42:44.030Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/expense/group/dailyExpense\",\"status\":\"200\",\"responseTime\":\"26.641\"}","timestamp":"2024-07-01T13:42:51.148Z"}
