@@ -1,9 +1,11 @@
+import ThemeProvider from "./theme"
+import AppRoutes from "./AppRoutes"
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <ThemeProvider>
+      <AppRoutes />
+    </ThemeProvider>
   )
 }
 
