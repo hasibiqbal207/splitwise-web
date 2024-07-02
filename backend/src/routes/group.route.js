@@ -21,9 +21,5 @@ router.route("/deleteGroup").delete(deleteGroup);
 
 router.route("/getUserGroups").get(findGroupsbyUser);
 
-// router.route("/splitNewExpense").get(splitNewExpense);
-// router.route("/clearLastSplit").get(clearLastSplit);
-// router.route("/initiateSettlement").get(initiateSettlement);
-// router.route("/splitExpense").get(viewGroup);
-
 export default router;
+
