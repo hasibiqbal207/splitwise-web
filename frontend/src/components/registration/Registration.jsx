@@ -2,9 +2,9 @@ import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Card, Link, Container, Typography, Stack, Box } from "@mui/material";
 import useResponsive from "../../theme/hooks/useResponsive";
-import LoginForm from "./LoginForm";
+// import Logo from "../Logo";
+import RegistrationForm from "./RegistrationForm";
 import Copyright from "../Copyright";
-// import configData from "../../config.json";
 
 const RootStyle = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -47,26 +47,18 @@ const ContentStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }));
 
-export default function Login() {
+export default function Registration() {
   const smUp = useResponsive("up", "sm");
   const mdUp = useResponsive("up", "md");
-
-  //Function to check if the user is already logged in - check localStorage
-//   const user = JSON.parse(localStorage.getItem("profile"));
-  
-//   //If user logged in the page is auto directed to dashboard
-//   if (user) {
-//     user.accessToken && (window.location.href = configData.DASHBOARD_URL);
-//   }
   return (
     <RootStyle>
       <HeaderStyle>
         <Box />
         {smUp && (
           <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-            Don’t have an account? {""}
-            <Link variant="subtitle2" component={RouterLink} to="/register">
-              Get started
+            Already have an account? {""}
+            <Link variant="subtitle2" component={RouterLink} to="/login">
+              Login
             </Link>
           </Typography>
         )}
@@ -74,33 +66,28 @@ export default function Login() {
       {mdUp && (
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
+            Manage the expense more effectively with Splitwise !
           </Typography>
-          <img src="/static/illustrations/illustration_login.png" alt="login" />
         </SectionStyle>
       )}
       <Container maxWidth="sm">
         <ContentStyle>
-          <Typography variant="h4" gutterBottom>
-            Sign in to Splitwise Web!
+          <Typography variant="h4" gutterBottom marginBottom={4}>
+            Get started absolutely free.
           </Typography>
 
-          <Typography sx={{ color: "text.secondary", mb: 5 }}>
-            Enter your details below.
-          </Typography>
-
+          <RegistrationForm />
           {/* <AuthSocial />*/}
-
-          <LoginForm />
 
           {!smUp && (
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-              Don’t have an account?{" "}
-              <Link variant="subtitle2" component={RouterLink} to="/register">
-                Get started
+              Already have an account? {""}
+              <Link variant="subtitle2" component={RouterLink} to="/">
+                Login
               </Link>
             </Typography>
           )}
+
           <Stack spacing={3} sx={{ mt: 5 }}>
             <Copyright />
           </Stack>

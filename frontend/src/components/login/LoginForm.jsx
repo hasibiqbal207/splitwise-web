@@ -10,7 +10,7 @@ import { LoadingButton } from '@mui/lab';
 
 import useResponsive from '../../theme/hooks/useResponsive';
 
-const Login = () => {
+const LoginForm = () => {
   const smUp = useResponsive('up', 'sm');
 
   const [showAlert, setShowAlert] = useState(false);
@@ -108,4 +108,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

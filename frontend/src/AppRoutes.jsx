@@ -7,13 +7,16 @@ import {
 } from "react-router-dom";
 
 // components
-import Login from "./components/login";
+import Login from "./components/login/Login.jsx";
+import Registration from "./components/registration/Registration.jsx";
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+
       </Routes>
     </Router>
   );
