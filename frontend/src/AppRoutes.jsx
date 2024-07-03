@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 // components
-import Login from "./components/login/Login";
+import Login from "./components/login";
 
 const AppRoutes = () => {
   return (
