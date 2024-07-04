@@ -4,7 +4,7 @@ import { Card, Link, Container, Typography, Stack, Box } from "@mui/material";
 import useResponsive from "../../theme/hooks/useResponsive";
 import LoginForm from "./LoginForm";
 import Copyright from "../Copyright";
-// import configData from "../../config.json";
+import configData from "../../config/config.json";
 
 const RootStyle = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -52,11 +52,10 @@ export default function Login() {
   const mdUp = useResponsive("up", "md");
 
   //  Function to check if the user is already logged in - check localStorage
-  //   const user = JSON.parse(localStorage.getItem("profile"));
-  //   If user logged in the page is auto directed to dashboard
-  //   if (user) {
-  //     user.accessToken && (window.location.href = configData.DASHBOARD_URL);
-  //   }
+  const user = JSON.parse(localStorage.getItem("profile"));
+  if (user) {
+    user.accessToken && (window.location.href = configData.DASHBOARD_URL);
+  }
 
   return (
     <RootStyle>
@@ -88,7 +87,7 @@ export default function Login() {
             Enter your details below.
           </Typography>
 
-          {/* <AuthSocial />*/}
+          {/* <AuthSocial Implementation Pending />*/}
 
           <LoginForm />
 

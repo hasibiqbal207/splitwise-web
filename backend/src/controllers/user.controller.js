@@ -12,6 +12,7 @@ import * as validator from "../utils/validation.js";
 export const viewUserProfile = async (req, res) => {
   try {
     const { email } = req.body;
+    logger.error("Checking user: " + email);
 
     apiAuth.validateUser(req.user, email); //[Check]
 
@@ -23,6 +24,7 @@ export const viewUserProfile = async (req, res) => {
       throw err;
     }
 
+    logger.error("User: " + user);
     res.status(200).json({
       status: "Success",
       message: "User fetched successfully",

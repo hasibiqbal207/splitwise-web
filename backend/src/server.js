@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
 
 import logger from "../config/logger.config.js";
 import connectDB from "../config/database.config.js";
@@ -12,6 +13,8 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(cors());
 
 const port = process.env.PORT || 3000;
 const morganFormat = ":method :url :status :response-time ms";

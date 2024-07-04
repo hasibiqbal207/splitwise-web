@@ -10,40 +10,39 @@ import {
   Alert,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import Iconify from "../Iconify";
-// import { register } from '../../services/auth';
+
 import useResponsive from "../../theme/hooks/useResponsive";
+import Iconify from "../Iconify";
+import { register } from "../../services/authentication";
 
 export default function RegistrationForm() {
   const smUp = useResponsive("up", "sm");
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState(" ");
-
   const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
-    emailId: Yup.string()
+    email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
     password: Yup.string()
       .required("Password is required")
       .min(8, "Password should be 8 characters minimum"),
     firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
   });
 
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
-      emailId: "",
+      email: "",
       password: "",
       remember: true,
     },
     validationSchema: RegisterSchema,
     onSubmit: async () => {
-      //User Register Service call - Upon success user is redirected to dashboard
-      //Register fail snackbar displays error
       await register(values, setShowAlert, setAlertMessage);
     },
   });
@@ -100,14 +99,14 @@ export default function RegistrationForm() {
             </Stack>
 
             <TextField
-              name="emailId"
+              name="email"
               fullWidth
               autoComplete="username"
               type="email"
               label="Email address"
-              {...getFieldProps("emailId")}
-              error={Boolean(touched.emailId && errors.emailId)}
-              helperText={touched.emailId && errors.emailId}
+              {...getFieldProps("email")}
+              error={Boolean(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
             />
 
             <TextField
@@ -144,16 +143,6 @@ export default function RegistrationForm() {
               Register
             </LoadingButton>
           </Stack>
-
-          {/* <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-            <FormControlLabel
-              control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-              label="Remember me" />
-
-            <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
-              Forgot password?
-            </Link>
-          </Stack> */}
         </Form>
       </FormikProvider>
     </>

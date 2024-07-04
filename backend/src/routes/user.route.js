@@ -4,7 +4,7 @@ import { viewUserProfile, updateUserProfile, deleteUser, getAllUsers } from "../
 
 const router = express.Router();
 
-router.route("/userProfile").get(viewUserProfile)
+router.route("/userProfile").post(viewUserProfile)
 
 router.route("/userProfile").put(updateUserProfile)
 

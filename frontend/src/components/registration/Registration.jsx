@@ -2,7 +2,6 @@ import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Card, Link, Container, Typography, Stack, Box } from "@mui/material";
 import useResponsive from "../../theme/hooks/useResponsive";
-// import Logo from "../Logo";
 import RegistrationForm from "./RegistrationForm";
 import Copyright from "../Copyright";
 
@@ -77,7 +76,7 @@ export default function Registration() {
           </Typography>
 
           <RegistrationForm />
-          {/* <AuthSocial />*/}
+          {/* <AuthSocial Implementation Pending />*/}
 
           {!smUp && (
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
