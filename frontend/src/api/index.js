@@ -20,3 +20,5 @@ export const getUser = (formData) => {
   return axios.post('http://localhost:3000/api/v1/user/userProfile', formData );
 
 }
+
+export const editUser = (formData) => API.put('/user/userProfile', formData)

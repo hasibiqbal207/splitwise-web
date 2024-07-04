@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 UserDetails.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
-  emailId: PropTypes.string,
+  email: PropTypes.string,
 };
 
-export default function UserDetails({ firstName, lastName, emailId }) {
+export default function UserDetails({ firstName, lastName, email }) {
   return (
     <Stack spacing={3}>
       <Stack
@@ -35,7 +35,7 @@ export default function UserDetails({ firstName, lastName, emailId }) {
         disabled
         id="outlined-disabled"
         label="Email address"
-        defaultValue={emailId}
+        defaultValue={email}
         sx={{ width: "100%" }}
       />
     </Stack>

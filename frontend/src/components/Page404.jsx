@@ -1,11 +1,11 @@
 import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Button, Typography, Container, Box, Stack } from "@mui/material";
-import Copyright from "../Copyright";
-
-import configData from "../../config/config.json";
+import Copyright from "./Copyright";
+import configData from "../config/config.json";
 
 const ContentStyle = styled("div")(({ theme }) => ({
+  maxWidth: 480,
   margin: "auto",
   minHeight: "100vh",
   display: "flex",
@@ -14,30 +14,25 @@ const ContentStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }));
 
-export default function UserDeleted() {
+export default function Page404() {
   return (
     <Container>
       <ContentStyle sx={{ textAlign: "center", alignItems: "center" }}>
-        <Stack
-          spacing={6}
-          direction={"row"}
-          sx={{ textAlign: "center", alignItems: "center" }}
-        >
-          <Box>
-            <Typography variant="h3" paragraph>
-              User Account deleted !
-            </Typography>
+        <Typography variant="h3" paragraph>
+          Sorry, page not found!
+        </Typography>
 
-            <Typography sx={{ color: "text.secondary" }}>
-              Thank you for using SplitApp! <br />
-            </Typography>
-          </Box>
-          <Box
-            component="img"
-            src="/static/illustrations/illustration_avatar.png"
-            sx={{ height: 260, mx: "auto", my: { xs: 5, sm: 10 } }}
-          />
-        </Stack>
+        <Typography sx={{ color: "text.secondary" }}>
+          Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
+          mistyped the URL? Be sure to check your spelling.
+        </Typography>
+
+        <Box
+          component="img"
+          src="/static/illustrations/illustration_404.svg"
+          sx={{ height: 260, mx: "auto", my: { xs: 5, sm: 10 } }}
+        />
+
         <Button
           to={configData.LOGIN_URL}
           size="large"

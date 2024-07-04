@@ -44,8 +44,6 @@ export default function EditForm({
     },
     validationSchema: EditSchema,
     onSubmit: async () => {
-      //User Edit Service call - Upon success user is redirected to dashboard
-      //Edit fail snackbar displays error
       const update_response = await editUser(
         values,
         setShowAlert,

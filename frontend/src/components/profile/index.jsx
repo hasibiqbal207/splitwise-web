@@ -9,7 +9,7 @@ import {
   Button,
   Modal,
 } from "@mui/material";
-import gravatarUrl from 'gravatar-url'
+import gravatarUrl from "gravatar-url";
 import Iconify from "../Iconify";
 import useResponsive from "../../theme/hooks/useResponsive";
 import UserDetails from "./UserDetails";
@@ -19,7 +19,7 @@ import ChangePassword from "./ChangePassword";
 import Loading from "../Loading";
 import EditForm from "./EditUser";
 import AlertBanner from "../AlertBanner";
-import configData from '../../config/config.json'
+import configData from "../../config/config.json";
 
 const profile = JSON.parse(localStorage.getItem("profile"));
 
@@ -78,7 +78,6 @@ export default function Profile() {
     const getUserDetails = async () => {
       setLoading(true);
       const response = await getUser(profile, setShowAlert, setAlertMessage);
-      console.log(response);
       setUser(response);
       setLoading(false);
     };
@@ -127,7 +126,7 @@ export default function Profile() {
               {changePass && (
                 <ChangePassword
                   hidePassUpdate={hidePassUpdate}
-                  emailId={user.emailId}
+                  email={user.email}
                   showHomeAlert={setShowAlert}
                   homeAlertMessage={setAlertMessage}
                 />
@@ -136,7 +135,7 @@ export default function Profile() {
               {editUser && (
                 <EditForm
                   hideEditUser={hideEditUser}
-                  emailId={user.emailId}
+                  email={user.email}
                   firstName={user.firstName}
                   lastName={user.lastName}
                   showHomeAlert={setShowAlert}
@@ -157,7 +156,7 @@ export default function Profile() {
                   <UserDetails
                     firstName={user.firstName}
                     lastName={user.lastName}
-                    emailId={user.emailId}
+                    email={user.email}
                   />
                   <Grid container spacing={3} mt={1} justifyContent={"center"}>
                     <Grid item xs={11} md={3} order={{ xs: 3, md: 1 }}>
