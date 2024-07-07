@@ -15,11 +15,11 @@ import {
 const router = express.Router();
 
 router.route("/createGroup").post(createGroup);
-router.route("/viewGroup").get(viewGroup);
+router.route("/viewGroup").post(viewGroup);
 router.route("/editGroup").put(editGroup);
 router.route("/deleteGroup").delete(deleteGroup);
 
-router.route("/getUserGroups").get(findGroupsbyUser);
+router.route("/getUserGroups").post(findGroupsbyUser);
 
 export default router;
 

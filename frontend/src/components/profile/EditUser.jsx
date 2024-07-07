@@ -6,7 +6,7 @@ import { Stack, TextField, Grid, Button } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
 import Iconify from "../Iconify";
-import { editUser } from "../../services/authentication";
+import { editUser } from "../../services/authentication.service.js";
 
 import useResponsive from "../../theme/hooks/useResponsive";
 import PropTypes from "prop-types";

@@ -14,7 +14,7 @@ import Iconify from "../Iconify";
 import useResponsive from "../../theme/hooks/useResponsive";
 import UserDetails from "./UserDetails";
 import { useState, useEffect } from "react";
-import { deleteUser, getUser } from "../../services/authentication";
+import { deleteUser, getUser } from "../../services/authentication.service.js";
 import ChangePassword from "./ChangePassword";
 import Loading from "../Loading";
 import EditForm from "./EditUser";

@@ -13,7 +13,7 @@ import { LoadingButton } from "@mui/lab";
 
 import Iconify from "../Iconify";
 import useResponsive from "../../theme/hooks/useResponsive";
-import { login } from "../../services/authentication";
+import { login } from "../../services/authentication.service.js";
 
 const LoginForm = () => {
   const smUp = useResponsive("up", "sm");

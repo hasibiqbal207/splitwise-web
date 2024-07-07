@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import Iconify from "../Iconify";
-import { updatePassword } from "../../services/authentication";
+import { updatePassword } from "../../services/authentication.service.js";
 
 import useResponsive from "../../theme/hooks/useResponsive";
 import { LoadingButton } from "@mui/lab";

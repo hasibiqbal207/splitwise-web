@@ -13,7 +13,7 @@ import { LoadingButton } from "@mui/lab";
 
 import useResponsive from "../../theme/hooks/useResponsive";
 import Iconify from "../Iconify";
-import { register } from "../../services/authentication";
+import { register } from "../../services/authentication.service.js";
 
 export default function RegistrationForm() {
   const smUp = useResponsive("up", "sm");

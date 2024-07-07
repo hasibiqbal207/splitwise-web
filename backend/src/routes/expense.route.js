@@ -22,26 +22,26 @@ router.route("/addExpense").post(addExpense);
 
 router.route("/editExpense").put(editExpense);
 
-router.route("/viewExpense").get(viewExpense);
+router.route("/viewExpense").post(viewExpense);
 
 router.route("/deleteExpense").delete(deleteExpense);
 
-router.route("/user").get(getUserExpenses);
+router.route("/user").post(getUserExpenses);
 
-router.route("/user/recentExpenses").get(getRecentUserExpenses);
+router.route("/user/recentExpenses").post(getRecentUserExpenses);
 
-router.route("/user/dailyExpense").get(userDailyExpense);
+router.route("/user/dailyExpense").post(userDailyExpense);
 
-router.route("/user/monthlyExpense").get(userMonthlyExpense);
+router.route("/user/monthlyExpense").post(userMonthlyExpense);
 
-router.route("/user/expenseByCategory").get(userExpenseByCategory);
+router.route("/user/expenseByCategory").post(userExpenseByCategory);
 
-router.route("/group").get(getGroupExpenses);
+router.route("/group").post(getGroupExpenses);
  
-router.route("/group/dailyExpense").get(groupDailyExpense);
+router.route("/group/dailyExpense").post(groupDailyExpense);
 
-router.route("/group/monthlyExpense").get(groupMonthlyExpense);
+router.route("/group/monthlyExpense").post(groupMonthlyExpense);
 
-router.route("/group/expenseByCategory").get(groupExpenseByCategory);
+router.route("/group/expenseByCategory").post(groupExpenseByCategory);
 
 export default router;
