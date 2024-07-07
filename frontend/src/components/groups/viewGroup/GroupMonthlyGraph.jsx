@@ -8,11 +8,11 @@ import {
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
-  getGroupDailyExpService,
-  getGroupMonthlyExpService,
-} from "../../../services/expenseServices";
+  getGroupDailyExpenseService,
+  getGroupMonthlyExpenseService,
+} from "../../../services/expense.service.js";
 import AlertBanner from "../../AlertBanner";
-import Loading from "../../loading";
+import Loading from "../../Loading";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { monthNamesMMM } from "../../../utils/helper";
@@ -78,12 +78,12 @@ const GroupMonthlyGraph = () => {
       const groupIdJson = {
         id: params.groupId,
       };
-      const monthly_exp = await getGroupMonthlyExpService(
+      const monthly_exp = await getGroupMonthlyExpenseService(
         groupIdJson,
         setAlert,
         setAlertMessage
       );
-      const daily_exp = await getGroupDailyExpService(
+      const daily_exp = await getGroupDailyExpenseService(
         groupIdJson,
         setAlert,
         setAlertMessage

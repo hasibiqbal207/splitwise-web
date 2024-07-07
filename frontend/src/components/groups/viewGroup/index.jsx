@@ -12,10 +12,9 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
-import {
-  getGroupDetailsService,
-  getGroupExpenseService,
-} from "../../../services/group.service.js";
+import { getGroupDetailsService } from "../../../services/group.service.js";
+import { getGroupExpenseService } from "../../../services/expense.service.js";
+
 import AlertBanner from "../../AlertBanner";
 import Iconify from "../../Iconify";
 import Loading from "../../Loading";
@@ -25,14 +24,14 @@ import {
   currencyFind,
   categoryIcon,
 } from "../../../utils/helper";
-import ExpenseCard from "../../expense/expenseCard";
-import GroupCategoryGraph from "./groupCategoryGraph";
-import GroupMonthlyGraph from "./groupMonthlyGraph";
-import dataConfig from "../../../config.json";
+import ExpenseCard from "../../expense/ExpenseCard";
+import GroupCategoryGraph from "./GroupCategoryGraph";
+import GroupMonthlyGraph from "./GroupMonthlyGraph";
+import dataConfig from "../../../config/config.json";
 import { GroupSettlements } from "../settlement";
 
 const profile = JSON.parse(localStorage.getItem("profile"));
-const emailId = profile?.emailId;
+const email = profile?.email;
 let showCount = 10;
 
 export default function ViewGroup() {
@@ -43,6 +42,7 @@ export default function ViewGroup() {
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertExpense, setAlertExpense] = useState(false);
+  const [alertExpenseMessage, setAlertExpenseMessage] = useState('');
   const [showAllExp, setShowAllExp] = useState(false);
   const [expFocus, setExpFocus] = useState(false);
   const [expenses, setExpenses] = useState();
@@ -72,7 +72,7 @@ export default function ViewGroup() {
   const findUserSplit = (split) => {
     if (split) {
       split = split[0];
-      return split[emailId];
+      return split[email];
     }
     return 0;
   };
@@ -81,8 +81,9 @@ export default function ViewGroup() {
     const getGroupDetails = async () => {
       setLoading(true);
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
+      console.log(groupIdJson);
       const response_group = await getGroupDetailsService(
         groupIdJson,
         setAlert,

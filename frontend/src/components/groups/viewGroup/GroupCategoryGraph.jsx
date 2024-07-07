@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getGroupCategoryExpService } from "../../../services/expense.service.js";
+import { getGroupCategoryExpenseService } from "../../../services/expense.service.js";
 import AlertBanner from "../../AlertBanner";
-import Loading from "../../loading";
+import Loading from "../../Loading";
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import "chart.js/auto";
@@ -61,7 +61,7 @@ const GroupCategoryGraph = (currencyType) => {
       const groupIdJson = {
         id: params.groupId,
       };
-      const category_exp = await getGroupCategoryExpService(
+      const category_exp = await getGroupCategoryExpenseService(
         groupIdJson,
         setAlert,
         setAlertMessage
