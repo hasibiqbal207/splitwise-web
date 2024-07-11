@@ -24,9 +24,9 @@ import * as Yup from "yup";
 import useResponsive from "../../theme/hooks/useResponsive";
 import { currencyFind } from "../../utils/helper";
 import { addExpenseService } from "../../services/expense.service.js";
-import configData from "../../config.json";
-import { getGroupDetailsService } from "../../services/group.services.js";
-import Loading from "../loading";
+import configData from "../../config/config.json";
+import { getGroupDetailsService } from "../../services/group.service.js";
+import Loading from "../Loading";
 import { useParams, Link as RouterLink } from "react-router-dom";
 import AlertBanner from "../AlertBanner";
 

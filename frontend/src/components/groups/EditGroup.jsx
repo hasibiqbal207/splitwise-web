@@ -17,15 +17,15 @@ import {
 import { Form, FormikProvider, useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import { getEmailList } from "../../services/auth";
-import Loading from "../loading";
+import { getEmailList } from "../../services/authentication.service.js";
+import Loading from "../Loading";
 import useResponsive from "../../theme/hooks/useResponsive";
 import {
   editGroupService,
   getGroupDetailsService,
 } from "../../services/group.service.js";
 import AlertBanner from "../AlertBanner";
-import configData from "../../config.json";
+import configData from "../../config/config.json";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const EditGroup = () => {
@@ -33,7 +33,7 @@ export const EditGroup = () => {
   const params = useParams();
   const mdUp = useResponsive("up", "md");
   const profile = JSON.parse(localStorage.getItem("profile"));
-  const currentUser = profile?.emailId;
+  const currentUser = profile?.email;
   const [loading, setLoading] = useState(false);
   const [emailList, setEmailList] = useState([]);
   const [alert, setAlert] = useState(false);

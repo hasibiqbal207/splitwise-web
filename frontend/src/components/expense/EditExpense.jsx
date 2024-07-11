@@ -25,11 +25,11 @@ import useResponsive from "../../theme/hooks/useResponsive";
 import { currencyFind } from "../../utils/helper";
 import {
   editExpenseService,
-  getExpDetailsService,
-} from "../../services/expenseServices";
+  getExpenseDetailsService,
+} from "../../services/expense.service.js";
 import { useParams, useNavigate } from "react-router-dom";
-import { getGroupDetailsService } from "../../services/groupServices";
-import Loading from "../loading";
+import { getGroupDetailsService } from "../../services/group.service.js";
+import Loading from "../Loading";
 import AlertBanner from "../AlertBanner";
 
 export default function EditExpense() {
@@ -90,7 +90,7 @@ export default function EditExpense() {
       const expenseIdJson = {
         id: params.expenseId,
       };
-      const response_exp = await getExpDetailsService(
+      const response_exp = await getExpenseDetailsService(
         expenseIdJson,
         setAlert,
         setAlertMessage

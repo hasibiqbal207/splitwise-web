@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link as RouterLink } from "react-router-dom";
-import { getExpDetailsService } from "../../services/expense.service.js";
+import { getExpenseDetailsService } from "../../services/expense.service.js";
 import useResponsive from "../../theme/hooks/useResponsive";
 import { convertToCurrency, currencyFind } from "../../utils/helper";
 import Loading from "../Loading";
@@ -47,7 +47,7 @@ export const ViewExpense = () => {
       const expenseIdJson = {
         id: expenseId,
       };
-      const response_exp = await getExpDetailsService(
+      const response_exp = await getExpenseDetailsService(
         expenseIdJson,
         setAlert,
         setAlertMessage

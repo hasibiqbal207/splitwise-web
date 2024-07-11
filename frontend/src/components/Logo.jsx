@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link as RouterLink } from "react-router-dom";
 import { Box } from "@mui/material";
-import configData from "../config.json";
+import configData from "../config/config.json";
 
 Logo.propTypes = {
   disabledLink: PropTypes.bool,

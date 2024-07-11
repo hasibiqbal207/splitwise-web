@@ -14,14 +14,14 @@ import AlertBanner from "../AlertBanner";
 
 EditForm.prototype = {
   hideEditUser: PropTypes.func,
-  emailId: PropTypes.string,
+  email: PropTypes.string,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
 };
 
 export default function EditForm({
   hideEditUser,
-  emailId,
+  email,
   firstName,
   lastName,
   showHomeAlert,
@@ -38,7 +38,7 @@ export default function EditForm({
 
   const formik = useFormik({
     initialValues: {
-      emailId: emailId,
+      email: email,
       firstName: firstName,
       lastName: lastName,
     },

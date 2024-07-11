@@ -21,7 +21,7 @@ import { useState } from "react";
 import AlertBanner from "../AlertBanner";
 
 ChangePassword.propTypes = {
-  emailId: PropTypes.string,
+  email: PropTypes.string,
   hidePassUpdate: PropTypes.func,
   showHomeAlert: PropTypes.func,
   homeAlertMessage: PropTypes.func,
@@ -29,7 +29,7 @@ ChangePassword.propTypes = {
 
 export default function ChangePassword({
   hidePassUpdate,
-  emailId,
+  email,
   showHomeAlert,
   homeAlertMessage,
 }) {
@@ -55,7 +55,7 @@ export default function ChangePassword({
 
   const formik = useFormik({
     initialValues: {
-      emailId: emailId,
+      email: email,
       oldPassword: "",
       newPassword: "",
       confirmPassword: "",
