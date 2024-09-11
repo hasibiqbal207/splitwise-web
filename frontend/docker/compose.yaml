@@ -1,0 +1,18 @@
+services:
+  portfolio-dev:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.dev
+    ports:
+      - "6004:6004"
+    volumes:
+      - ../:/app
+      - /app/node_modules/
+
+  portfolio-prod:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.prod
+    ports:
+      - "6004:6004"
+    restart: always
