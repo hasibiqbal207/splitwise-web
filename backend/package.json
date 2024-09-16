@@ -9,7 +9,8 @@
     "dev": "nodemon src/server.js",
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production babel src -d dist"
   },
   "keywords": [],
   "author": "Hasib Iqbal",
@@ -28,6 +29,11 @@
     "winston": "^3.13.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.25.2",
+    "@babel/node": "^7.25.0",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/register": "^7.24.6",
     "eslint": "^9.5.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
