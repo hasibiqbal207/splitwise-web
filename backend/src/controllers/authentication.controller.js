@@ -6,7 +6,7 @@ import {
 } from "../services/authentication.service.js";
 import logger from "../../config/logger.config.js";
 import validator from "../utils/validation.js"; // Assuming there's a validator module
-import apiAuth from "../utils/apiAuthentication.js";
+import {generateAccessToken, validateUser} from "../utils/apiAuthentication.js";
 
 /**
  * User Registration function
@@ -20,7 +20,6 @@ import apiAuth from "../utils/apiAuthentication.js";
 export const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
-    console.log(firstName, lastName, email, password);
 
     // Checking if email ID already present in database
     const existingUser = await findUserByEmail(email);
@@ -67,7 +66,7 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const user = await signUser(email, password);
 
-    // const accessToken = apiAuth.generateAccessToken(req.body.email)
+    const accessToken = generateAccessToken(req.body.email)
 
     res.status(200).json({
       status: "Success",
@@ -93,7 +92,7 @@ export const updatePassword = async (req, res) => {
     const { email, oldPassword, newPassword } = req.body;
 
     // Check if the logged-in user is the same as the requested user
-    apiAuth.validateUser(req.user, email);
+    validateUser(req.user, email);
 
     // Call the service to update the password
     const updateResponse = await updatePasswordInDatabase(email, oldPassword, newPassword);

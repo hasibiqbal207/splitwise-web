@@ -1,4 +1,4 @@
-import apiAuth from "../utils/apiAuthentication.js";
+import {validateUser, } from "../utils/apiAuthentication.js";
 import logger from "../../config/logger.config.js";
 
 import {
@@ -14,7 +14,7 @@ export const viewUserProfile = async (req, res) => {
     const { email } = req.body;
     logger.error("Checking user: " + email);
 
-    apiAuth.validateUser(req.user, email); //[Check]
+    validateUser(req.user, email); //[Check]
 
     const user = await fetchUserByEmail(email);
 
@@ -44,7 +44,7 @@ export const updateUserProfile = async (req, res) => {
   try {
     const { firstName, lastName, email } = req.body;
 
-    apiAuth.validateUser(req.user, email); //[Check]
+    validateUser(req.user, email); //[Check]
     const userCheck = await validator.userValidation(email);
     if (!userCheck) {
       const err = new Error("User does not exist!");
@@ -76,7 +76,7 @@ export const deleteUser = async (req, res) => {
   try {
     const { email } = req.body;
 
-    apiAuth.validateUser(req.user, email); //[Check]
+    validateUser(req.user, email); //[Check]
     const userCheck = await validator.userValidation(email);
     if (!userCheck) {
       const err = new Error("User does not exist!");
