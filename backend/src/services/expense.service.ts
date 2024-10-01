@@ -24,7 +24,6 @@ export const deleteExpenseById = async (expenseId) => {
 };
 
 export const updateExpense = async (expenseData) => {
-  console.log(expenseData);
   return await ExpenseModel.updateOne(
     {
       _id: expenseData.id,

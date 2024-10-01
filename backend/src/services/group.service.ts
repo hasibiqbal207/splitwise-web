@@ -1,10 +1,10 @@
-import { GroupModel } from "../models/index.js";
+import { GroupModel, SettlementModel } from "../models/index.js";
 
 export const createGroupinDB = async (groupData) => {
   return await GroupModel.create(groupData);
 };
 
-export const findGroupinDB = async (groupId) => {
+export const findGroupByID = async (groupId) => {
   return await GroupModel.findOne({ _id: groupId });
 };
 
@@ -44,4 +44,12 @@ export const getGroupUsers = async (groupId) => {
       _id: 0,
     }
   );
+};
+
+export const updateGroupSplit = async (groupId, split) => {
+  return GroupModel.updateOne({ _id: groupId }, { $set: { split } });
+};
+
+export const createSettlement = async (settlementData) => {
+  return SettlementModel.create(settlementData);
 };

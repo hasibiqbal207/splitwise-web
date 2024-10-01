@@ -5,7 +5,7 @@ const morganFormat = ":method :url :status :response-time ms";
 
 // Define stream for Morgan to use Winston's logger
 const stream = {
-  write: (message) => {
+  write: (message: string) => {
     const logObject = {
       method: message.split(" ")[0],
       url: message.split(" ")[1],

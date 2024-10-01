@@ -1,17 +1,18 @@
-import apiAuth from "../utils/apiAuthentication.js";
 import logger from "../../config/logger.config.js";
 import * as validator from "../utils/validation.js";
 import { GroupModel } from "../models/index.js";
 
 import {
   createGroupinDB,
-  findGroupinDB,
+  findGroupByID,
   updateGroupinDB,
   deleteGroupinDB,
   getUserGroups,
 } from "../services/group.service.js";
 
 import { findUserByEmail } from "../services/authentication.service.js";
+
+import simplifyDebts from "../utils/split.js";
 
 export const createGroup = async (req, res) => {
   try {
@@ -82,7 +83,7 @@ export const createGroup = async (req, res) => {
 export const viewGroup = async (req, res) => {
   try {
     const { groupId } = req.body;
-    const group = await findGroupinDB(groupId);
+    const group = await findGroupByID(groupId);
 
     if (!group || groupId == null) {
       const err = new Error("Invalid Group Id");
@@ -106,7 +107,7 @@ export const viewGroup = async (req, res) => {
 export const editGroup = async (req, res) => {
   try {
     const groupId = req.body.id;
-    const group = await findGroupinDB(groupId);
+    const group = await findGroupbyID(groupId);
 
     //Validation to check if the group exists
     if (!group || groupId == null) {
@@ -172,7 +173,7 @@ export const editGroup = async (req, res) => {
 export const deleteGroup = async (req, res) => {
   try {
     const { groupId } = req.body;
-    const group = await findGroupinDB(groupId);
+    const group = await findGroupbyID(groupId);
 
     if (!group) {
       const err = new Error("Invalid Group Id");
@@ -231,7 +232,7 @@ export const splitNewExpense = async (
 ) => {
   try {
     // Find the group by ID
-    const group = await findGroupinDB(groupId);
+    const group = await findGroupbyID(groupId);
 
     // Update the group's total expense
     group.groupTotal += expenseAmount;
@@ -280,7 +281,7 @@ export const revertSplit = async (
 ) => {
   try {
     // Find the group by ID
-    const group = await findGroupinDB(groupId);
+    const group = await findGroupbyID(groupId);
 
     // Update the group's total expense
     group.groupTotal -= expenseAmount;
@@ -321,4 +322,72 @@ export const revertSplit = async (
   }
 };
 
-export const initiateSettlement = async (req, res) => {};
+export const makeSettlement = async (req, res) => {
+  try {
+    validator.notNull(req.body.groupId);
+    validator.notNull(req.body.settleTo);
+    validator.notNull(req.body.settleFrom);
+    validator.notNull(req.body.settleAmount);
+    validator.notNull(req.body.settleDate);
+
+    // Fetch the group by ID
+    const group = await findGroupByID(req.body.groupId);
+    if (!group) {
+      const err = new Error("Invalid Group Id");
+      err.status = 400;
+      throw err;
+    }
+
+    // Perform settlement logic
+    group.split[0][req.body.settleFrom] += req.body.settleAmount;
+    group.split[0][req.body.settleTo] -= req.body.settleAmount;
+
+    // Persist the settlement and update the group
+    const settlementId = await createSettlement(req.body);
+    const updatedResponse = await updateGroupSplit(group._id, group.split);
+
+    res.status(200).json({
+      message: "Settlement successfully!",
+      status: "Success",
+      update: updatedResponse,
+      response: settlementId,
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};
+
+/*
+Group Settlement Calculator 
+This function is used to calculate the balnce sheet in a group, who owes whom 
+Accepts : group Id 
+return : group settlement detals
+*/
+export const groupBalanceSheet = async (req, res) => {
+  try {
+    // Fetch the group by ID
+    const group = await findGroupByID(req.body.groupId);
+    if (!group) {
+      const err = new Error("Invalid Group Id");
+      err.status = 400;
+      throw err;
+    }
+
+    res.status(200).json({
+      status: "Success",
+      data: simplifyDebts(group.split[0]),
+    });
+  } catch (err) {
+    logger.error(
+      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
+    );
+    res.status(err.status || 500).json({
+      message: err.message,
+    });
+  }
+};

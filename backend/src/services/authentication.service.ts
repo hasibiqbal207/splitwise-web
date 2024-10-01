@@ -26,7 +26,6 @@ export const createUser = async (userData) => {
  * @throws {NotFound} - If the user with the provided email does not exist or the passwords do not match.
  */
 export const signUser = async (email, password) => {
-  console.log(email, password);
   const user = await UserModel.findOne({ email: email });
 
   //check if user exist

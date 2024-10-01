@@ -1,6 +1,6 @@
 import * as validator from "../utils/validation.js";
 import logger from "../../config/logger.config.js";
-import { findGroupinDB } from "../services/group.service.js";
+import { findGroupByID } from "../services/group.service.js";
 import {
   createExpenseinDB,
   getExpenseById,
@@ -23,7 +23,7 @@ export const addExpense = async (req, res) => {
     const expenseData = req.body;
     logger.info(expenseData);
     // Find the group by ID
-    const group = await findGroupinDB(expenseData.groupId);
+    const group = await findGroupByID(expenseData.groupId);
     if (!group) {
       const error = new Error("Invalid Group ID");
       error.status = 400;
@@ -149,8 +149,6 @@ export const editExpense = async (req, res) => {
           throw error;
         }
       }
-
-      console.log("Check mark", newExpenseData);
 
       const updatedExpenseData = await updateExpense(newExpenseData);
 
@@ -390,11 +388,11 @@ export const getGroupExpenses = async (req, res) => {
     const { groupId } = req.body;
     const expenses = await getGroupExpensesById(groupId);
 
-    if (expenses.length == 0) {
-      const err = new Error("No expense present for the group");
-      err.status = 400;
-      throw err;
-    }
+    // if (expenses.length == 0) {
+    //   const err = new Error("No expense present for the group");
+    //   err.status = 400;
+    //   throw err;
+    // }
 
     let totalAmount = 0;
     for (const expense of expenses) {
@@ -420,7 +418,6 @@ export const getRecentUserExpenses = async (req, res) => {
   try {
     const { userEmail } = req.body;
     const expenses = await getRecentExpensesByUser(userEmail);
-    console.log(expenses.length);
     res.status(200).json({
       status: "Success",
       expenses: expenses,
