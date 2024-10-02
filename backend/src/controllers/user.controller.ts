@@ -1,27 +1,32 @@
-import {validateUser, } from "../utils/apiAuthentication.js";
+import { Request, Response } from "express";
+import handleAsync from "../utils/handleAsync.js";
+// import { validateUser } from "../utils/apiAuthentication.js";
 import logger from "../../config/logger.config.js";
-
+import * as validator from "../utils/validation.js";
 import {
   deleteUserByEmail,
   fetchUserByEmail,
   updateUserData,
   fetchAllUsers,
 } from "../services/user.service.js";
-import * as validator from "../utils/validation.js";
 
-export const viewUserProfile = async (req, res) => {
-  try {
+interface CustomError extends Error {
+  status?: number;
+}
+
+export const viewUserProfile = handleAsync(
+  async (req: Request, res: Response) => {
     const { email } = req.body;
     logger.error("Checking user: " + email);
 
-    validateUser(req.user, email); //[Check]
+    // validateUser(req.user, email); //[Check]
 
     const user = await fetchUserByEmail(email);
 
     if (!user) {
-      const err = new Error("User does not exist!");
-      err.status = 400;
-      throw err;
+      const error: CustomError = new Error("User does not exist!");
+      error.status = 400;
+      throw error;
     }
 
     logger.error("User: " + user);
@@ -30,26 +35,20 @@ export const viewUserProfile = async (req, res) => {
       message: "User fetched successfully",
       user,
     });
-  } catch (error) {
-    logger.error(
-      `URL : ${req.originalUrl} | staus : ${error.status} | message: ${error.message} ${error.stack}`
-    );
-    res.status(error.status || 500).json({
-      message: error.message,
-    });
-  }
-};
+  },
+  "Failed to create user"
+);
 
-export const updateUserProfile = async (req, res) => {
-  try {
+export const updateUserProfile = handleAsync(
+  async (req: Request, res: Response) => {
     const { firstName, lastName, email } = req.body;
 
-    validateUser(req.user, email); //[Check]
+    // validateUser(req.user, email); //[Check]
     const userCheck = await validator.userValidation(email);
     if (!userCheck) {
-      const err = new Error("User does not exist!");
-      err.status = 400;
-      throw err;
+      const error: CustomError = new Error("User does not exist!");
+      error.status = 400;
+      throw error;
     }
 
     // Performing validations
@@ -62,70 +61,46 @@ export const updateUserProfile = async (req, res) => {
         response: updatedResponse,
       });
     }
-  } catch (err) {
-    logger.error(
-      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
-    );
-    res.status(err.status || 500).json({
-      message: err.message,
-    });
+  },
+  "Failed to create user"
+);
+
+export const deleteUser = handleAsync(async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  // validateUser(req.user, email); //[Check]
+  const userCheck = await validator.userValidation(email);
+  if (!userCheck) {
+    const error: CustomError = new Error("User does not exist!");
+    error.status = 400;
+    throw error;
   }
-};
 
-export const deleteUser = async (req, res) => {
-  try {
-    const { email } = req.body;
+  const deleteUserResponse = await deleteUserByEmail(email);
 
-    validateUser(req.user, email); //[Check]
-    const userCheck = await validator.userValidation(email);
-    if (!userCheck) {
-      const err = new Error("User does not exist!");
-      err.status = 400;
-      throw err;
-    }
+  res.status(200).json({
+    status: "Success",
+    message: "User Account deleted!",
+    response: deleteUserResponse,
+  });
+}, "Failed to create user");
 
-    const deleteUserResponse = await deleteUserByEmail(email);
+export const getAllUsers = handleAsync(async (req: Request, res: Response) => {
+  const users = await fetchAllUsers();
 
-    res.status(200).json({
-      status: "Success",
-      message: "User Account deleted!",
-      response: deleteUserResponse,
-    });
-  } catch (err) {
-    logger.error(
-      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
-    );
-    res.status(err.status || 500).json({
-      message: err.message,
-    });
+  if (!users) {
+    const error: CustomError = new Error("User does not exist!");
+    error.status = 400;
+    throw error;
   }
-};
 
-export const getAllUsers = async (req, res) => {
-  try {
-    const users = await fetchAllUsers();
-
-    if (!users) {
-      const err = new Error("User does not exist!");
-      err.status = 400;
-      throw err;
-    }
-
-    let emailList = [];
-    for (const user of users) {
-      emailList.push(user.email);
-    }
-
-    res.status(200).json({
-      status: "Success",
-      users: emailList,
-    });
-  } catch (err) {
-    logger.error(
-      `URL : ${req.originalUrl} | staus : ${err.status} | message: ${err.message}`
-    );
-    res.status(err.status || 500).json({
-      message: err.message,
-    });
+  let emailList = [];
+  for (const user of users) {
+    emailList.push(user.email);
   }
-};
+
+  res.status(200).json({
+    status: "Success",
+    users: emailList,
+  });
+}, "Failed to create user");
