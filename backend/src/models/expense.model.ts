@@ -1,6 +1,32 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const expenseSchema = new mongoose.Schema(
+enum Currency {
+  EUR = "EUR",
+  USD = "USD",
+}
+
+enum ExpenseType {
+  Cash = "Cash",
+  Card = "Card",
+}
+
+interface IExpense {
+  groupId: string;
+  expenseName: string;
+  expenseDescription?: string;
+  expenseAmount: number;
+  expenseCategory?: string; 
+  expenseCurrency?: Currency;
+  expenseDate: Date;
+  expenseOwner: string;
+  expenseMembers: string[];
+  expensePerMember: number;
+  expenseType?: ExpenseType; 
+}
+
+export interface ExpenseDocument extends IExpense, Document {}
+
+const expenseSchema = new mongoose.Schema<ExpenseDocument>(
   {
     groupId: {
       type: String,
@@ -23,18 +49,19 @@ const expenseSchema = new mongoose.Schema(
     },
     expenseCurrency: {
       type: String,
-      default: "INR",
+      enum: Object.values(Currency), 
+      default: Currency.EUR,
     },
     expenseDate: {
       type: Date,
-      default: Date.now,
+      default: Date.now, // `Date.now` returns a timestamp, Mongoose will convert it to Date
     },
     expenseOwner: {
       type: String,
       required: true,
     },
     expenseMembers: {
-      type: Array,
+      type: [String], // Correctly typed as an array of strings
       required: true,
     },
     expensePerMember: {
@@ -43,15 +70,17 @@ const expenseSchema = new mongoose.Schema(
     },
     expenseType: {
       type: String,
-      default: "Cash",
+      enum: Object.values(ExpenseType), // Use enum validation in the schema
+      default: ExpenseType.Cash, // Default to Cash
     },
   },
   {
     collection: "expenses",
-    timestamps: true,
+    timestamps: true, // Adds createdAt and updatedAt fields
   }
 );
 
-const ExpenseModel =
-  mongoose.model.ExpenseModel || mongoose.model("ExpenseModel", expenseSchema);
+const ExpenseModel: Model<ExpenseDocument> =
+  mongoose.models.ExpenseModel || mongoose.model<ExpenseDocument>("ExpenseModel", expenseSchema);
+
 export default ExpenseModel;

@@ -1,6 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const groupSchema = new mongoose.Schema(
+interface IGroup {
+  groupName: string;
+  groupDescription?: string;
+  groupCurrency: string;
+  groupOwner: string;
+  groupMembers: string[];
+  groupCategory: string;
+  groupTotal: number;
+  split: Record<string, number>[]; 
+}
+
+export interface GroupDocument extends IGroup, Document {}
+
+const groupSchema = new mongoose.Schema<GroupDocument>(
   {
     groupName: {
       type: String,
@@ -18,7 +31,7 @@ const groupSchema = new mongoose.Schema(
       required: true,
     },
     groupMembers: {
-      type: Array,
+      type: [String],
       required: true,
     },
     groupCategory: {
@@ -30,7 +43,12 @@ const groupSchema = new mongoose.Schema(
       default: 0,
     },
     split: {
-      type: Array,
+      type: [
+        {
+          user: { type: String, required: true },
+          amount: { type: Number, required: true }
+        }
+      ],
     },
   },
   {
@@ -39,6 +57,7 @@ const groupSchema = new mongoose.Schema(
   }
 );
 
-const GroupModel =
-  mongoose.model.GroupModel || mongoose.model("GroupModel", groupSchema);
+const GroupModel: Model<GroupDocument> =
+  mongoose.models.GroupModel ||
+  mongoose.model<GroupDocument>("GroupModel", groupSchema);
 export default GroupModel;

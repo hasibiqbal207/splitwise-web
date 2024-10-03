@@ -1,6 +1,16 @@
-import mongoose from "mongoose";
+import mongoose, {Document, Model} from "mongoose";
 
-const settlementSchema = new mongoose.Schema(
+interface ISettlement {
+  groupId: string;
+  settleTo: string;
+  settleFrom: string;
+  settleDate: string;
+  settleAmount: number;
+}
+
+export interface SettlementDocument extends ISettlement, Document {}
+
+const settlementSchema = new mongoose.Schema<SettlementDocument>(
   {
     groupId: {
       type: String,
@@ -29,8 +39,8 @@ const settlementSchema = new mongoose.Schema(
   }
 );
 
-const SettlementModel =
-  mongoose.model.SettlementModel ||
-  mongoose.model("SettlementModel", settlementSchema);
+const SettlementModel: Model<SettlementDocument> =
+  mongoose.models.SettlementModel ||
+  mongoose.model<SettlementDocument>("SettlementModel", settlementSchema);
 
 export default SettlementModel;
