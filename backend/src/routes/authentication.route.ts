@@ -1,8 +1,11 @@
 import express from "express";
 
-import { registerUser, loginUser, updatePassword } from "../controllers/authentication.controller.js";
+import {
+  registerUser,
+  loginUser,
+  updatePassword,
+} from "../controllers/authentication.controller.js";
 import { validateToken } from "../utils/apiAuthentication.js";
-
 
 const router = express.Router();
 
@@ -27,7 +30,7 @@ const router = express.Router();
  *                   name:
  *                     type: string
  */
-router.route("/registerUser").post(registerUser)
+router.route("/registerUser").post(registerUser);
 
 /**
  * @swagger
@@ -50,14 +53,8 @@ router.route("/registerUser").post(registerUser)
  *                   name:
  *                     type: string
  */
-router.route("/loginUser").post(loginUser)
+router.route("/loginUser").post(loginUser);
 
-router.route("/updatePassword").post(validateToken, updatePassword)
-// router.route("/resetPassword").post(resetPassword)
+router.route("/updatePassword").post(validateToken, updatePassword);
 
-// router.route("/logout").post(logout)
-
-// // Refresh authentication token
-// router.route("/refreshToken").post(refreshToken)
-
-export default router
+export default router;

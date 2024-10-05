@@ -6,7 +6,7 @@ import {
   userDailyExpense,
   userMonthlyExpense,
   userExpenseByCategory,
-} from "../controllers/expense.controller.js";
+} from "../../controllers/expense/userExpenses.controller.js";
 
 const router = express.Router();
 
