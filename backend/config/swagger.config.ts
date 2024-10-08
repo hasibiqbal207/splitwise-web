@@ -27,16 +27,30 @@ const swaggerDefinition: SwaggerDefinition = {
   ],
   servers: [
     {
-      url: "http://localhost:4004", // The URL of your API
+      url: "http://localhost:4004/api/v1", // The URL of your API
       description: "Development server",
     },
+    // {
+    //   url: "http://localhost:4004/api/v1", // The URL of your API
+    //   description: "Development server",
+  //   - url: http://api.example.com/v1
+  //   description: Optional server description, e.g. Main (production) server
+  // - url: http://staging-api.example.com
+  //   description: Optional server description, e.g. Internal staging server for testing
+    // },
   ],
 };
 
 // Options for the swagger-jsdoc
-const options: Options  = {
+const options: Options = {
   swaggerDefinition,
-  apis: ["../src/routes/*.js", "../src/models/*.js"], // Path to the API docs (JSDoc comments in your code)
+  apis: [
+    "./src/routes/*.ts",
+    "./src/models/*.ts",
+    "./docs/swagger-docs/routes/*.ts",
+    "./docs/swagger-docs/routes/expense/*.ts",
+    "./docs/swagger-docs/models/*.ts",
+  ], // Path to the API docs (JSDoc comments in your code)
 };
 
 // Initialize swagger-jsdoc

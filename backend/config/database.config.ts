@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
 import logger from "./logger.config.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Define the type for the environment variable
-const MONGODB_URI = process.env.MONGODB_URI as string; // Explicitly cast MONGODB_URI as string
+const MONGODB_URI = process.env.MONGODB_URL; // Explicitly cast MONGODB_URI as string
 
 // Create a function to connect to MongoDB
 const connectDB = async (): Promise<void> => {

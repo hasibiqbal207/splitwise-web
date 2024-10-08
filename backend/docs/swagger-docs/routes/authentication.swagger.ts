@@ -10,7 +10,7 @@
  * /auth/registerUser:
  *   post:
  *     summary: Register an user.
- *     description: Register a new user with email and password. Returns an userId.
+ *     description: Register a new user with name, email and password. Returns an userId.
  *     tags:
  *       - User Authentication
  *     requestBody:
@@ -66,7 +66,7 @@
  * /auth/loginUser:
  *   post:
  *     summary: Login an user
- *     description: Authenticate an user with email and password, and return a JWT token and user details.
+ *     description: Authenticate an user with email and password, and return an access token and user details.
  *     tags:
  *       - User Authentication
  *     requestBody:
@@ -123,22 +123,56 @@
 
 /**
  * @openapi
+ * /auth/updatePassword:
+ *   post:
+ *     summary: Update password of an user
+ *     tags:
+ *       - User Authentication
+ *     requestBody:
+ *       description: Update an user password with email and old and new password.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User's email address.
+ *                 example: "test@gmail.com"
+ *               oldPassword:
+ *                 type: string
+ *                 description: User's password.
+ *                 example: "TestPassword@123"
+ *               newPassword:
+ *                 type: string
+ *                 description: User's password.
+ *                 example: "TestPassword@2022"
+ *     responses:
+ *       200:
+ *         description: Password updated successfully, returns user information containing id, name, email, password, createdAt, and updatedAt.
+ *         content:
+ *           application/json:
+ *             schema:
+ *              properties:
+ *                status:
+ *                  type: string
+ *                  example: Success
+ *                  description: Status of the password update operation.
+ *                message:
+ *                  type: string
+ *                  example: Password updated successfully
+ *                  description: Message describing the result of the password update.
+ *                user:
+ *                  $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Bad request, invalid email or password.
+ *       500:
+ *         description: Internal server error.
+ *
+ *
  * components:
  *  schemas:
- *    PasswordUpdateResponse:
- *      type: object
- *      properties:
- *        status:
- *          type: string
- *          example: Success
- *          description: Status of the password update operation.
- *        message:
- *          type: string
- *          example: Password updated successfully
- *          description: Message describing the result of the password update.
- *        user:
- *          $ref: '#/components/schemas/User'
- *
  *    User:
  *      type: object
  *      properties:
@@ -177,42 +211,4 @@
  *          type: integer
  *          example: 0
  *          description: The document version key.
- * 
- * 
- * /auth/updatePassword:
- *   post:
- *     summary: Update password of an user
- *     tags:
- *       - User Authentication
- *     requestBody:
- *       description: The new password and user details.
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 description: User's email address.
- *                 example: "test@gmail.com"
- *               oldPassword:
- *                 type: string
- *                 description: User's password.
- *                 example: "TestPassword@123"
- *               newPassword:
- *                 type: string
- *                 description: User's password.
- *                 example: "TestPassword@2022"
- *     responses:
- *       200:
- *         description: Password updated successfully, returns user information containing id, name, email, password, createdAt, and updatedAt.
- *         content:
- *           application/json:
- *             schema:
- *              $ref: '#/components/schemas/PasswordUpdateResponse'
- *       400:
- *         description: Bad request, invalid email or password.
- *       500:
- *         description: Internal server error.
  */
