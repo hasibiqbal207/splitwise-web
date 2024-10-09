@@ -1,19 +1,29 @@
 import createHttpError from "http-errors";
-import { UserModel } from "../models/index.js";
+import UserModel, { UserDocument } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import validator from "../utils/validation.js";
 
+interface CreateUserInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 // Function to check if email ID already exists
-export const findUserByEmail = async (email) => {
+export const findUserByEmail = async (
+  email: string
+): Promise<UserDocument | null> => {
   return await UserModel.findOne({ email });
 };
-
 // Function to create a new user
-export const createUser = async (userData) => {
+export const createUser = async (userData: CreateUserInput) => {
   // Bcrypt password encryption
   const salt = await bcrypt.genSalt(10);
   userData.password = await bcrypt.hash(userData.password, salt);
-  return await UserModel(userData).save();
+
+  const newUser = new UserModel(userData);
+  return await newUser.save();
 };
 
 /**
@@ -25,32 +35,41 @@ export const createUser = async (userData) => {
  *                            or throws an error if the credentials are invalid.
  * @throws {NotFound} - If the user with the provided email does not exist or the passwords do not match.
  */
-export const signUser = async (email, password) => {
+// Sign in a user by email and password
+export const signUser = async (
+  email: string,
+  password: string
+): Promise<UserDocument> => {
   const user = await UserModel.findOne({ email: email });
 
-  //check if user exist
+  // Check if user exists
   if (!user) throw createHttpError.NotFound("Invalid credentials.");
 
-  //compare passwords
-  let passwordMatches = await bcrypt.compare(password, user.password);
+  // Compare passwords
+  const passwordMatches = await bcrypt.compare(password, user.password);
 
-  // check if passwords match
-  if (!passwordMatches)
+  // Check if passwords match
+  if (!passwordMatches) {
     throw createHttpError.NotFound(
       "Invalid credentials. Password does not match."
     );
+  }
 
   return user;
 };
 
-
-export const updatePasswordInDatabase = async (email, oldPassword, newPassword) => {
-  // Checking if email is present in the database
-  const user = await findUserByEmail(email);
+// Update a user's password in the database
+export const updatePasswordInDatabase = async (
+  email: string,
+  oldPassword: string,
+  newPassword: string
+): Promise<UserDocument | null> => {
+  // Checking if the user exists
+  const user = await UserModel.findOne({ email });
 
   if (!user) {
     const error = new Error("User does not exist!");
-    error.status = 400;
+    (error as any).status = 400;
     throw error;
   }
 
@@ -62,7 +81,7 @@ export const updatePasswordInDatabase = async (email, oldPassword, newPassword) 
   const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
   if (!isPasswordValid) {
     const error = new Error("Old password does not match");
-    error.status = 400;
+    (error as any).status = 400;
     throw error;
   }
 
@@ -71,10 +90,11 @@ export const updatePasswordInDatabase = async (email, oldPassword, newPassword) 
   const hashedPassword = await bcrypt.hash(newPassword, salt);
 
   // Updating the user's password in the database
-  const updateResponse = await UserModel.updateOne(
+  const updatedResponse = await UserModel.findOneAndUpdate(
     { email },
-    { $set: { password: hashedPassword } }
+    { $set: { password: hashedPassword } },
+    { new: true, select: '-password' }
   );
 
-  return updateResponse;
+  return updatedResponse;
 };

@@ -1,0 +1,171 @@
+#    Represents the Swagger documentation for the authentication routes
+#    in the form of ./backend/src/routes/authentication.route.ts
+
+paths:
+  # Register an user
+  /auth/registerUser:
+    post:
+      summary: Register a user.
+      description: "Register a new user with name, email, and password. Returns a userId."
+      tags:
+      - User Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: User's first name.
+                  example: Hasib
+                lastName:
+                  type: string
+                  description: User's last name.
+                  example: Iqbal
+                email:
+                  type: string
+                  description: User's email address.
+                  example: test@gmail.com
+                password:
+                  type: string
+                  description: User's password.
+                  example: TestPassword@123
+      responses:
+        200:
+          description: "Successful Registration, returns success message & userId."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: User Registration Successful
+                  userId:
+                    type: string
+                    example: 67019fbd5bacc7c300309b1d
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Login an user
+  /auth/loginUser:
+    post:
+      summary: Login an user
+      description: >-
+        Authenticate an user with email and password, and return an access token and user details.
+      tags:
+      - User Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User's email address.
+                  example: test@gmail.com
+                password:
+                  type: string
+                  description: User's password.
+                  example: TestPassword@123
+      responses:
+        200:
+          description: "Successful login, returns user information and access token."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  message:
+                    type: string
+                    example: User Login Successful.
+                  userId:
+                    type: string
+                    example: 667b62c37cc329877c5929ef
+                  email:
+                    type: string
+                    example: test@gmail.com
+                  firstName:
+                    type: string
+                    example: Hasib
+                  lastName:
+                    type: string
+                    example: Iqbal
+                  accessToken:
+                    type: string
+                    example: >-
+                      eyJhbGciOiJIUzI1NiJ9.dGVzdEBnbWFpbC5jb20.qffo9HSr1KAOPsNirYJWdiEh6xNIzE5gSHIWcGTU-Ao
+        400:
+          description: "Bad request, invalid email or password."
+        500:
+          description: Internal server error.
+
+  # Update password of an user. (Only for authenticated users)
+  /auth/updatePassword:
+    post:
+      summary: Update password of an user
+      tags:
+      - User Authentication
+      security:
+      - BearerAuth: []
+      requestBody:
+        description: >-
+          Update an user password with email and old and new password. Works only for authenticated users.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User's email address.
+                  example: test@gmail.com
+                oldPassword:
+                  type: string
+                  description: User's password.
+                  example: TestPassword@123
+                newPassword:
+                  type: string
+                  description: User's password.
+                  example: TestPassword@2022
+      responses:
+        200:
+          description: >-
+            Password updated successfully, returns user information containing id, name, email, password, createdAt, and updatedAt.
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                    description: Status of the password update operation.
+                  message:
+                    type: string
+                    example: Password updated successfully
+                    description: Message describing the result of the password update.
+                  user:
+                    allof:
+                    - $ref: '#/components/schemas/User'
+                    - type: object
+                      properties:
+                        password:
+                          type: string
+                          readOnly: true
+        400:
+          description: "Bad request, invalid email or password."
+        500:
+          description: Internal server error.
