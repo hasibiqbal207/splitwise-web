@@ -1,0 +1,204 @@
+#    Represents the Swagger documentation for the User routes 
+#    in the form of ./backend/src/routes/user.route.ts
+
+paths:
+  # Get an user profile data by email
+  /user/userProfile:
+    post:
+      summary: Get an user profile data by email.
+      description: Get an user profile data by email.
+      tags:
+      - User API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User's email address.
+                  example: "test@gmail.com"
+      responses:
+        '200':
+          description: Successfully retrieved user profile data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                    description: Status of the password update operation.
+                  message:
+                    type: string
+                    example: User fetched successfully
+                    description: Message describing the fetching of the user data.
+                  user:
+                    allof:
+                    - $ref: '#/components/schemas/User'
+                    - type: object
+                      properties:
+                        password:
+                          type: string
+                          readOnly: true
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
+
+  # Update an user profile
+  /user/updateUser:
+    put:
+      summary: Update an user profile data. Initially, only the names.
+      description: Update an user profile data. Initially, only the names.
+      tags:
+      - User API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: User's first name.
+                  example: Hasib
+                lastName:
+                  type: string
+                  description: User's last name.
+                  example: Iqbal
+                email:
+                  type: string
+                  description: User's email address.
+                  example: test@gmail.com
+      responses:
+        "200":
+          description: Successfully retrieved user profile data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                    description: Status of the password update operation.
+                  message:
+                    type: string
+                    example: User updated Successfully
+                    description: Message describing the fetching of the user data.
+                  response:
+                    allof:
+                    - $ref: "#/components/schemas/User"
+                    - type: object
+                      properties:
+                        password: null
+                        type: string
+                        readOnly: true
+        "400":
+          description: Bad request.
+        "500":
+          description: Internal server error.
+
+
+
+  # Delete an user profile
+  /user/deleteUser:
+    delete:
+      summary: Delete an user profile data by email.
+      description: Delete an user profile data by email.
+      tags:
+      - User API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User's email address.
+                  example: "test@gmail.com"
+      responses:
+        '200':
+          description: Successfully retrieved user profile data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                    description: Status of the password update operation.
+                  message:
+                    type: string
+                    example: User Account deleted!
+                    description: Message describing the fetching of the user data.
+                  response:
+                    type: object
+                    properties:
+                      acknowledged:
+                        type: boolean
+                        example: true
+                        description: Indicates whether the operation was acknowledged by the server.
+                      deletedCount:
+                        type: integer
+                        example: 1
+                        description: Number of documents deleted.
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
+
+  # Get All User Names and Emails 
+  /user/users:
+    get:
+      summary: Get All User Names and Emails.
+      description: Get All User Names and Emails.
+      tags:
+      - User API's
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Successful retrieval of user list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The status of the response.
+                    example: Success
+                  users:
+                    type: array
+                    description: The list of users.
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the user.
+                          example: John Dao
+                        email:
+                          type: string
+                          nullable: true
+                          description: The email address of the user (optional).
+                          example: test@gmail.com
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.

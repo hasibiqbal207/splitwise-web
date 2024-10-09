@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.route("/userProfile").post(validateToken, viewUserProfile);
 
-router.route("/userProfile").put(validateToken, updateUserProfile);
+router.route("/updateUser").put(validateToken, updateUserProfile);
 
 router.route("/deleteUser").delete(validateToken, deleteUser);
 
