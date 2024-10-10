@@ -1,0 +1,447 @@
+#    Represents the Swagger documentation for the group routes 
+#    in the form of ./backend/src/routes/group.route.ts
+
+paths:
+  # Create a group
+  /group/createGroup:
+    post:
+      summary: Create a group with group name, description, currency, owner, and members.
+      description: Create a group with group name, description, currency, owner, and members.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupName:
+                  type: string
+                  description: Group's name.
+                  example: "Barcelona Tour"
+                groupDescription:
+                  type: string
+                  description: Group's description.
+                  example: "Sample group description"
+                groupCurrency:
+                  type: string
+                  description: Group's currency.
+                  example: "EUR"
+                groupOwner:
+                  type: string
+                  description: Group's owner.
+                  example: "test@gmail.com"
+                groupMembers:
+                  type: array
+                  description: Group's members.
+                  example: ["test@gmail.com", "test2@gmail.com"]
+      responses:
+        200:
+          description: Successful creation of group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  message:
+                    type: string
+                    example: "Group created successfully"
+                  groupData:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The unique identifier of the group.
+                        example: "6706f59fdca7f9feb4fb6c5e"
+                      allof:
+                      - $ref: '#/components/schemas/Group'
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: The creation timestamp.
+                        example: "2024-10-09T21:29:03.767Z"
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: The last update timestamp.
+                        example: "2024-10-09T21:29:03.767Z"
+                      __v:
+                        type: number
+                        description: The version key for the group document.
+                        example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # View Group Details by groupId
+  /group/viewGroup:
+    post:
+      summary: Get the group details by groupId.
+      description: Get the group details by groupId.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: Group's id.
+                  example: "667c63a60bb4948c0039d664"
+      responses:
+        200:
+          description: Successfully fetched the group details by groupId.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  message:
+                    type: string
+                    example: "Group created successfully"
+                  groupData:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The unique identifier of the group.
+                        example: "6706f59fdca7f9feb4fb6c5e"
+                      allof:
+                      - $ref: '#/components/schemas/Group'
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: The creation timestamp.
+                        example: "2024-10-09T21:29:03.767Z"
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: The last update timestamp.
+                        example: "2024-10-09T21:29:03.767Z"
+                      __v:
+                        type: number
+                        description: The version key for the group document.
+                        example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Edit Group Information
+  /group/editGroup:
+    put:
+      summary: Edit group information.
+      description: Edit group information.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Group's id.
+                  example: "667c63a60bb4948c0039d664"
+                groupName:
+                  type: string
+                  description: Group's name.
+                  example: "Barcelona Tour"
+                groupDescription:
+                  type: string
+                  description: Group's description.
+                  example: "Sample group description"
+                groupCurrency:
+                  type: string
+                  description: Group's currency.
+                  example: "EUR"
+                groupOwner:
+                  type: string
+                  description: Group's owner.
+                  example: "test@gmail.com"
+                groupMembers:
+                  type: array
+                  description: Group's members.
+                  example: ["test@gmail.com", "test2@gmail.com"]
+      responses:
+        200:
+          description: Successfully updated the group information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  message:
+                    type: string
+                    example: "Group updated successfully"
+                  groupData:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: The unique identifier of the group.
+                        example: "6706f59fdca7f9feb4fb6c5e"
+                      allof:
+                      - $ref: '#/components/schemas/Group'
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: The creation timestamp.
+                        example: "2024-10-09T21:29:03.767Z"
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: The last update timestamp.
+                        example: "2024-10-09T21:29:03.767Z"
+                      __v:
+                        type: number
+                        description: The version key for the group document.
+                        example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Delete Group
+  /group/deleteGroup:
+    delete:
+      summary: Delete group by groupId.
+      description: Delete group by groupId.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: Group's id.
+                  example: "667c63a60bb4948c0039d664"
+      responses:
+        '200':
+          description: Successfully deleted the group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                    description: Status of the group delete operation.
+                  message:
+                    type: string
+                    example: Group deleted successfully!
+                    description: Message describing the deletion of the group.
+                  response:
+                    type: object
+                    properties:
+                      acknowledged:
+                        type: boolean
+                        example: true
+                        description: Indicates whether the operation was acknowledged by the server.
+                      deletedCount:
+                        type: integer
+                        example: 1
+                        description: Number of documents deleted.
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
+
+  # Get Group List of an User by email.
+  /group/getUserGroups:
+    post:
+      summary: Get All the groups where an user is a member.
+      description: Get All the groups where an user is a member.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User's email address.
+                  example: "test@gmail.com"
+      responses:
+        200:
+          description: Successful creation of group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      allOf:
+                      - $ref: '#/components/schemas/Group'
+                      - type: object
+                        properties:
+                          _id:
+                            type: string
+                            description: The unique identifier of the group.
+                            example: "6706f59fdca7f9feb4fb6c5e"
+                          createdAt:
+                            type: string
+                            format: date-time
+                            description: The creation timestamp.
+                            example: "2024-10-09T21:29:03.767Z"
+                          updatedAt:
+                            type: string
+                            format: date-time
+                            description: The last update timestamp.
+                            example: "2024-10-09T21:29:03.767Z"
+                          __v:
+                            type: number
+                            description: The version key for the group document.
+                            example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Initiate a settlement ( Check )
+  /group/makeSettlement:
+    post:
+      summary: Register an user.
+      description: Register a new user with email and password. Returns an userId.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: User's first name.
+                  example: "Hasib"
+                lastName:
+                  type: string
+                  description: User's last name.
+                  example: "Iqbal"
+                email:
+                  type: string
+                  description: User's email address.
+                  example: "test@gmail.com"
+                password:
+                  type: string
+                  description: User's password.
+                  example: "TestPassword@123"
+      responses:
+        200:
+          description: Successful Registration, returns success message & userId.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  message:
+                    type: string
+                    example: "User Registration Successful"
+                  userId:
+                    type: string
+                    example: "67019fbd5bacc7c300309b1d"
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Initiate a group settlement ( Check )
+  /group/groupSettlement:
+    post:
+      summary: Register an user.
+      description: Register a new user with email and password. Returns an userId.
+      tags:
+      - Group API's
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: User's first name.
+                  example: "Hasib"
+                lastName:
+                  type: string
+                  description: User's last name.
+                  example: "Iqbal"
+                email:
+                  type: string
+                  description: User's email address.
+                  example: "test@gmail.com"
+                password:
+                  type: string
+                  description: User's password.
+                  example: "TestPassword@123"
+      responses:
+        200:
+          description: Successful Registration, returns success message & userId.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  message:
+                    type: string
+                    example: "User Registration Successful"
+                  userId:
+                    type: string
+                    example: "67019fbd5bacc7c300309b1d"
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
