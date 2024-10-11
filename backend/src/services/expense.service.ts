@@ -1,33 +1,63 @@
 import { ExpenseModel } from "../models/index.js";
+import { ExpenseDocument } from "../models/expense.model.js";
 
-export const createExpenseinDB = async (expenseData) => {
+interface ExpenseData {
+  groupId: string;
+  expenseName: string;
+  expenseDescription?: string;
+  expenseAmount: number;
+  expenseCategory: string;
+  expenseCurrency: string;
+  expenseDate: Date;
+  expenseOwner: string;
+  expenseMembers: string[];
+  expensePerMember: number;
+  expenseType: string;
+}
+
+// Create an expense in the database
+export const createExpenseinDB = async (
+  expenseData: ExpenseData
+): Promise<ExpenseDocument> => {
   return await ExpenseModel.create(expenseData);
 };
 
-export const getExpenseById = async (expenseId) => {
+// Get an expense by its ID
+export const getExpenseById = async (
+  expenseId: string
+): Promise<ExpenseDocument | null> => {
   return await ExpenseModel.findOne({ _id: expenseId });
 };
 
-export const getGroupExpensesById = async (groupId) => {
-  return await ExpenseModel.find({ groupId: groupId }).sort({
+// Get all expenses for a group by group ID
+export const getGroupExpensesById = async (
+  groupId: string
+): Promise<ExpenseDocument[]> => {
+  return await ExpenseModel.find({ groupId }).sort({ expenseDate: -1 });
+};
+
+// Get all expenses for a user by their email
+export const getExpensesByUser = async (
+  userEmail: string
+): Promise<ExpenseDocument[]> => {
+  return await ExpenseModel.find({ expenseMembers: userEmail }).sort({
     expenseDate: -1,
   });
 };
 
-export const getExpensesByUser = async (userEmail) =>
-  await ExpenseModel.find({ expenseMembers: userEmail }).sort({
-    expenseDate: -1,
-  });
-
-export const deleteExpenseById = async (expenseId) => {
+// Delete an expense by its ID
+export const deleteExpenseById = async (
+  expenseId: string
+): Promise<{ deletedCount?: number }> => {
   return await ExpenseModel.deleteOne({ _id: expenseId });
 };
 
-export const updateExpense = async (expenseData) => {
-  return await ExpenseModel.updateOne(
-    {
-      _id: expenseData.id,
-    },
+// Update an expense in the database
+export const updateExpense = async (
+  expenseData: ExpenseData & { id: string }
+): Promise<ExpenseDocument | null> => {
+  return await ExpenseModel.findOneAndUpdate(
+    { _id: expenseData.id },
     {
       $set: {
         groupId: expenseData.groupId,
@@ -41,11 +71,13 @@ export const updateExpense = async (expenseData) => {
         expenseType: expenseData.expenseType,
         expenseDate: expenseData.expenseDate,
       },
-    }
+    },
+    { new: true } // This option returns the updated document
   );
 };
 
-export const getDailyExpense = async (userEmail) => {
+// Get daily expenses for a user
+export const getDailyExpense = async (userEmail: string): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
       $match: {
@@ -59,56 +91,42 @@ export const getDailyExpense = async (userEmail) => {
     {
       $group: {
         _id: {
-          date: {
-            $dayOfMonth: "$expenseDate",
-          },
-          month: {
-            $month: "$expenseDate",
-          },
-          year: {
-            $year: "$expenseDate",
-          },
+          date: { $dayOfMonth: "$expenseDate" },
+          month: { $month: "$expenseDate" },
+          year: { $year: "$expenseDate" },
         },
-        amount: {
-          $sum: "$expenseAmount",
-        },
+        amount: { $sum: "$expenseAmount" },
       },
     },
     { $sort: { "_id.month": 1, "_id.date": 1 } },
   ]);
 };
 
-export const getMonthlyExpense = async (userEmail) => {
+// Get monthly expenses for a user
+export const getMonthlyExpense = async (userEmail: string): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
-      $match: {
-        expenseMembers: userEmail,
-      },
+      $match: { expenseMembers: userEmail },
     },
     {
       $group: {
         _id: {
-          month: {
-            $month: "$expenseDate",
-          },
-          year: {
-            $year: "$expenseDate",
-          },
+          month: { $month: "$expenseDate" },
+          year: { $year: "$expenseDate" },
         },
-        amount: {
-          $sum: "$expenseAmount",
-        },
+        amount: { $sum: "$expenseAmount" },
       },
     },
     { $sort: { "_id.month": 1 } },
   ]);
 };
 
-export const getGroupDailyExpense = async (groupId) => {
+// Get daily expenses for a group
+export const getGroupDailyExpense = async (groupId: string): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
       $match: {
-        groupId: groupId,
+        groupId,
         expenseDate: {
           $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
           $lte: new Date(),
@@ -118,91 +136,79 @@ export const getGroupDailyExpense = async (groupId) => {
     {
       $group: {
         _id: {
-          date: {
-            $dayOfMonth: "$expenseDate",
-          },
-          month: {
-            $month: "$expenseDate",
-          },
-          year: {
-            $year: "$expenseDate",
-          },
+          date: { $dayOfMonth: "$expenseDate" },
+          month: { $month: "$expenseDate" },
+          year: { $year: "$expenseDate" },
         },
-        amount: {
-          $sum: "$expenseAmount",
-        },
+        amount: { $sum: "$expenseAmount" },
       },
     },
     { $sort: { "_id.month": 1, "_id.date": 1 } },
   ]);
 };
 
-export const getGroupMonthlyExpense = async (groupId) => {
+// Get monthly expenses for a group
+export const getGroupMonthlyExpense = async (
+  groupId: string
+): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
-      $match: {
-        groupId: groupId,
-      },
+      $match: { groupId },
     },
     {
       $group: {
         _id: {
-          month: {
-            $month: "$expenseDate",
-          },
-          year: {
-            $year: "$expenseDate",
-          },
+          month: { $month: "$expenseDate" },
+          year: { $year: "$expenseDate" },
         },
-        amount: {
-          $sum: "$expenseAmount",
-        },
+        amount: { $sum: "$expenseAmount" },
       },
     },
     { $sort: { "_id.month": 1 } },
   ]);
 };
 
-export const getUserExpenseByCategory = async (userEmail) => {
+// Get expenses by category for a user
+export const getUserExpenseByCategory = async (
+  userEmail: string
+): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
-      $match: {
-        expenseMembers: userEmail,
-      },
+      $match: { expenseMembers: userEmail },
     },
     {
       $group: {
         _id: "$expenseCategory",
-        amount: {
-          $sum: "$expensePerMember",
-        },
+        amount: { $sum: "$expensePerMember" },
       },
     },
     { $sort: { _id: 1 } },
   ]);
 };
 
-export const getGroupExpenseByCategory = async (groupId) => {
+// Get expenses by category for a group
+export const getGroupExpenseByCategory = async (
+  groupId: string
+): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
-      $match: {
-        groupId: groupId,
-      },
+      $match: { groupId },
     },
     {
       $group: {
         _id: "$expenseCategory",
-        amount: {
-          $sum: "$expenseAmount",
-        },
+        amount: { $sum: "$expenseAmount" },
       },
     },
     { $sort: { _id: 1 } },
   ]);
 };
 
-export const getRecentExpensesByUser = async (userEmail) => {
+// Get recent expenses for a user
+export const getRecentExpensesByUser = async (
+  userEmail: string
+): Promise<ExpenseDocument[]> => {
   return await ExpenseModel.find({ expenseMembers: userEmail }).sort({
-    expenseDate: -1,
-  });
+    $natural: -1,
+  }).limit(5);
 };

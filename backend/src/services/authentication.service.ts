@@ -16,6 +16,7 @@ export const findUserByEmail = async (
 ): Promise<UserDocument | null> => {
   return await UserModel.findOne({ email });
 };
+
 // Function to create a new user
 export const createUser = async (userData: CreateUserInput) => {
   // Bcrypt password encryption
@@ -26,15 +27,6 @@ export const createUser = async (userData: CreateUserInput) => {
   return await newUser.save();
 };
 
-/**
- * Signs in a user with the provided email and password.
- *
- * @param {string} email - The email of the user.
- * @param {string} password - The password of the user.
- * @return {Promise<Object>} - A promise that resolves to the user object if the credentials are valid,
- *                            or throws an error if the credentials are invalid.
- * @throws {NotFound} - If the user with the provided email does not exist or the passwords do not match.
- */
 // Sign in a user by email and password
 export const signUser = async (
   email: string,

@@ -1,15 +1,47 @@
 import { GroupModel, SettlementModel } from "../models/index.js";
+import { GroupDocument } from "../models/group.model.js"; 
+import { SettlementDocument } from "../models/settlement.model.js"; 
 
-export const createGroupinDB = async (groupData) => {
-  return await GroupModel.create(groupData);
+// Type for groupData to ensure type safety
+interface GroupData {
+  groupName: string;
+  groupDescription?: string;
+  groupCurrency: string;
+  groupOwner: string;
+  groupMembers: string[];
+  groupCategory?: string;
+  groupTotal?: number;
+  split: Record<string, number>[]; 
+}
+
+interface SettlementData {
+  groupId: string;
+  payer: string;
+  payee: string;
+  amount: number;
+  date: Date;
+}
+
+// Create a group in the database
+export const createGroupinDB = async (
+  groupData: GroupData
+): Promise<GroupDocument> => {
+  const newGroup = new GroupModel(groupData);
+  return await newGroup.save();
 };
 
-export const findGroupByID = async (groupId) => {
+// Find a group by its ID
+export const findGroupByID = async (
+  groupId: string
+): Promise<GroupDocument | null> => {
   return await GroupModel.findOne({ _id: groupId });
 };
 
-export const updateGroupinDB = async (groupData) => {
-  return await GroupModel.updateOne(
+// Update a group in the database
+export const updateGroupinDB = async (
+  groupData: Partial<GroupData> & { id: string }
+): Promise<GroupDocument | null> => {
+  return await GroupModel.findOneAndUpdate(
     {
       _id: groupData.id,
     },
@@ -22,21 +54,31 @@ export const updateGroupinDB = async (groupData) => {
         groupCategory: groupData.groupCategory,
         split: groupData.split,
       },
-    }
+    },
+    { new: true }
   );
 };
 
-export const deleteGroupinDB = async (groupId) => {
+// Delete a group by its ID
+export const deleteGroupinDB = async (
+  groupId: string
+): Promise<{ deletedCount?: number }> => {
   return await GroupModel.deleteOne({ _id: groupId });
 };
 
-export const getUserGroups = async (email) => {
+// Get groups for a specific user by email
+export const getUserGroups = async (
+  email: string
+): Promise<GroupDocument[]> => {
   return await GroupModel.find({ groupMembers: email }).sort({
-    $natural: -1, //to get the newest first
+    $natural: -1, // To get the newest first
   });
 };
 
-export const getGroupUsers = async (groupId) => {
+// Get users in a specific group by group ID
+export const getGroupUsers = async (
+  groupId: string
+): Promise<{ groupMembers: string[] } | null> => {
   return await GroupModel.findOne(
     { _id: groupId },
     {
@@ -46,10 +88,17 @@ export const getGroupUsers = async (groupId) => {
   );
 };
 
-export const updateGroupSplit = async (groupId, split) => {
-  return GroupModel.updateOne({ _id: groupId }, { $set: { split } });
+// Update the split in a specific group
+export const updateGroupSplit = async (
+  groupId: string,
+  split: Record<string, number>
+): Promise<GroupDocument | null> => {
+  return await GroupModel.findOneAndUpdate({ _id: groupId }, { $set: { split } },{ new: true });
 };
 
-export const createSettlement = async (settlementData) => {
-  return SettlementModel.create(settlementData);
+// Create a settlement in the database
+export const createSettlement = async (
+  settlementData: SettlementData
+): Promise<SettlementDocument> => {
+  return await SettlementModel.create(settlementData);
 };
