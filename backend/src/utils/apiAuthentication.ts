@@ -1,56 +1,71 @@
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import logger from "../../config/logger.config.js";
 
-export const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+interface CustomError extends Error {
+  status?: number;
+}
+
+interface UserPayload {
+  id: string;
+  email: string;
+  [key: string]: any;
+}
+
+export interface AuthRequest extends Request {
+  user?: string;
+}
+
+export const generateAccessToken = (user: UserPayload): string => {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET as string);
 };
 
-// [check]
-export const validateToken = (req, res, next) => {
-  //Bypass Authentication when DISABLE_API_AUTH is set in the env file for dev purpose only
-  if (process.env.DISABLE_API_AUTH == "true") {
+export const validateToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
+  // Bypass Authentication when DISABLE_API_AUTH is set in the env file for dev purpose only
+  if (process.env.DISABLE_API_AUTH === "true") {
     next();
   } else {
-    //Checking if authorization is present in the header if not present then access is forbidden
-    if (req.headers["authorization"] == null) {
+    // Checking if authorization is present in the header, if not present then access is forbidden
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
       logger.error(
         `URL : ${req.originalUrl} | API Authentication Fail | message: Token not present`
       );
       res.status(403).json({
         message: "Token not present",
       });
-    } else {
-      //getting token from request header
-      const authHeader = req.headers["authorization"];
-      //the request header contains the token "Bearer <token>", split the string and use the second value in the split array.
-      const token = authHeader.split(" ")[1];
-
-      //function to verify the token
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) {
-          logger.error(
-            `URL : ${req.originalUrl} | API Authentication Fail | message: Invalid Token`
-          );
-          res.sendStatus(403).json({
-            message: "Invalid Token",
-          });
-          res.end();
-        } else {
-          //Adding user data to the req
-          req.user = user;
-          //proceed to the next action in the calling function
-          next();
-        }
-      });
+      return;
     }
+
+    // The request header contains the token "Bearer <token>", split the string and use the second value in the split array
+    const token = authHeader.split(" ")[1];
+
+    // Function to verify the token
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (error, user) => {
+      if (error) {
+        logger.error(
+          `URL : ${req.originalUrl} | API Authentication Fail | message: Invalid Token`
+        );
+        res.status(403).json({
+          message: "Invalid Token",
+        });
+        return;
+      }
+
+      // Adding user data to the request
+      req.user = user as string;
+      // Proceed to the next action in the calling function
+      next();
+    });
   }
 };
 
-// [check]
-export const validateUser = (user, email) => {
+// Function to validate user
+export const validateUser = (user: string, email: string): boolean => {
   if (process.env.DISABLE_API_AUTH != "true" && user != email) {
-    const err = new Error("Access Denied");
-    err.status = 403;
-    throw err;
+    const error: CustomError = new Error("Access Denied");
+    error.status = 403;
+    throw error;
   } else return true;
 };

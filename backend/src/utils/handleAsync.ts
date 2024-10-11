@@ -4,6 +4,7 @@ import logger from "../../config/logger.config.js";
 interface CustomError extends Error {
   status?: number;
 }
+
 const handleAsync = (
   fn: (req: Request, res: Response) => Promise<void>,
   customErrorMessage?: string
