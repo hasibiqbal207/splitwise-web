@@ -1,56 +1,53 @@
-import swaggerJsdoc, { SwaggerDefinition, Options } from "swagger-jsdoc";
+import swaggerJsdoc, { Options } from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Application } from "express";
+import YAML from "yamljs";
+import path from "path";
+import { fileURLToPath } from "url";
 import logger from "./logger.config.js";
 
-// Swagger definition
-const swaggerDefinition: SwaggerDefinition = {
-  openapi: "3.0.0", // You can use '2.0' for older versions
-  info: {
-    title: "Splitwise API Documentation", // Title of the API documentation
-    version: "1.0.0", // Version of the API
-    description: "Splitwise API documentation for developers",
-  },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-        bearerFormat: "JWT",
-      },
-    },
-  },
-  security: [
-    {
-      bearerAuth: [],
-    },
-  ],
-  servers: [
-    {
-      url: "http://localhost:4004/api/v1", // The URL of your API
-      description: "Development server",
-    },
-    // {
-    //   url: "http://localhost:4004/api/v1", // The URL of your API
-    //   description: "Development server",
-  //   - url: http://api.example.com/v1
-  //   description: Optional server description, e.g. Main (production) server
-  // - url: http://staging-api.example.com
-  //   description: Optional server description, e.g. Internal staging server for testing
-    // },
-  ],
+// Utility function to load YAML files
+function loadYamlFile(filePath: string) {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  return YAML.load(path.join(__dirname, filePath));
+}
+
+// Load base OpenAPI YAML file
+const openapiMain = loadYamlFile("../docs/swagger-docs/openapi.yaml");
+
+// Load and merge other module-specific YAML files
+const authenticationDoc = loadYamlFile(
+  "../docs/swagger-docs/authentication.swagger.yaml"
+);
+const userDoc = loadYamlFile("../docs/swagger-docs/user.swagger.yaml");
+const groupDoc = loadYamlFile("../docs/swagger-docs/group.swagger.yaml");
+const expenseDoc = loadYamlFile(
+  "../docs/swagger-docs/expense/expense.swagger.yaml"
+);
+const groupExpenseDoc = loadYamlFile(
+  "../docs/swagger-docs/expense/group.expense.swagger.yaml"
+);
+const userExpenseDoc = loadYamlFile(
+  "../docs/swagger-docs/expense/user.expense.swagger.yaml"
+);
+
+// Merge paths from all YAML files into the main spec
+openapiMain.paths = {
+  ...openapiMain.paths,
+  ...authenticationDoc.paths,
+  ...userDoc.paths,
+  ...groupDoc.paths,
+  ...expenseDoc.paths,
+  ...groupExpenseDoc.paths,
+  ...userExpenseDoc.paths,
 };
 
 // Options for the swagger-jsdoc
 const options: Options = {
-  swaggerDefinition,
-  apis: [
-    "./src/routes/*.ts",
-    "./src/models/*.ts",
-    "./docs/swagger-docs/routes/*.ts",
-    "./docs/swagger-docs/routes/expense/*.ts",
-    "./docs/swagger-docs/models/*.ts",
-  ], // Path to the API docs (JSDoc comments in your code)
+  swaggerDefinition: openapiMain,
+  apis: [],
+  // Path to the API docs (JSDoc comments in the code). No need for JSDoc comments in the codebase, as the YAML files are used for this.
 };
 
 // Initialize swagger-jsdoc

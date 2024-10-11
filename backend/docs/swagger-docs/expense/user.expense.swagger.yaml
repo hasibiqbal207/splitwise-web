@@ -1,0 +1,282 @@
+#    Represents the Swagger documentation for the expense routes 
+#    in the form of ./backend/src/routes/expense/group.expense.route.ts
+
+paths:
+  # Fetch all of the user expenses.
+  /expense/user/:
+    post:
+      summary: Get all of the user expenses filtered by email.
+      description: Get all of the user expenses filtered by email.
+      tags:
+      - Expense API's - User-Wise
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email of the user.
+                  example: "hasibiqbal207@gmail.com"
+      responses:
+        200:
+          description: Successfully fetched the user expenses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  total:
+                    type: number
+                    example: 2
+                  expenses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The unique identifier of the group.
+                          example: "6706f59fdca7f9feb4fb6c5e"
+                        allof:
+                        - $ref: '#/components/schemas/Expense'
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: The creation timestamp.
+                          example: "2024-10-09T21:29:03.767Z"
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: The last update timestamp.
+                          example: "2024-10-09T21:29:03.767Z"
+                        __v:
+                          type: number
+                          description: The version key for the group document.
+                          example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Fetch user's last 5 expenses
+  /expense/user/recentExpenses:
+    post:
+      summary: Get user's last 5 expenses.
+      description: Get user's last 5 expenses.
+      tags:
+      - Expense API's - User-Wise
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email of the user.
+                  example: "hasibiqbal207@gmail.com"
+      responses:
+        200:
+          description: Successfully fetched the recent user expenses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  total:
+                    type: number
+                    example: 2
+                  expenses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The unique identifier of the group.
+                          example: "6706f59fdca7f9feb4fb6c5e"
+                        allof:
+                        - $ref: '#/components/schemas/Expense'
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: The creation timestamp.
+                          example: "2024-10-09T21:29:03.767Z"
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: The last update timestamp.
+                          example: "2024-10-09T21:29:03.767Z"
+                        __v:
+                          type: number
+                          description: The version key for the group document.
+                          example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Get user's daily expenses
+  /expense/user/dailyExpense:
+    post:
+      summary: Get user's daily expenses.
+      description: Get user's daily expenses.
+      tags:
+      - Expense API's - User-Wise
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email of the user.
+                  example: "hasibiqbal207@gmail.com"
+      responses:
+        '200':
+          description: Successful retrieval of response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  responseData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: object
+                          properties:
+                            date:
+                              type: integer
+                              example: 6
+                            month:
+                              type: integer
+                              example: 10
+                            year:
+                              type: integer
+                              example: 2024
+                        amount:
+                          type: number
+                          example: 8300
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Get user's monthly expenses
+  /expense/user/monthlyExpense:
+    post:
+      summary: Get All of the group expenses by groupId.
+      description: Get All of the group expenses by groupId.
+      tags:
+      - Expense API's - User-Wise
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email of the user.
+                  example: "hasibiqbal207@gmail.com"
+      responses:
+        '200':
+          description: Successful retrieval of response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  responseData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: object
+                          properties:
+                            month:
+                              type: integer
+                              example: 10
+                            year:
+                              type: integer
+                              example: 2024
+                        amount:
+                          type: number
+                          example: 8300
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Add an expense to a group made by an user
+  /expense/user/expenseByCategory:
+    post:
+      summary: Get All of the group expenses by groupId.
+      description: Get All of the group expenses by groupId.
+      tags:
+      - Expense API's - User-Wise
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email of the user.
+                  example: "hasibiqbal207@gmail.com"
+      responses:
+        '200':
+          description: Successful retrieval of response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  responseData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          example: "Others"
+                        amount:
+                          type: number
+                          example: 8300
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
