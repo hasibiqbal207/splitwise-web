@@ -73,7 +73,7 @@ export const updateUserProfile = handleAsync(
       });
     }
   },
-  "Failed to update user name"
+  "Failed to update user profile."
 );
 
 export const deleteUser = handleAsync(
@@ -104,7 +104,7 @@ export const deleteUser = handleAsync(
       response: deleteUserResponse,
     });
   },
-  "Failed to delete user"
+  "Failed to delete user."
 );
 
 export const getAllUsers = handleAsync(async (req: Request, res: Response) => {

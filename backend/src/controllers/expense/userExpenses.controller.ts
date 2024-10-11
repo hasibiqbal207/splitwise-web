@@ -12,47 +12,10 @@ interface CustomError extends Error {
   status?: number;
 }
 
-export const userDailyExpense = handleAsync(
-  async (req: Request, res: Response) => {
-    const { userEmail } = req.body;
-    const expenses = await getDailyExpense(userEmail);
-    res.status(200).json({
-      status: "Success",
-      responseData: expenses,
-    });
-  },
-  "Failed to create user"
-);
-
-export const userMonthlyExpense = handleAsync(
-  async (req: Request, res: Response) => {
-    const { userEmail } = req.body;
-
-    const expenses = await getMonthlyExpense(userEmail);
-    res.status(200).json({
-      status: "Success",
-      responseData: expenses,
-    });
-  },
-  "Failed to create user"
-);
-
-export const getRecentUserExpenses = handleAsync(
-  async (req: Request, res: Response) => {
-    const { userEmail } = req.body;
-    const expenses = await getRecentExpensesByUser(userEmail);
-    res.status(200).json({
-      status: "Success",
-      expenses: expenses,
-    });
-  },
-  "Failed to create user"
-);
-
 export const getUserExpenses = handleAsync(
   async (req: Request, res: Response) => {
-    const { userEmail } = req.body;
-    const expenses = await getExpensesByUser(userEmail);
+    const { email } = req.body;
+    const expenses = await getExpensesByUser(email);
 
     if (expenses.length == 0) {
       const error: CustomError = new Error("No expense present for the group");
@@ -71,17 +34,56 @@ export const getUserExpenses = handleAsync(
       total: totalAmount,
     });
   },
-  "Failed to create user"
+  "Failed to fetch all the expense of the user."
 );
 
-export const userExpenseByCategory = handleAsync(
+export const userDailyExpense = handleAsync(
   async (req: Request, res: Response) => {
-    const { userEmail } = req.body;
-    const expenses = await getUserExpenseByCategory(userEmail);
+    const { email } = req.body;
+    const expenses = await getDailyExpense(email);
     res.status(200).json({
       status: "Success",
       responseData: expenses,
     });
   },
-  "Failed to create user"
+  "Failed to fetch daily expense of the user."
+);
+
+export const userMonthlyExpense = handleAsync(
+  async (req: Request, res: Response) => {
+    const { email } = req.body;
+
+    const expenses = await getMonthlyExpense(email);
+    res.status(200).json({
+      status: "Success",
+      responseData: expenses,
+    });
+  },
+  "Failed to fetch monthly expense of the user."
+);
+
+export const getRecentUserExpenses = handleAsync(
+  async (req: Request, res: Response) => {
+    const { email } = req.body;
+    const expenses = await getRecentExpensesByUser(email);
+    res.status(200).json({
+      status: "Success",
+      expenses: expenses,
+    });
+  },
+  "Failed to fetch last 5 expenses of the user."
+);
+
+
+
+export const userExpenseByCategory = handleAsync(
+  async (req: Request, res: Response) => {
+    const { email } = req.body;
+    const expenses = await getUserExpenseByCategory(email);
+    res.status(200).json({
+      status: "Success",
+      responseData: expenses,
+    });
+  },
+  "Failed to fetch expense of the user by category."
 );

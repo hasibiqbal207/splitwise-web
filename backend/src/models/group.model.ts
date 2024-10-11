@@ -8,7 +8,7 @@ interface IGroup {
   groupMembers: string[];
   groupCategory: string;
   groupTotal: number;
-  split: Record<string, number>[]; 
+  split: Record<string, number>; 
 }
 
 export interface GroupDocument extends IGroup, Document {}
@@ -43,12 +43,9 @@ const groupSchema = new mongoose.Schema<GroupDocument>(
       default: 0,
     },
     split: {
-      type: [
-        {
-          user: { type: String, required: true },
-          amount: { type: Number, required: true }
-        }
-      ],
+      type: Object, // Use Object to represent Record<string, number> in Mongoose
+      of: Number,   // Each value in the object must be a number
+      required: true,
     },
   },
   {

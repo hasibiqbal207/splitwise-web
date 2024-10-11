@@ -9,13 +9,34 @@ import {
 
 import handleAsync from "../../utils/handleAsync.js";
 
-/**
- * Get daily expenses for a group
- * @param {Request} req - request object
- * @param {Response} res - response object
- * @param {string} req.body.groupId - group ID
- * @returns {Promise<void>}
- */
+interface CustomError extends Error {
+  status?: number;
+}
+
+export const getGroupExpenses = handleAsync(
+  async (req: Request, res: Response) => {
+    const { groupId } = req.body;
+    const expenses = await getGroupExpensesById(groupId);
+
+    if (expenses.length == 0) {
+      const err: CustomError = new Error("No expense present for the group");
+      err.status = 400;
+      throw err;
+    }
+
+    let totalAmount = 0;
+    for (const expense of expenses) {
+      totalAmount += expense["expenseAmount"];
+    }
+
+    res.status(200).json({
+      status: "Success",
+      total: totalAmount,
+      expenses: expenses,
+    });
+  },
+  "Failed to fetch all the expenses of the group."
+);
 
 export const groupDailyExpense = handleAsync(
   async (req: Request, res: Response) => {
@@ -26,7 +47,7 @@ export const groupDailyExpense = handleAsync(
       responseData: expenses,
     });
   },
-  "Failed to create user"
+  "Failed to fetch daily expenses of the group."
 );
 
 export const groupMonthlyExpense = handleAsync(
@@ -38,7 +59,7 @@ export const groupMonthlyExpense = handleAsync(
       responseData: expenses,
     });
   },
-  "Failed to create user"
+  "Failed to fetch monthly expenses of the group."
 );
 
 export const groupExpenseByCategory = handleAsync(
@@ -50,30 +71,6 @@ export const groupExpenseByCategory = handleAsync(
       responseData: expenses,
     });
   },
-  "Failed to create user"
+  "Failed to fetch all the expenses of the group by category."
 );
 
-export const getGroupExpenses = handleAsync(
-  async (req: Request, res: Response) => {
-    const { groupId } = req.body;
-    const expenses = await getGroupExpensesById(groupId);
-
-    // if (expenses.length == 0) {
-    //   const err = new Error("No expense present for the group");
-    //   err.status = 400;
-    //   throw err;
-    // }
-
-    let totalAmount = 0;
-    for (const expense of expenses) {
-      totalAmount += expense["expenseAmount"];
-    }
-
-    res.status(200).json({
-      status: "Success",
-      expenses: expenses,
-      total: totalAmount,
-    });
-  },
-  "Failed to create user"
-);

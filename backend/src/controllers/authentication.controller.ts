@@ -70,7 +70,7 @@ export const loginUser = handleAsync(async (req: Request, res: Response) => {
     lastName: user.lastName,
     accessToken: accessToken,
   });
-}, "Failed to login user");
+}, "Failed to login an user");
 
 export const updatePassword = handleAsync(
   async (req: AuthRequest, res: Response) => {

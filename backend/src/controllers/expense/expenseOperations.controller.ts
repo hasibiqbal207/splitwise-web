@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import * as validator from "../../utils/validation.js";
-import logger from "../../../config/logger.config.js";
 import { findGroupByID } from "../../services/group.service.js";
 import {
   createExpenseinDB,
@@ -8,7 +7,7 @@ import {
   deleteExpenseById,
   updateExpense,
 } from "../../services/expense.service.js";
-import { revertSplit, splitNewExpense } from "../group.controller.js";
+import { revertSplit, splitNewExpense } from "../../utils/split.js";
 import handleAsync from "../../utils/handleAsync.js";
 
 interface CustomError extends Error {
@@ -17,7 +16,7 @@ interface CustomError extends Error {
 
 export const addExpense = handleAsync(async (req: Request, res: Response) => {
   const expenseData = req.body;
-  logger.info(expenseData);
+
   // Find the group by ID
   const group = await findGroupByID(expenseData.groupId);
   if (!group) {
@@ -25,13 +24,13 @@ export const addExpense = handleAsync(async (req: Request, res: Response) => {
     error.status = 400;
     throw error;
   }
-
+  
   // Perform validation on the expense data
   if (
     validator.notNull(expenseData.expenseName) &&
     validator.notNull(expenseData.expenseAmount) &&
     validator.notNull(expenseData.expenseOwner) &&
-    validator.notNull(expenseData.expenseMembers)
+    validator.notNull(expenseData.expenseMembers) 
     // &&
     // validator.notNull(expenseData.expenseDate)
   ) {
@@ -87,7 +86,7 @@ export const addExpense = handleAsync(async (req: Request, res: Response) => {
       splitUpdateResponse,
     });
   }
-}, "Failed to create user");
+}, "Failed to add the expense to the group");
 
 export const editExpense = handleAsync(async (req: Request, res: Response) => {
   const newExpenseData = req.body;
@@ -110,7 +109,6 @@ export const editExpense = handleAsync(async (req: Request, res: Response) => {
     validator.notNull(newExpenseData.expenseAmount) &&
     validator.notNull(newExpenseData.expenseOwner) &&
     validator.notNull(newExpenseData.expenseMembers)
-    // validator.notNull(newExpenseData.expenseDate)
   ) {
     // Validate the expense owner
     const isOwnerValid = await validator.groupUserValidation(
@@ -163,7 +161,7 @@ export const editExpense = handleAsync(async (req: Request, res: Response) => {
       response: updatedExpenseData,
     });
   }
-}, "Failed to create user");
+}, "Failed to edit the expense");
 
 export const viewExpense = handleAsync(async (req: Request, res: Response) => {
   let expense = await getExpenseById(req.body.id);
@@ -177,7 +175,7 @@ export const viewExpense = handleAsync(async (req: Request, res: Response) => {
     status: "Success",
     expense: expense,
   });
-}, "Failed to create user");
+}, "Failed to fetch expense");
 
 export const deleteExpense = handleAsync(
   async (req: Request, res: Response) => {
@@ -190,7 +188,7 @@ export const deleteExpense = handleAsync(
       throw error;
     }
 
-    const deleteExpenseResponse = deleteExpenseById(expenseId);
+    const deleteExpenseResponse = await deleteExpenseById(expenseId);
 
     //Clearing split value for the deleted expense from group table
     await revertSplit(
@@ -206,5 +204,5 @@ export const deleteExpense = handleAsync(
       response: deleteExpenseResponse,
     });
   },
-  "Failed to create user"
+  "Failed to delete expense"
 );
