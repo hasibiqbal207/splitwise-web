@@ -26,7 +26,7 @@ export default function Dashboard() {
     const getUserDetails = async () => {
       setLoading(true);
       const userIdJson = {
-        userEmail: profile.email,
+        email: profile.email,
       };
       const response_expense = await getUserExpenseService(
         userIdJson,
@@ -108,9 +108,6 @@ export default function Dashboard() {
                 </Grid>
                 <Grid item xs={12}>
                   <CategoryExpenseChart />
-                </Grid>
-                <Grid item md={12} xs={0}>
-                  <EndMessage />
                 </Grid>
               </Grid>
             </Grid>

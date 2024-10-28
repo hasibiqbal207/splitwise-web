@@ -11,31 +11,40 @@ import Loading from "../../Loading";
 import SettlementCard from "./settlementCard";
 import UserBalanceChart from "./userBalanceChart";
 
+
 export const GroupSettlements = ({ currencyType }) => {
   const params = useParams();
   const [noSettle, setNoSettle] = useState(true);
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState();
   const [loading, setLoading] = useState(true);
-  const [groupSettlement, setGroupSettlement] = useState();
+  const [groupSettlement, setGroupSettlement] = useState([]);
 
   const mdUp = useResponsive("up", "md");
+
   useEffect(() => {
     const getGroupSettlement = async () => {
       setLoading(true);
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
-      const group_settle = await getGroupSettleService(
-        groupIdJson,
-        setAlert,
-        setAlertMessage
-      );
-      setGroupSettlement(group_settle?.data?.data);
-      setLoading(false);
+      try {
+        const group_settle = await getGroupSettleService(
+          groupIdJson,
+          setAlert,
+          setAlertMessage
+        );
+        setGroupSettlement(group_settle?.data?.data || []);
+      } catch (error) {
+        console.error("Error fetching group settlement:", error);
+        setAlert(true);
+        setAlertMessage("Failed to fetch group settlement");
+      } finally {
+        setLoading(false);
+      }
     };
     getGroupSettlement();
-  }, []);
+  }, [params.groupId]);
 
   return (
     <>
@@ -49,18 +58,16 @@ export const GroupSettlements = ({ currencyType }) => {
             severity="error"
           />
           <Grid container spacing={2}>
-            {groupSettlement?.map((mySettle, index) => (
-              <>
-                {mySettle[2] > 0 && (
-                  <Grid item xs={12} md={6} key={index}>
-                    {noSettle && setNoSettle(false)}
-                    <SettlementCard
-                      mySettle={mySettle}
-                      currencyType={currencyType}
-                    />
-                  </Grid>
-                )}
-              </>
+            {groupSettlement.map((mySettle, index) => (
+              mySettle[2] > 0 && (
+                <Grid item xs={12} md={6} key={`settlement-${index}`}>
+                  {noSettle && setNoSettle(false)}
+                  <SettlementCard
+                    mySettle={mySettle}
+                    currencyType={currencyType}
+                  />
+                </Grid>
+              )
             ))}
           </Grid>
 

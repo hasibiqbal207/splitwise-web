@@ -97,7 +97,6 @@ export const getUser = async (formData, setShowAlert, setAlertMessage) => {
     const response = await api.getUser(formData)
   
     if (response.data.status === 'Success') {
-      console.log('User fetched successfully:', response.data.user);
       // You can set the user data to state or do other things here
       return response.data.user;
     } else {

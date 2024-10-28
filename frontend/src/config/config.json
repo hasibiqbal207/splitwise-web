@@ -1,8 +1,8 @@
 {
   "DASHBOARD_HOME_URL": "/dashboard",
-  "DASHBOARD_URL": "/dashboard/app",
+  "DASHBOARD_URL": "/dashboard",
 
-  "LOGIN_URL": "/login",
+  "LOGIN_URL": "/",
   "REGISTER_URL": "/registration",
   
   "USER_GROUPS_URL": "/dashboard/groups",
@@ -30,7 +30,7 @@
   "USER_DELETED_URL": "/userProfile/confirmDelete",
   "USER_PASS_UPDATE_URL": "/dashboard/userProfile/updatePassword",
 
-  "USER_DEFAULT_LOGO_URL": "https://res.cloudinary.com/tuzup/image/upload/v1658929366/SplitApp/user_l7xmft.png"
+  "USER_DEFAULT_LOGO_URL": "/static/user_logo.png"
 }
 
 

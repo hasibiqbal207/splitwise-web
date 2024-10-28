@@ -11,18 +11,20 @@ export const RecentTransactions = () => {
   const [alertMessage, setAlertMessage] = useState();
   const [recentExp, setRecentExp] = useState();
   const profile = JSON.parse(localStorage.getItem("profile"));
+
   useEffect(() => {
     const getRecentExp = async () => {
       setLoading(true);
       const userIdJson = {
-        user: profile.email,
+        email: profile.email,
       };
       const recent_exp = await getRecentUserExpenseService(
         userIdJson,
         setAlert,
         setAlertMessage
       );
-      recent_exp && setRecentExp(recent_exp?.data?.expense);
+      // console.log(recent_exp?.data?.expenses);
+      recent_exp && setRecentExp(recent_exp?.data?.expenses);
       setLoading(false);
     };
     getRecentExp();
@@ -38,6 +40,7 @@ export const RecentTransactions = () => {
             boxShadow: 5,
             bgcolor: "background.paper",
             borderRadius: 2,
+            p: 1,
           }}
         >
           <AlertBanner
@@ -45,9 +48,17 @@ export const RecentTransactions = () => {
             alertMessage={alertMessage}
             severity="error"
           />
-          <Typography variant="h6" p={2}>
-            Your Recent transactions,
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              textAlign: "center",
+              typography: "h6", 
+              p: 2,
+            }}
+          >
+            Your Recent Transactions
           </Typography>
+
           {recentExp?.map((myExpense) => (
             <ExpenseCard
               key={myExpense?._id}

@@ -43,6 +43,19 @@ export const editGroupService = async (data, setAlert, setAlertMessage) => {
   }
 };
 
+export const deleteGroupService = async (groupData, setAlert, setAlertMessage) => {
+  try {
+    const response = await api.deleteGroup(groupData);
+    return response;
+  } catch (err) {
+    setAlert(true);
+    err.response.status === 400 || err.response.status === 401
+      ? setAlertMessage(err.response.data.message)
+      : setAlertMessage("Oops! Something went worng");
+    return false;
+  }
+};
+
 export const getUserGroupsService = async (data) => {
   try {
     const userGroups = await api.getUserGroups(data);
@@ -81,3 +94,5 @@ export const settlementService = async (data, setAlert, setAlertMessage) => {
     return false;
   }
 };
+
+

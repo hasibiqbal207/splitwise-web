@@ -45,7 +45,7 @@ export const SummaryCards = ({ userTotalExp }) => {
               variant="h5"
               sx={{ color: (theme) => theme.palette["primary"].darker }}
             >
-              ₹ {userTotalExp ? convertToCurrency(userTotalExp) : 0}
+              € {userTotalExp ? convertToCurrency(userTotalExp) : 0}
             </Typography>
           </Box>
         </Stack>

@@ -49,8 +49,8 @@ export default function ViewGroup() {
   const [viewSettlement, setViewSettlement] = useState(0);
 
   const toggleAllExp = () => {
-    setExpenses(groupExpense?.expense?.slice(0, showCount));
-    if (showCount >= groupExpense?.expense?.length) setShowAllExp(true);
+    setExpenses(groupExpense?.expenses?.slice(0, showCount));
+    if (showCount >= groupExpense?.expenses?.length) setShowAllExp(true);
     setExpFocus(true);
     showCount += 5;
   };
@@ -71,7 +71,6 @@ export default function ViewGroup() {
 
   const findUserSplit = (split) => {
     if (split) {
-      split = split[0];
       return split[email];
     }
     return 0;
@@ -80,10 +79,10 @@ export default function ViewGroup() {
   useEffect(() => {
     const getGroupDetails = async () => {
       setLoading(true);
+      
       const groupIdJson = {
         groupId: params.groupId,
       };
-      console.log(groupIdJson);
       const response_group = await getGroupDetailsService(
         groupIdJson,
         setAlert,
@@ -95,15 +94,17 @@ export default function ViewGroup() {
         setAlertExpenseMessage
       );
 
-      response_group && setGroup(response_group?.data?.group);
+      response_group && setGroup(response_group?.data?.groupData);
       response_expense && setGroupExpense(response_expense?.data);
-      response_expense?.data?.expense &&
-        setExpenses(response_expense?.data?.expense?.slice(0, 5));
+      response_expense?.data?.expenses &&
+        setExpenses(response_expense?.data?.expenses?.slice(0, 5));
       if (response_expense?.data?.expense?.length <= 5 || !response_expense)
         setShowAllExp(true);
       setLoading(false);
     };
+
     getGroupDetails();
+
   }, []);
 
   const CategoryStyle = styled("span")(({ theme }) => ({
@@ -121,6 +122,7 @@ export default function ViewGroup() {
     width: 60,
     height: 60,
   }));
+
   return (
     <Container>
       {loading ? (

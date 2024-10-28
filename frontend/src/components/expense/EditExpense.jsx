@@ -31,6 +31,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getGroupDetailsService } from "../../services/group.service.js";
 import Loading from "../Loading";
 import AlertBanner from "../AlertBanner";
+import { parseISO } from 'date-fns';  // Add this import
 
 export default function EditExpense() {
   const navigate = useNavigate();
@@ -52,16 +53,16 @@ export default function EditExpense() {
 
   const formik = useFormik({
     initialValues: {
-      expenseName: null,
-      expenseDescription: null,
-      expenseAmount: null,
-      expenseCategory: null,
+      expenseName: '',
+      expenseDescription: '',
+      expenseOwner: '',  // Initialize with an empty string instead of null
+      expenseMembers: [],
+      expenseAmount: '',
+      expenseCategory: '',
       expenseDate: null,
-      expenseMembers: null,
-      expenseOwner: null,
-      groupId: null,
-      expenseType: null,
-      id: null,
+      groupId: '',
+      expenseType: '',
+      id: '',
     },
     validationSchema: editExpenseSchema,
     onSubmit: async () => {
@@ -90,34 +91,47 @@ export default function EditExpense() {
       const expenseIdJson = {
         id: params.expenseId,
       };
-      const response_exp = await getExpenseDetailsService(
-        expenseIdJson,
-        setAlert,
-        setAlertMessage
-      );
-      setExpenseDetails(response_exp?.data?.expense);
-      const exp = response_exp?.data?.expense;
-      console.log(exp);
-      const groupIdJson = {
-        id: response_exp?.data?.expense?.groupId,
-      };
-      const response_group = await getGroupDetailsService(
-        groupIdJson,
-        setAlert,
-        setAlertMessage
-      );
-      formik.values.expenseName = exp?.expenseName;
-      formik.values.expenseDescription = exp?.expenseDescription;
-      formik.values.expenseOwner = exp?.expenseOwner;
-      formik.values.expenseMembers = exp?.expenseMembers;
-      formik.values.expenseAmount = exp?.expenseAmount;
-      formik.values.expenseCategory = exp?.expenseCategory;
-      formik.values.expenseDate = exp?.expenseDate;
-      formik.values.groupId = exp?.groupId;
-      formik.values.expenseType = exp?.expenseType;
-      formik.values.id = exp?._id;
-      setGroupMembers(response_group?.data?.group?.groupMembers);
-      setLoading(false);
+      try {
+        const response_exp = await getExpenseDetailsService(
+          expenseIdJson,
+          setAlert,
+          setAlertMessage
+        );
+        setExpenseDetails(response_exp?.data?.expense);
+        const exp = response_exp?.data?.expense;
+        const groupIdJson = {
+          groupId: exp?.groupId,
+        };
+        const response_group = await getGroupDetailsService(
+          groupIdJson,
+          setAlert,
+          setAlertMessage
+        );
+        
+        // Parse the expenseDate string to a Date object
+        const parsedDate = exp?.expenseDate ? parseISO(exp.expenseDate) : null;
+
+        formik.setValues({
+          expenseName: exp?.expenseName || '',
+          expenseDescription: exp?.expenseDescription || '',
+          expenseOwner: exp?.expenseOwner || '',  // Use empty string as fallback
+          expenseMembers: exp?.expenseMembers || [],
+          expenseAmount: exp?.expenseAmount || '',
+          expenseCategory: exp?.expenseCategory || '',
+          expenseDate: parsedDate,
+          groupId: exp?.groupId || '',
+          expenseType: exp?.expenseType || '',
+          id: exp?._id || '',
+        });
+
+        setGroupMembers(response_group?.data?.groupData?.groupMembers);
+      } catch (error) {
+        console.error("Error fetching expense details:", error);
+        setAlert(true);
+        setAlertMessage("Failed to fetch expense details");
+      } finally {
+        setLoading(false);
+      }
     };
     getExpenseDetails();
   }, []);
@@ -198,7 +212,8 @@ export default function EditExpense() {
                       labelId="expense-owner"
                       id="demo-simple-select"
                       label="Expense Owner"
-                      {...getFieldProps("expenseOwner")}
+                      value={formik.values.expenseOwner}
+                      onChange={(event) => formik.setFieldValue('expenseOwner', event.target.value)}
                     >
                       {groupMembers?.map((member) => (
                         <MenuItem key={member} value={member}>
@@ -317,7 +332,6 @@ export default function EditExpense() {
                       {...getFieldProps("expenseType")}
                     >
                       <MenuItem value={"Cash"}>Cash</MenuItem>
-                      <MenuItem value={"UPI Payment"}>UPI Payment</MenuItem>
                       <MenuItem value={"Card"}>Card</MenuItem>
                     </Select>
                     <FormHelperText>
@@ -339,7 +353,7 @@ export default function EditExpense() {
                         onChange={(value) => {
                           formik.setFieldValue(
                             "expenseDate",
-                            Date.parse(value)
+                            value
                           );
                         }}
                       />
@@ -355,7 +369,7 @@ export default function EditExpense() {
                         onChange={(value) => {
                           formik.setFieldValue(
                             "expenseDate",
-                            Date.parse(value)
+                            value
                           );
                         }}
                       />

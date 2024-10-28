@@ -24,7 +24,7 @@ const GroupCategoryGraph = (currencyType) => {
         data: categoryExp?.map((category) => category.amount),
         fill: true,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.7)",
+          // "rgba(255, 99, 132, 0.7)",
           "rgba(54, 162, 235, 0.7)",
           "rgba(255, 206, 86, 0.7)",
           "rgba(75, 192, 192, 0.7)",
@@ -59,18 +59,19 @@ const GroupCategoryGraph = (currencyType) => {
     const getGroupCategoryExpense = async () => {
       setLoading(true);
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
       const category_exp = await getGroupCategoryExpenseService(
         groupIdJson,
         setAlert,
         setAlertMessage
       );
-      setCategoryExp(category_exp.data.data);
+      setCategoryExp(category_exp.data.responseData);
       setLoading(false);
     };
     getGroupCategoryExpense();
   }, []);
+
   return (
     <>
       {loading ? (

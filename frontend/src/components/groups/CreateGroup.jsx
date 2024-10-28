@@ -55,7 +55,7 @@ export default function Creategroup() {
         setAlert,
         setAlertMessage
       );
-      window.location = configData.VIEW_GROUP_URL + create_response.data.Id;
+      window.location = configData.VIEW_GROUP_URL + create_response.data.groupData._id;
     },
   });
 
@@ -73,19 +73,45 @@ export default function Creategroup() {
     },
   };
 
+  // useEffect(() => {
+  //   const getEmails = async () => {
+  //     console.log(currentUser);
+  //     setLoading(true);
+  //     const response = await getEmailList();
+  //     let list = response.data.users;
+  //     console.log(list);
+  //     list.indexOf(currentUser) > -1 &&
+  //       list.splice(list.indexOf(currentUser), 1);
+  //     setEmailList(list);
+  //     setLoading(false);
+  //   };
+  //   getEmails();
+  // }, []);
+
   useEffect(() => {
     const getEmails = async () => {
       setLoading(true);
-      const response = await getEmailList();
-      let list = response.data.users;
-      console.log("list", list);
-      list.indexOf(currentUser) > -1 &&
-        list.splice(list.indexOf(currentUser), 1);
-      setEmailList(list);
-      setLoading(false);
+      try {
+        const response = await getEmailList();  
+  
+        if (response.data.status === "Success") {  
+          let list = response.data.users;          
+          
+          // Remove currentUser based on the email
+          const filteredList = list.filter(user => user.email !== currentUser.email);
+  
+          setEmailList(filteredList);  
+        }
+      } catch (error) {
+        console.error("Error fetching emails:", error); 
+      } finally {
+        setLoading(false); 
+      }
     };
-    getEmails();
-  }, []);
+  
+    getEmails();  
+  }, [currentUser]); 
+  
 
   return (
     <Container>
@@ -162,9 +188,9 @@ export default function Creategroup() {
                       )}
                       MenuProps={MenuProps}
                     >
-                      {emailList.map((email) => (
-                        <MenuItem key={email} value={email}>
-                          {email}
+                      {emailList.map((user, index) => (
+                        <MenuItem key={user.email} value={user.email}>
+                          {user.name} - <Typography sx={{ color: "gray" }}>[{user.email}] </Typography>
                         </MenuItem>
                       ))}
                     </Select>

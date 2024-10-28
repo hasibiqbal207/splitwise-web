@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  // Navigate,
+  Navigate,
 } from "react-router-dom";
 import configData from "./config/config.json";
 
@@ -12,7 +12,7 @@ import LogoOnlyLayout from "./components/layouts/LogoOnlyLayout";
 //Pages
 import Login from "./components/login/Login.jsx";
 import Registration from "./components/registration/Registration.jsx";
-import Page404 from "./components/Page404";
+import Page404 from "./components/Page404.jsx";
 import DashboardLayout from "./components/layouts/index.jsx";
 import Profile from "./components/profile";
 import UserDeleted from "./components/profile/UserDeleted";
@@ -26,16 +26,18 @@ import EditExpense from "./components/expense/EditExpense";
 import { EditGroup } from "./components/groups/EditGroup";
 
 const AppRoutes = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LogoOnlyLayout />}>
-          <Route path="/login" element={<Login />} />
+        <Route path="/">
+          <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path={configData.USER_DELETED_URL} element={<UserDeleted />} />
         </Route>
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route path="/dashboard/app" element={<Dashboard />} />
+        <Route path="/dashboard" element={user ? <DashboardLayout /> : <Navigate to="/" />}>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/userProfile" element={<Profile />} />
           <Route path="/dashboard/groups" element={<Group />} />
           
@@ -47,8 +49,9 @@ const AppRoutes = () => {
           <Route path="/dashboard/groups/view/:groupId" element={<ViewGroup />} />
           <Route path="/dashboard/groups/edit/:groupId" element={<EditGroup />} />
 
-          <Route path="/dashboard/userProfile" element={<Profile />} />
         </Route>
+
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
   );

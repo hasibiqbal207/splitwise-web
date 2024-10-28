@@ -69,7 +69,6 @@ export const GroupExpenseChart = () => {
       );
       setGroupExp(group_exp.data.groups);
       setLoading(false);
-      console.log(group_exp.data.groups);
     };
     getGroupExpense();
   }, []);

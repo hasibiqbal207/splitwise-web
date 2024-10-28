@@ -12,7 +12,6 @@ import {
 import gravatarUrl from "gravatar-url";
 
 import useResponsive from "../../theme/hooks/useResponsive";
-import Logo from "../Logo";
 import Scrollbar from "../Scrollbar";
 import NavSection from "../NavSection";
 import navConfig from "./NavConfig";
@@ -67,10 +66,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           },
         }}
       >
-        <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
-          <Logo />
-        </Box>
-
         <Box sx={{ mb: 5, mx: 2.5, mt: 5 }}>
           <Link
             underline="none"

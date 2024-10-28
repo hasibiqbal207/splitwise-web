@@ -42,8 +42,8 @@ const GroupMonthlyGraph = () => {
         data: monthlyView
           ? monthlyExp?.map((monthly) => monthly.amount)
           : dailyExp?.map((daily) => daily.amount),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(54, 162, 235, 0.7)",
+        borderColor: "rgba(54, 162, 235, 1)",
         fill: true,
       },
     ],
@@ -76,7 +76,7 @@ const GroupMonthlyGraph = () => {
     const getGroupMonthlyExpense = async () => {
       setLoading(true);
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
       const monthly_exp = await getGroupMonthlyExpenseService(
         groupIdJson,
@@ -88,8 +88,8 @@ const GroupMonthlyGraph = () => {
         setAlert,
         setAlertMessage
       );
-      setMonthlyExp(monthly_exp.data.data);
-      setDailyExp(daily_exp.data.data);
+      setMonthlyExp(monthly_exp.data.responseData);
+      setDailyExp(daily_exp.data.responseData);
       setLoading(false);
     };
     getGroupMonthlyExpense();

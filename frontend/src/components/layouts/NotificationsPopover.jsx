@@ -15,7 +15,7 @@ import {
   ListItemAvatar,
   ListItemButton,
 } from "@mui/material";
-import { fToNow } from "../../utils/formatTime";
+import { formatTimeDistanceToNow } from "../../utils/formatTime";
 import Iconify from "../Iconify";
 import MenuPopover from "../MenuPopover";
 
@@ -31,9 +31,9 @@ const NOTIFICATIONS = [
   },
   {
     id: faker.datatype.uuid(),
-    title: faker.name.findName(),
+    title: faker.name.fullName(),
     description: "answered to your comment on the Minimal",
-    avatar: "/static/mock-images/avatars/avatar_2.jpg",
+    avatar: null,
     type: "friend_interactive",
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
     isUnRead: true,
@@ -188,7 +188,7 @@ function NotificationItem({ notification }) {
               icon="eva:clock-outline"
               sx={{ mr: 0.5, width: 16, height: 16 }}
             />
-            {fToNow(notification.createdAt)}
+            {formatTimeDistanceToNow(notification.createdAt)}
           </Typography>
         }
       />

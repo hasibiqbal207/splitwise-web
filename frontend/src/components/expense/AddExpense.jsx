@@ -39,7 +39,7 @@ export default function AddExpense() {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  let [groupMembers, setGroupMembers] = useState();
+  let [groupMembers, setGroupMembers] = useState([]);
   let [groupCurrency, setGroupCurrency] = useState();
 
   const addExpenseSchema = Yup.object().shape({
@@ -62,7 +62,7 @@ export default function AddExpense() {
       expenseCategory: "",
       expenseDate: Date(),
       expenseMembers: [],
-      expenseOwner: currentUser,
+      expenseOwner: "",
       groupId: groupId,
       expenseType: "Cash",
     },
@@ -92,20 +92,29 @@ export default function AddExpense() {
     const getGroupDetails = async () => {
       setLoading(true);
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
       const response_group = await getGroupDetailsService(
         groupIdJson,
         setAlert,
         setAlertMessage
       );
-      setGroupCurrency(response_group?.data?.group?.groupCurrency);
-      setGroupMembers(response_group?.data?.group?.groupMembers);
-      formik.values.expenseMembers = response_group?.data?.group?.groupMembers;
+      setGroupCurrency(response_group?.data?.groupData?.groupCurrency);
+      setGroupMembers(response_group?.data?.groupData?.groupMembers);
+      
+      // Set expenseMembers to all group members
+      formik.setFieldValue('expenseMembers', response_group?.data?.groupData?.groupMembers);
+      
+      // Set expenseOwner to an array containing only the current user
+      if (response_group?.data?.groupData?.groupMembers.includes(currentUser)) {
+        formik.setFieldValue('expenseOwner', currentUser);
+      }
+      
       setLoading(false);
     };
     getGroupDetails();
   }, []);
+
   return (
     <>
       {loading ? (
@@ -182,7 +191,7 @@ export default function AddExpense() {
                       name="expenseOwner"
                       labelId="expense-owner"
                       id="demo-simple-select"
-                      label="Expense Owner"
+                      label="Expense Owner"                      
                       {...getFieldProps("expenseOwner")}
                     >
                       {groupMembers?.map((member) => (
@@ -308,7 +317,6 @@ export default function AddExpense() {
                       {...getFieldProps("expenseType")}
                     >
                       <MenuItem value={"Cash"}>Cash</MenuItem>
-                      <MenuItem value={"UPI Payment"}>UPI Payment</MenuItem>
                       <MenuItem value={"Card"}>Card</MenuItem>
                     </Select>
                     <FormHelperText>
@@ -323,15 +331,18 @@ export default function AddExpense() {
                         name="expenseDate"
                         label="Expense Date"
                         inputFormat="dd/MM/yyyy"
-                        renderInput={(params) => (
-                          <TextField {...params} sx={{ width: "100%" }} />
-                        )}
-                        value={formik.values.expenseDate}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                          },
+                        }}
+                        value={
+                          formik.values.expenseDate
+                            ? new Date(formik.values.expenseDate)
+                            : null
+                        }
                         onChange={(value) => {
-                          formik.setFieldValue(
-                            "expenseDate",
-                            Date.parse(value)
-                          );
+                          formik.setFieldValue("expenseDate", value);
                         }}
                       />
                     ) : (

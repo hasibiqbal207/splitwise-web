@@ -36,12 +36,6 @@ export const WelcomeMessage = () => {
               View Groups
             </Button>
           </Grid>
-          <Grid item lg={5} md={6} xs={12}>
-            <img
-              src="/static/illustrations/dashboard-card.png"
-              alt="dashboard"
-            />
-          </Grid>
         </Grid>
       </Grid>
     </Box>

@@ -121,10 +121,9 @@ export const editGroup = handleAsync(async (req: Request, res: Response) => {
       }
 
       //Check if a new group member is added to the gorup and missing in the split
-      //split[0] is used since json is stored as an array in the DB - ideally there should only be one element in the split array hence we are using the index number
-      if (!updatedGroup.split[0].hasOwnProperty(memberEmail)) {
+      if (!updatedGroup.split.hasOwnProperty(memberEmail)) {
         //adding the missing members to the split and init with value 0
-        updatedGroup.split[0][memberEmail] = 0;
+        updatedGroup.split[memberEmail] = 0;
       }
     }
 
@@ -152,6 +151,8 @@ export const deleteGroup = handleAsync(async (req: Request, res: Response) => {
   const { groupId } = req.body;
   const group = await findGroupByID(groupId);
 
+  console.log(group)
+
   if (!group) {
     const error: CustomError = new Error("Invalid Group Id");
     error.status = 400;
@@ -168,8 +169,8 @@ export const deleteGroup = handleAsync(async (req: Request, res: Response) => {
 
 export const findGroupsbyUser = handleAsync(
   async (req: Request, res: Response) => {
-    const userEmail = req.body.email;
-    const user = await findUserByEmail(userEmail);
+    const email = req.body.email;
+    const user = await findUserByEmail(email);
 
     if (!user) {
       const error: CustomError = new Error("User Id not found !");
@@ -177,7 +178,7 @@ export const findGroupsbyUser = handleAsync(
       throw error;
     }
 
-    const groups = await getUserGroups(userEmail);
+    const groups = await getUserGroups(email);
 
     res.status(200).json({
       status: "Success",

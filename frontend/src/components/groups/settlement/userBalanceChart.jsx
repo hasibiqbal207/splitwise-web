@@ -49,14 +49,14 @@ const UserBalanceChart = () => {
     const getGroupDetails = async () => {
       setLoading(true);
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
       const response_group = await getGroupDetailsService(
         groupIdJson,
         setAlert,
         setAlertMessage
       );
-      let split = Object.entries(response_group?.data?.group?.split[0]);
+      let split = Object.entries(response_group?.data?.groupData?.split);
       split.map((mySplit, index) => {
         if (mySplit[1] < 0) {
           if (index === 0) {

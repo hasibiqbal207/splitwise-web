@@ -53,6 +53,10 @@ const modelStyle = {
   borderRadius: 1,
 };
 
+Number.prototype.zeroPad = function (length) {
+  return String(this).padStart(length, "0");
+};
+
 export default function ExpenseCard({
   expenseId,
   expenseName,
@@ -89,6 +93,7 @@ export default function ExpenseCard({
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+ 
   return (
     <Grid
       container
@@ -101,7 +106,8 @@ export default function ExpenseCard({
         py: 1,
       }}
     >
-      <Grid item xs={2}>
+       {/* //md={2} */}
+      <Grid item md={3}>
         <DateBoxStyle>
           <Typography
             variant="body2"
@@ -127,7 +133,7 @@ export default function ExpenseCard({
           </Typography>
         </DateBoxStyle>
       </Grid>
-      <Grid item xs={5} ml={1}>
+      <Grid item md={4} ml={1}>
         <Typography
           noWrap
           variant="h6"
@@ -149,14 +155,14 @@ export default function ExpenseCard({
           noWrap
           variant="body2"
           sx={{
-            fontSize: 9,
+            fontSize: 10,
           }}
         >
           Paid by, <br />
           {expenseOwner}
         </Typography>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item md={2}>
         <Typography
           color={(theme) => theme.palette["error"].dark}
           sx={{
@@ -171,7 +177,7 @@ export default function ExpenseCard({
           </b>
         </Typography>
       </Grid>
-      <Grid item xs={1}>
+      <Grid item md={1}>
         <Box
           sx={{
             p: 0,

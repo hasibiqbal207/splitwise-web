@@ -3,6 +3,7 @@ import mongoose, { Document, Model } from "mongoose";
 enum Currency {
   EUR = "EUR",
   USD = "USD",
+  BDT = "BDT",
 }
 
 enum ExpenseType {

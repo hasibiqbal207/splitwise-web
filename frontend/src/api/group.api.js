@@ -18,12 +18,12 @@ export const getGroupDetails = (payload) =>
 export const editGroup = (payload) =>
   API.put("/group/editGroup", payload, getAuthHeader());
 export const deleteGroup = (payload) =>
-  API.put("group/deleteGroup", payload, getAuthHeader());
+  API.delete("group/deleteGroup", { ...getAuthHeader(), data: payload });
 
 export const getUserGroups = (payload) =>
   API.post("/group/getUserGroups", payload, getAuthHeader());
 
 export const getSettle = (payload) =>
-  API.post("group/getSettlement", payload, getAuthHeader());
+  API.post("group/groupSettlement", payload, getAuthHeader());
 export const makeSettle = (payload) =>
   API.post("group/makeSettlement", payload, getAuthHeader());

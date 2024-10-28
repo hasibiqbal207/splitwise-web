@@ -9,6 +9,8 @@ paths:
       description: Get all of the user expenses filtered by email.
       tags:
       - Expense API's - User-Wise
+      security:
+      - BearerAuth: []
       requestBody:
         description:
         required: true
@@ -72,6 +74,8 @@ paths:
       description: Get user's last 5 expenses.
       tags:
       - Expense API's - User-Wise
+      security:
+      - BearerAuth: []
       requestBody:
         description:
         required: true
@@ -135,6 +139,8 @@ paths:
       description: Get user's daily expenses.
       tags:
       - Expense API's - User-Wise
+      security:
+      - BearerAuth: []
       requestBody:
         description:
         required: true
@@ -190,6 +196,8 @@ paths:
       description: Get All of the group expenses by groupId.
       tags:
       - Expense API's - User-Wise
+      security:
+      - BearerAuth: []
       requestBody:
         description:
         required: true
@@ -242,6 +250,8 @@ paths:
       description: Get All of the group expenses by groupId.
       tags:
       - Expense API's - User-Wise
+      security:
+      - BearerAuth: []
       requestBody:
         description:
         required: true

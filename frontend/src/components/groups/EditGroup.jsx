@@ -13,6 +13,11 @@ import {
   Select,
   TextField,
   Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import { Form, FormikProvider, useFormik } from "formik";
 import { useEffect, useState } from "react";
@@ -23,10 +28,12 @@ import useResponsive from "../../theme/hooks/useResponsive";
 import {
   editGroupService,
   getGroupDetailsService,
+  deleteGroupService,
 } from "../../services/group.service.js";
 import AlertBanner from "../AlertBanner";
 import configData from "../../config/config.json";
 import { useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export const EditGroup = () => {
   const navigate = useNavigate();
@@ -38,6 +45,7 @@ export const EditGroup = () => {
   const [emailList, setEmailList] = useState([]);
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const groupSchema = Yup.object().shape({
     groupName: Yup.string().required("Group name is required"),
@@ -68,7 +76,7 @@ export const EditGroup = () => {
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps, setFieldValue } =
     formik;
 
   const ITEM_HEIGHT = 48;
@@ -85,31 +93,82 @@ export const EditGroup = () => {
   useEffect(() => {
     const getEmails = async () => {
       setLoading(true);
-      const response = await getEmailList();
-      let list = response.data.user;
-      list.indexOf(currentUser) > -1 &&
-        list.splice(list.indexOf(currentUser), 1);
-      setEmailList(list);
+
+      try {
+        const response = await getEmailList();
+
+        if (response.data.status === "Success") {
+          let list = response.data.users;
+
+          // Remove currentUser based on the email
+          const filteredList = list.filter(
+            (user) => user.email !== currentUser
+          );
+
+          setEmailList(filteredList);
+        }
+      } catch (error) {
+        console.error("Error fetching emails:", error);
+      } finally {
+        const groupIdJson = {
+          groupId: params.groupId,
+        };
+        const response_group = await getGroupDetailsService(
+          groupIdJson,
+          setAlert,
+          setAlertMessage
+        );
+        const groupDetails = response_group?.data?.groupData;
+        setFieldValue('groupName', groupDetails?.groupName);
+        setFieldValue('groupDescription', groupDetails?.groupDescription);
+        setFieldValue('groupMembers', groupDetails?.groupMembers || []); // Ensure it's an array
+        setFieldValue('groupOwner', groupDetails?.groupOwner);
+        setFieldValue('groupCurrency', groupDetails?.groupCurrency);
+        setFieldValue('groupCategory', groupDetails?.groupCategory);
+
+        setLoading(false);
+      }
+    };
+    getEmails();
+  }, []);
+
+  const handleDeleteClick = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+
+  const handleDeleteConfirm = async () => {
+    setLoading(true);
+    try {
       const groupIdJson = {
-        id: params.groupId,
+        groupId: params.groupId,
       };
-      const response_group = await getGroupDetailsService(
+
+      const response = await deleteGroupService(
         groupIdJson,
         setAlert,
         setAlertMessage
       );
-      const groupDetails = response_group?.data?.group;
-      formik.values.groupName = groupDetails?.groupName;
-      formik.values.groupDescription = groupDetails?.groupDescription;
-      formik.values.groupMembers = groupDetails?.groupMembers;
-      formik.values.groupOwner = groupDetails?.groupOwner;
-      formik.values.groupCurrency = groupDetails?.groupCurrency;
-      formik.values.groupCategory = groupDetails?.groupCategory;
-
+      if (response.data.status === "Success") {
+        setAlert(true);
+        setAlertMessage("Group deleted successfully");
+        // Navigate to groups list or dashboard after successful deletion
+        navigate('/dashboard');
+      } else {
+        setAlert(true);
+        setAlertMessage(response.data.message || "Failed to delete group");
+      }
+    } catch (error) {
+      setAlert(true);
+      setAlertMessage("An error occurred while deleting the group");
+    } finally {
       setLoading(false);
-    };
-    getEmails();
-  }, []);
+      setOpenDeleteDialog(false);
+    }
+  };
 
   return (
     <Container>
@@ -168,7 +227,8 @@ export const EditGroup = () => {
                       labelId="group-members-label"
                       id="group-members"
                       multiple
-                      {...getFieldProps("groupMembers")}
+                      value={values.groupMembers}
+                      onChange={(event) => setFieldValue('groupMembers', event.target.value)}
                       input={
                         <OutlinedInput
                           id="group-members"
@@ -186,9 +246,9 @@ export const EditGroup = () => {
                       )}
                       MenuProps={MenuProps}
                     >
-                      {emailList.map((email) => (
-                        <MenuItem key={email} value={email}>
-                          {email}
+                      {emailList.map((user, index) => (
+                        <MenuItem key={uuidv4()} value={user.email}>
+                          {user.name} - <Typography sx={{ color: "gray" }}>[{user.email}] </Typography>
                         </MenuItem>
                       ))}
                     </Select>
@@ -248,7 +308,7 @@ export const EditGroup = () => {
                   </FormControl>
                 </Grid>
 
-                {mdUp && <Grid item xs={0} md={6} />}
+                {mdUp && <Grid item xs={0} md={3} />}
                 <Grid item xs={6} md={3}>
                   <Button
                     fullWidth
@@ -270,9 +330,43 @@ export const EditGroup = () => {
                     Edit Group
                   </LoadingButton>
                 </Grid>
+                <Grid item xs={6} md={3}>
+                  <Button
+                    fullWidth
+                    size="large"
+                    variant="outlined"
+                    color="error"
+                    onClick={handleDeleteClick}
+                  >
+                    Delete Group
+                  </Button>
+                </Grid>
               </Grid>
             </Form>
           </FormikProvider>
+
+          {/* Delete Confirmation Dialog */}
+          <Dialog
+            open={openDeleteDialog}
+            onClose={handleCloseDeleteDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Delete Group"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete this group? This action cannot be undone.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDeleteDialog}>Cancel</Button>
+              <Button onClick={handleDeleteConfirm} color="error" autoFocus>
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
         </>
       )}
     </Container>

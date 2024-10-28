@@ -70,7 +70,7 @@ export const ViewExpense = () => {
       ) : (
         <Container
           maxWidth="md"
-          disableGutters="true"
+          // disableGutters="true"
           sx={{
             bgcolor: "background.paper",
             borderRadius: 2,
@@ -142,7 +142,7 @@ export const ViewExpense = () => {
             <Grid item xs={12}>
               <Typography variant="h6">Members :</Typography>
               {expenseDetails?.expenseMembers.map((member) => (
-                <Typography variant="body2">
+                <Typography key={member.id} variant="body2">
                   {member}
                   &nbsp;
                 </Typography>

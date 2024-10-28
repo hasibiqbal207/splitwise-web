@@ -38,9 +38,9 @@ export const getGroupExpensesById = async (
 
 // Get all expenses for a user by their email
 export const getExpensesByUser = async (
-  userEmail: string
+  email: string
 ): Promise<ExpenseDocument[]> => {
-  return await ExpenseModel.find({ expenseMembers: userEmail }).sort({
+  return await ExpenseModel.find({ expenseMembers: email }).sort({
     expenseDate: -1,
   });
 };
@@ -77,11 +77,11 @@ export const updateExpense = async (
 };
 
 // Get daily expenses for a user
-export const getDailyExpense = async (userEmail: string): Promise<any[]> => {
+export const getDailyExpense = async (email: string): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
       $match: {
-        expenseMembers: userEmail,
+        expenseMembers: email,
         expenseDate: {
           $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
           $lte: new Date(),
@@ -103,10 +103,10 @@ export const getDailyExpense = async (userEmail: string): Promise<any[]> => {
 };
 
 // Get monthly expenses for a user
-export const getMonthlyExpense = async (userEmail: string): Promise<any[]> => {
+export const getMonthlyExpense = async (email: string): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
-      $match: { expenseMembers: userEmail },
+      $match: { expenseMembers: email },
     },
     {
       $group: {
@@ -170,11 +170,11 @@ export const getGroupMonthlyExpense = async (
 
 // Get expenses by category for a user
 export const getUserExpenseByCategory = async (
-  userEmail: string
+  email: string
 ): Promise<any[]> => {
   return await ExpenseModel.aggregate([
     {
-      $match: { expenseMembers: userEmail },
+      $match: { expenseMembers: email },
     },
     {
       $group: {
@@ -206,9 +206,9 @@ export const getGroupExpenseByCategory = async (
 
 // Get recent expenses for a user
 export const getRecentExpensesByUser = async (
-  userEmail: string
+  email: string
 ): Promise<ExpenseDocument[]> => {
-  return await ExpenseModel.find({ expenseMembers: userEmail }).sort({
+  return await ExpenseModel.find({ expenseMembers: email }).sort({
     $natural: -1,
   }).limit(5);
 };

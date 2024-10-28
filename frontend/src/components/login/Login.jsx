@@ -54,6 +54,7 @@ export default function Login() {
   //  Function to check if the user is already logged in - check localStorage
   const user = JSON.parse(localStorage.getItem("profile"));
   if (user) {
+    console.log(user);
     user.accessToken && (window.location.href = configData.DASHBOARD_URL);
   }
 

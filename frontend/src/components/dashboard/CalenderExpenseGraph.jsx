@@ -78,20 +78,20 @@ export const CalenderExpenseGraph = () => {
     const getUserDetails = async () => {
       setLoading(true);
       const userIdJson = {
-        user: profile.email,
+        email: profile.email,
       };
       const response_group_monthly = await getUserMonthlyExpenseService(
         userIdJson,
         setAlert,
         setAlertMessage
       );
-      setUserMonthlyExp(response_group_monthly.data.data);
+      setUserMonthlyExp(response_group_monthly.data.responseData);
       const response_group_daily = await getUserDailyExpenseService(
         userIdJson,
         setAlert,
         setAlertMessage
       );
-      setUserDailyExp(response_group_daily.data.data);
+      setUserDailyExp(response_group_daily.data.responseData);
       setLoading(false);
     };
     getUserDetails();
@@ -125,7 +125,7 @@ export const CalenderExpenseGraph = () => {
           <FormGroup>
             <FormControlLabel
               control={<Switch defaultChecked onClick={toggleMonthlyView} />}
-              label="Monthly expense view"
+              label={monthlyView ? "Daily Expense" : "Monthly Expense"}
             />
           </FormGroup>
         </Box>

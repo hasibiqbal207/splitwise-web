@@ -1,4 +1,5 @@
-import { DesktopDatePicker, LoadingButton, MobileDatePicker } from "@mui/lab";
+import { DesktopDatePicker, MobileDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { LoadingButton } from "@mui/lab";
 import {
   Button,
   Grid,
@@ -7,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import useResponsive from "../../../theme/hooks/useResponsive";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import * as Yup from "yup";
 import { Form, FormikProvider, useFormik } from "formik";
@@ -41,6 +41,7 @@ const BalanceSettlement = ({
       .required("Amount is required")
       .min(0, "Min is 0")
       .max(amount, "Max is " + amount),
+    settleDate: Yup.date().required("Settlement date is required"),
   });
 
   const formik = useFormik({
@@ -48,28 +49,32 @@ const BalanceSettlement = ({
       settleTo: settleTo,
       settleFrom: settleFrom,
       settleAmount: amount,
-      settleDate: Date(),
+      settleDate: new Date(), 
       groupId: params.groupId,
     },
     validationSchema: settlementSchema,
-    onSubmit: async () => {
+    onSubmit: async (values) => {
       setLoading(true);
-      const response = await settlementService(
-        values,
-        setAlert,
-        setAlertMessage
-      );
-
-      if (response?.data?.status === "Success") {
-        setSettleSuccess(true);
-        setReload(true);
+      try {
+        const response = await settlementService(values);
+        if (response?.data?.status === "Success") {
+          setSettleSuccess(true);
+          setReload(true);
+        } else {
+          setAlert(true);
+          setAlertMessage(response?.data?.message || "Settlement failed");
+        }
+      } catch (error) {
+        console.error("Settlement error:", error);
+        setAlert(true);
+        setAlertMessage("An error occurred during settlement");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
-    formik;
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps, setFieldValue } = formik;
 
   return (
     <>
@@ -157,12 +162,9 @@ const BalanceSettlement = ({
                             renderInput={(params) => (
                               <TextField {...params} sx={{ width: "100%" }} />
                             )}
-                            value={formik.values.settleDate}
-                            onChange={(value) => {
-                              formik.setFieldValue(
-                                "settleDate",
-                                Date.parse(value)
-                              );
+                            value={values.settleDate}
+                            onChange={(newValue) => {
+                              setFieldValue("settleDate", newValue);
                             }}
                           />
                         ) : (
@@ -173,12 +175,9 @@ const BalanceSettlement = ({
                             renderInput={(params) => (
                               <TextField {...params} sx={{ width: "100%" }} />
                             )}
-                            value={formik.values.settleDate}
-                            onChange={(value) => {
-                              formik.setFieldValue(
-                                "settleDate",
-                                Date.parse(value)
-                              );
+                            value={values.settleDate}
+                            onChange={(newValue) => {
+                              setFieldValue("settleDate", newValue);
                             }}
                           />
                         )}

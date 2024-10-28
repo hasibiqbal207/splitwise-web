@@ -92,10 +92,10 @@ export default function Group() {
                     title={myGroup?.groupName}
                     description={myGroup?.groupDescription}
                     groupMembers={myGroup?.groupMembers}
-                    share={myGroup?.split[0][email]}
+                    share={myGroup?.split[email]}
                     currencyType={myGroup?.groupCurrency}
                     groupCategory={myGroup?.groupCategory}
-                    isGroupActive={checkActive(myGroup?.split[0])}
+                    isGroupActive={checkActive(myGroup?.split)}
                     color={color[Math.floor(Math.random() * 5)]}
                   />
                 </Link>
