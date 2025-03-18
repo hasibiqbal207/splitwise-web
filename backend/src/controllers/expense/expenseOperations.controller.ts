@@ -78,7 +78,6 @@ export const addExpense = handleAsync(async (req: Request, res: Response) => {
       expenseData.expenseMembers
     );
 
-    // Respond with success status and new expense ID
     res.status(200).json({
       status: "Success",
       message: "New expense added",

@@ -5,6 +5,7 @@ import {
   getMonthlyExpense,
   getUserExpenseByCategory,
   getRecentExpensesByUser,
+  getAllUserTransactions,
 } from "../../services/expense.service.js";
 import handleAsync from "../../utils/handleAsync.js";
 
@@ -74,8 +75,6 @@ export const getRecentUserExpenses = handleAsync(
   "Failed to fetch last 5 expenses of the user."
 );
 
-
-
 export const userExpenseByCategory = handleAsync(
   async (req: Request, res: Response) => {
     const { email } = req.body;
@@ -86,4 +85,17 @@ export const userExpenseByCategory = handleAsync(
     });
   },
   "Failed to fetch expense of the user by category."
+);
+
+export const getAllTransactions = handleAsync(
+  async (req: Request, res: Response) => {
+    const { email } = req.body;
+    const transactions = await getAllUserTransactions(email);
+    
+    res.status(200).json({
+      status: "Success",
+      transactions: transactions,
+    });
+  },
+  "Failed to fetch all transactions for the user."
 );

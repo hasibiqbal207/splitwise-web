@@ -1,5 +1,8 @@
 import { ExpenseModel } from "../models/index.js";
 import { ExpenseDocument } from "../models/expense.model.js";
+import { GroupModel, SettlementModel } from "../models/index.js";
+import { GroupDocument } from "../models/group.model.js";
+import { SettlementDocument } from "../models/settlement.model.js";
 
 interface ExpenseData {
   groupId: string;
@@ -211,4 +214,83 @@ export const getRecentExpensesByUser = async (
   return await ExpenseModel.find({ expenseMembers: email }).sort({
     $natural: -1,
   }).limit(5);
+};
+
+// Get all transactions for a user (both expenses and settlements)
+export const getAllUserTransactions = async (email: string): Promise<any[]> => {
+  // Get all expenses where user is a member
+  const expenses = await ExpenseModel.find({ 
+    expenseMembers: email 
+  }).sort({ expenseDate: -1 });
+  
+  // Get all settlements where user is either paying or receiving
+  const settlements = await SettlementModel.find({
+    $or: [
+      { settleTo: email },
+      { settleFrom: email }
+    ]
+  }).sort({ settleDate: -1 });
+  
+  // Get group info for settlements
+  const groupIds = [...new Set([
+    ...expenses.map(exp => exp.groupId),
+    ...settlements.map((settle: SettlementDocument) => settle.groupId)
+  ])];
+  
+  const groups = await GroupModel.find({
+    _id: { $in: groupIds }
+  });
+  
+  const groupMap = new Map();
+  groups.forEach((group: GroupDocument) => {
+    if (group._id) {
+      groupMap.set(group._id.toString(), {
+        groupName: group.groupName,
+        groupCurrency: group.groupCurrency
+      });
+    }
+  });
+  
+  // Format expenses
+  const formattedExpenses = expenses.map(exp => {
+    const group = groupMap.get(exp.groupId);
+    return {
+      id: exp._id,
+      type: 'expense',
+      date: exp.expenseDate,
+      amount: exp.expensePerMember,
+      totalAmount: exp.expenseAmount,
+      name: exp.expenseName,
+      description: exp.expenseDescription,
+      category: exp.expenseCategory,
+      owner: exp.expenseOwner,
+      isOwner: exp.expenseOwner === email,
+      groupId: exp.groupId,
+      groupName: group?.groupName || 'Unknown Group',
+      groupCurrency: group?.groupCurrency || 'USD',
+      timestamp: new Date(exp.expenseDate).getTime()
+    };
+  });
+  
+  // Format settlements
+  const formattedSettlements = settlements.map((settle: SettlementDocument) => {
+    const group = groupMap.get(settle.groupId);
+    const isReceiver = settle.settleTo === email;
+    return {
+      id: settle._id,
+      type: 'settlement',
+      date: settle.settleDate,
+      amount: settle.settleAmount,
+      isReceiver: isReceiver,
+      otherParty: isReceiver ? settle.settleFrom : settle.settleTo,
+      groupId: settle.groupId,
+      groupName: group?.groupName || 'Unknown Group',
+      groupCurrency: group?.groupCurrency || 'USD',
+      timestamp: new Date(settle.settleDate).getTime()
+    };
+  });
+  
+  // Combine and sort by date (newest first)
+  return [...formattedExpenses, ...formattedSettlements]
+    .sort((a, b) => b.timestamp - a.timestamp);
 };

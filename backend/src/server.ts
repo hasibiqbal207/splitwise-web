@@ -19,7 +19,6 @@ app.use(cors());
 
 const port: number = parseInt(process.env.PORT ?? "3000", 10);
 
-
 //parse json request url
 app.use(express.json());
 

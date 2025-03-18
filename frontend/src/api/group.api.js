@@ -25,5 +25,9 @@ export const getUserGroups = (payload) =>
 
 export const getSettle = (payload) =>
   API.post("group/groupSettlement", payload, getAuthHeader());
+
+export const getUserBalance = (payload) =>
+  API.post("group/userBalance", payload, getAuthHeader());
+
 export const makeSettle = (payload) =>
   API.post("group/makeSettlement", payload, getAuthHeader());

@@ -29,6 +29,7 @@ import GroupCategoryGraph from "./GroupCategoryGraph";
 import GroupMonthlyGraph from "./GroupMonthlyGraph";
 import dataConfig from "../../../config/config.json";
 import { GroupSettlements } from "../settlement";
+import UserBalance from "../settlement/userBalance";
 
 const profile = JSON.parse(localStorage.getItem("profile"));
 const email = profile?.email;
@@ -488,7 +489,9 @@ export default function ViewGroup() {
               }}
             >
               {viewSettlement == 2 && (
-                <Typography>My Balance - Under development</Typography>
+                <Grid item md={12} xs={12}>
+                  <UserBalance />
+                </Grid>
               )}
               {viewSettlement === 1 && (
                 <Grid item md={12} xs={12}>

@@ -242,3 +242,58 @@ export const groupBalanceSheet = handleAsync(
   },
   "Failed to settle the group."
 );
+
+export const userBalanceSheet = handleAsync(
+  async (req: Request, res: Response) => {
+    const userEmail = req.body.email;
+    
+    // Validate email
+    if (!validator.emailValidation(userEmail)) {
+      const error: CustomError = new Error("Invalid email format");
+      error.status = 400;
+      throw error;
+    }
+    
+    // Get all groups for the user
+    const userGroups = await getUserGroups(userEmail);
+    
+    if (!userGroups || userGroups.length === 0) {
+      res.status(200).json({
+        status: "Success",
+        data: [],
+        message: "User is not part of any groups"
+      });
+      return;
+    }
+    
+    // Collect balance information across all groups
+    const balanceInfo = [];
+    
+    for (const group of userGroups) {
+      // Only include groups where the user has a balance
+      if (group.split && group.split[userEmail] !== 0) {
+        const simplifiedDebts = simplifyDebts(group.split);
+        
+        // Find transactions involving the current user
+        const userTransactions = simplifiedDebts.filter(
+          transaction => transaction[0] === userEmail || transaction[1] === userEmail
+        );
+        
+        if (userTransactions.length > 0) {
+          balanceInfo.push({
+            groupId: group._id,
+            groupName: group.groupName,
+            groupCurrency: group.groupCurrency,
+            transactions: userTransactions
+          });
+        }
+      }
+    }
+    
+    res.status(200).json({
+      status: "Success",
+      data: balanceInfo
+    });
+  },
+  "Failed to get user balance information"
+);

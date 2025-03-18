@@ -8,6 +8,7 @@ import {
   findGroupsbyUser,
   makeSettlement,
   groupBalanceSheet,
+  userBalanceSheet,
 } from "../controllers/group.controller.js";
 
 const router = express.Router();
@@ -25,5 +26,7 @@ router.route("/getUserGroups").post(findGroupsbyUser);
 router.route("/makeSettlement").post(makeSettlement);
 
 router.route("/groupSettlement").post(groupBalanceSheet);
+
+router.route("/userBalance").post(userBalanceSheet);
 
 export default router;

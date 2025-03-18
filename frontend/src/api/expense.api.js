@@ -31,6 +31,9 @@ export const getUserMonthlyExpense = (payload) =>
 export const getUserCategoryExpense = (payload) =>
   API.post("/expense/user/expenseByCategory", payload, getAuthHeader());
 
+export const getAllUserTransactions = (payload) =>
+  API.post("/expense/user/allTransactions", payload, getAuthHeader());
+
 export const getGroupExpense = (payload) =>
   API.post("/expense/group", payload, getAuthHeader());
 export const getGroupDailyExpense = (payload) =>

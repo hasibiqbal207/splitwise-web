@@ -136,6 +136,22 @@ export const getUserCategoryExpenseService = async (
   }
 };
 
+export const getAllUserTransactionsService = async (
+  data,
+  setAlert,
+  setAlertMessage
+) => {
+  try {
+    return await api.getAllUserTransactions(data);
+  } catch (err) {
+    setAlert(true);
+    err.response.status === 400 || err.response.status === 401
+      ? setAlertMessage(err.response.data.message)
+      : setAlertMessage("Oops! Something went wrong");
+    return false;
+  }
+};
+
 export const getGroupExpenseService = async (
   data,
   setAlert,

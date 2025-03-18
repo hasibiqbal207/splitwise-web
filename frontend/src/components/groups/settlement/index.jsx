@@ -34,6 +34,7 @@ export const GroupSettlements = ({ currencyType }) => {
           setAlert,
           setAlertMessage
         );
+        console.log("group_settle", group_settle);
         setGroupSettlement(group_settle?.data?.data || []);
       } catch (error) {
         console.error("Error fetching group settlement:", error);
