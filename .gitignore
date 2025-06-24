@@ -1,3 +1,6 @@
-.VSCodeCounter
+node_modules/
+.env
+
+app.log
 
 dist
