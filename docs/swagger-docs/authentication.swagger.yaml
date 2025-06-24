@@ -8,7 +8,7 @@ paths:
       summary: Register a user.
       description: "Register a new user with name, email, and password. Returns a userId."
       tags:
-      - User Authentication
+      - Authentication
       requestBody:
         required: true
         content:
@@ -61,7 +61,7 @@ paths:
       description: >-
         Authenticate an user with email and password, and return an access token and user details.
       tags:
-      - User Authentication
+      - Authentication
       requestBody:
         required: true
         content:
@@ -117,7 +117,7 @@ paths:
     post:
       summary: Update password of an user
       tags:
-      - User Authentication
+      - Authentication
       security:
       - BearerAuth: []
       requestBody:

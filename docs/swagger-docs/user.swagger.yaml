@@ -8,7 +8,7 @@ paths:
       summary: Get an user profile data by email.
       description: Get an user profile data by email.
       tags:
-      - User API's
+      - Users
       security:
       - BearerAuth: []
       requestBody:
@@ -57,7 +57,7 @@ paths:
       summary: Update an user profile data. Initially, only the names.
       description: Update an user profile data. Initially, only the names.
       tags:
-      - User API's
+      - Users
       security:
       - BearerAuth: []
       requestBody:
@@ -108,15 +108,13 @@ paths:
         "500":
           description: Internal server error.
 
-
-
   # Delete an user profile
   /user/deleteUser:
     delete:
       summary: Delete an user profile data by email.
       description: Delete an user profile data by email.
       tags:
-      - User API's
+      - Users
       security:
       - BearerAuth: []
       requestBody:
@@ -168,7 +166,7 @@ paths:
       summary: Get All User Names and Emails.
       description: Get All User Names and Emails.
       tags:
-      - User API's
+      - Users
       security:
       - BearerAuth: []
       responses:

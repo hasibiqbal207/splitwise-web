@@ -8,7 +8,7 @@ paths:
       summary: Add an expense to a group made by an user.
       description: Add an expense to a group made by an user.
       tags:
-      - Expense API's
+      - Expenses
       security:
       - BearerAuth: []
       requestBody:
@@ -88,7 +88,7 @@ paths:
       summary: Edit an expense to a group made by an user.
       description: Edit an expense to a group made by an user.
       tags:
-      - Expense API's
+      - Expenses
       security:
       - BearerAuth: []
       requestBody:
@@ -183,7 +183,7 @@ paths:
       summary: Get an expense by expenseId.
       description: Get an expense by expenseId.
       tags:
-      - Expense API's
+      - Expenses
       security:
       - BearerAuth: []
       requestBody:
@@ -242,7 +242,7 @@ paths:
       summary: Delete an expense by expenseId.
       description: Delete an expense by expenseId.
       tags:
-      - Expense API's
+      - Expenses
       security:
       - BearerAuth: []
       requestBody:

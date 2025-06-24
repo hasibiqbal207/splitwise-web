@@ -8,7 +8,7 @@ paths:
       summary: Create a group with group name, description, currency, owner, and members.
       description: Create a group with group name, description, currency, owner, and members.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:
@@ -37,7 +37,7 @@ paths:
                 groupMembers:
                   type: array
                   description: Group's members.
-                  example: ["test@gmail.com", "test2@gmail.com"]
+                  example: [ "test@gmail.com", "test2@gmail.com" ]
       responses:
         200:
           description: Successful creation of group.
@@ -86,7 +86,7 @@ paths:
       summary: Get the group details by groupId.
       description: Get the group details by groupId.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:
@@ -148,7 +148,7 @@ paths:
       summary: Edit group information.
       description: Edit group information.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:
@@ -181,7 +181,7 @@ paths:
                 groupMembers:
                   type: array
                   description: Group's members.
-                  example: ["test@gmail.com", "test2@gmail.com"]
+                  example: [ "test@gmail.com", "test2@gmail.com" ]
       responses:
         200:
           description: Successfully updated the group information.
@@ -230,7 +230,7 @@ paths:
       summary: Delete group by groupId.
       description: Delete group by groupId.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:
@@ -282,7 +282,7 @@ paths:
       summary: Get All the groups where an user is a member.
       description: Get All the groups where an user is a member.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:
@@ -344,7 +344,7 @@ paths:
       summary: Register an user.
       description: Register a new user with email and password. Returns an userId.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:
@@ -398,7 +398,7 @@ paths:
       summary: Register an user.
       description: Register a new user with email and password. Returns an userId.
       tags:
-      - Group API's
+      - Groups
       security:
       - BearerAuth: []
       requestBody:

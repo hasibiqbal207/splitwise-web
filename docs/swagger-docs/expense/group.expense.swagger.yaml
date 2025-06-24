@@ -8,7 +8,7 @@ paths:
       summary: Get All of the group expenses by groupId.
       description: Get All of the group expenses by groupId.
       tags:
-      - Expense API's - Group-Wise
+      - Expenses - Group
       security:
       - BearerAuth: []
       requestBody:
@@ -73,7 +73,7 @@ paths:
       summary:
       description:
       tags:
-      - Expense API's - Group-Wise
+      - Expenses - Group
       security:
       - BearerAuth: []
       requestBody:
@@ -130,7 +130,7 @@ paths:
       summary: Get All of the group expenses by groupId made in a single month.
       description: Get All of the group expenses by groupId made in a single month.
       tags:
-      - Expense API's - Group-Wise
+      - Expenses - Group
       security:
       - BearerAuth: []
       requestBody:
@@ -184,7 +184,7 @@ paths:
       summary: Get All of the group expenses by groupId sorted by category.
       description: Get All of the group expenses by groupId sorted by category.
       tags:
-      - Expense API's - Group-Wise
+      - Expenses - Group
       security:
       - BearerAuth: []
       requestBody:

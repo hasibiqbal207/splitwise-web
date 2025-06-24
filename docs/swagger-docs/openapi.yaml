@@ -1,15 +1,26 @@
 openapi: 3.0.0
 info:
   title: Splitwise API Documentation
-  description: Splitwise API documentation for developers
   version: 1.0.0
+  description: |
+    Complete API documentation for the Splitwise-like Expense Sharing System.
+
+    This system provides:
+    - User authentication and management
+    - Group creation and management
+    - Expense tracking and splitting
+    - Group and user-wise expense analytics
+    - Secure JWT-based authentication
+    - Comprehensive error handling
   contact:
     name: API Support
     email: hasibiqbal207@gmail.com
 
 servers:
 - url: http://localhost:4004/api/v1
-  description: Development Server
+  description: Development server
+- url: https://api.splitwise-demo.com/api/v1
+  description: Production server (dummy)
 
 components:
   securitySchemes:
@@ -18,6 +29,90 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Invalid request data"
+              errors:
+                type: array
+                items:
+                  type: string
+    Unauthorized:
+      description: Unauthorized access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Unauthorized access"
+    Forbidden:
+      description: Forbidden access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Access forbidden - insufficient permissions"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Resource not found"
+    Conflict:
+      description: Resource conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Resource conflict"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Internal server error"
+
   schemas:
     User:
       type: object
@@ -25,7 +120,7 @@ components:
         _id:
           type: string
           example: 667d7bf8937dd0b603ac7495
-          description: The unique identifier for the user, used it as userId.
+          description: The unique identifier for the user, used as userId.
         firstName:
           type: string
           example: Hasib
@@ -126,7 +221,8 @@ components:
           description: The currency of the expense.
           example: "EUR"
         expenseDate:
-          type: date
+          type: string
+          format: date
           description: The date of the expense.
           example: 2022-10-10
         expenseOwner:
@@ -148,4 +244,17 @@ components:
           description: The type of the expense.
           example: "Cash"
 
+tags:
+- name: Authentication
+  description: User authentication and authorization endpoints
+- name: Users
+  description: User profile and management endpoints
+- name: Groups
+  description: Group creation, management, and settlement endpoints
+- name: Expenses
+  description: Expense creation, editing, and analytics endpoints
+- name: Expenses - Group
+  description: Expense creation, editing, and analytics endpoints
+- name: Expenses - User
+  description: Expense creation, editing, and analytics endpoints
 paths: {}
