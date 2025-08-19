@@ -10,7 +10,10 @@
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production babel src -d dist"
+    "copy-swagger": "cp -r docs/swagger-docs dist/docs/",
+    "prebuild": "rm -rf dist && mkdir -p dist/docs",
+    "build": "NODE_ENV=production tsc && npm run copy-swagger",
+    "prod": "node ./dist/src/server.js"
   },
   "keywords": [],
   "author": "Hasib Iqbal",

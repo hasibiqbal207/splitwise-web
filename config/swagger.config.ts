@@ -13,23 +13,26 @@ function loadYamlFile(filePath: string) {
   return YAML.load(path.join(__dirname, filePath));
 }
 
+// Determine the base path based on environment
+const basePath = process.env.NODE_ENV === 'production' ? '../docs' : '../docs';
+
 // Load base OpenAPI YAML file
-const openapiMain = loadYamlFile("../docs/swagger-docs/openapi.yaml");
+const openapiMain = loadYamlFile(`${basePath}/swagger-docs/openapi.yaml`);
 
 // Load and merge other module-specific YAML files
 const authenticationDoc = loadYamlFile(
-  "../docs/swagger-docs/authentication.swagger.yaml"
+  `${basePath}/swagger-docs/authentication.swagger.yaml`
 );
-const userDoc = loadYamlFile("../docs/swagger-docs/user.swagger.yaml");
-const groupDoc = loadYamlFile("../docs/swagger-docs/group.swagger.yaml");
+const userDoc = loadYamlFile(`${basePath}/swagger-docs/user.swagger.yaml`);
+const groupDoc = loadYamlFile(`${basePath}/swagger-docs/group.swagger.yaml`);
 const expenseDoc = loadYamlFile(
-  "../docs/swagger-docs/expense/expense.swagger.yaml"
+  `${basePath}/swagger-docs/expense/expense.swagger.yaml`
 );
 const groupExpenseDoc = loadYamlFile(
-  "../docs/swagger-docs/expense/group.expense.swagger.yaml"
+  `${basePath}/swagger-docs/expense/group.expense.swagger.yaml`
 );
 const userExpenseDoc = loadYamlFile(
-  "../docs/swagger-docs/expense/user.expense.swagger.yaml"
+  `${basePath}/swagger-docs/expense/user.expense.swagger.yaml`
 );
 
 // Merge paths from all YAML files into the main spec
