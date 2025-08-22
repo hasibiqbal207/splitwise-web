@@ -371,7 +371,7 @@ docker-compose -f compose.prod.yaml up -d
 
 ## 📄 License
 
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for details.
 
 ## 🆘 Support
 
@@ -379,13 +379,5 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 - **Issues**: Report bugs and request features via GitHub Issues
 - **Discussions**: Use GitHub Discussions for questions and ideas
 - **Email**: Contact the development team for enterprise support
-
-## 🙏 Acknowledgments
-
-- **Express.js Team**: For the excellent web framework
-- **MongoDB Team**: For the powerful NoSQL database
-- **Mongoose Team**: For the elegant ODM
-- **JWT.io**: For the authentication standard
-- **Open Source Community**: For all the amazing tools and libraries
-
+- 
 ---
