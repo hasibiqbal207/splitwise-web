@@ -57,8 +57,19 @@ const options: Options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 function swaggerDocs(app: Application, port: number) {
-  // Swagger page
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  // Swagger page with custom options
+  const swaggerOptions = {
+    explorer: true,
+    swaggerOptions: {
+      persistAuthorization: true,
+      tryItOutEnabled: true,
+      displayRequestDuration: true,
+      filter: true,
+      deepLinking: true,
+    }
+  };
+
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
 
   // Docs in JSON format
   app.get("/docs.json", (req, res) => {
@@ -67,6 +78,7 @@ function swaggerDocs(app: Application, port: number) {
   });
 
   logger.info(`Docs available at http://localhost:${port}/api-docs`);
+  logger.info(`Docs also available at http://0.0.0.0:${port}/api-docs`);
 }
 
 export default swaggerDocs;

@@ -5,16 +5,16 @@ FROM node:18.18.0-alpine AS development
 WORKDIR /app
 
 # Copy package.json and package-lock.json (if available)
-COPY ../package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application source code
-COPY ../ .
+COPY . .
 
 # Expose the development server port
-EXPOSE 6002
+EXPOSE 4004
 
 # Command to run the application in development mode
 CMD ["npm", "run", "dev"]

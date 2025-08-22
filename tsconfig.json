@@ -5,6 +5,9 @@
     "outDir": "./dist", // Output directory for the compiled JavaScript files
     "forceConsistentCasingInFileNames": true, // Ensure file names are treated as case-sensitive
     "allowSyntheticDefaultImports": true,
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "target": "ES2022",
     // "allowImportingTsExtensions": true,
     // "noEmit": true
   },

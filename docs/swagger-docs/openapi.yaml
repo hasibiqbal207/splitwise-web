@@ -17,10 +17,10 @@ info:
     email: hasibiqbal207@gmail.com
 
 servers:
-- url: http://localhost:4004/api/v1
+- url: http://localhost:6002/api/v1
   description: Development server
-- url: https://api.splitwise-demo.com/api/v1
-  description: Production server (dummy)
+- url: http://0.0.0.0:6002/api/v1
+  description: Docker Development server
 
 components:
   securitySchemes:

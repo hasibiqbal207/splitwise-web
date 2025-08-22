@@ -15,7 +15,13 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// Configure CORS
+app.use(cors({
+  origin: ['http://localhost:6002', 'http://localhost:4004', 'http://0.0.0.0:6002'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 const port: number = parseInt(process.env.PORT ?? "3000", 10);
 
