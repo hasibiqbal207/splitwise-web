@@ -32,9 +32,9 @@ app.use(express.json());
 app.use(morganMiddleware);
 
 //api v1 routes
-app.use("/api/v1", routes);
+app.use("/splitwiseBE/api/v1", routes);
 
-app.get("/", (req, res) => {
+app.get("/splitwiseBE/", (req, res) => {
   res.send("Hello World!");
 });
 

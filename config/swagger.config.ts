@@ -69,10 +69,10 @@ function swaggerDocs(app: Application, port: number) {
     }
   };
 
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
+  app.use("/splitwiseBE/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
 
   // Docs in JSON format
-  app.get("/docs.json", (req, res) => {
+  app.get("/splitwiseBE/docs.json", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
   });
