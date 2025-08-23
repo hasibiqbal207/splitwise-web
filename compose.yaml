@@ -5,13 +5,13 @@ services:
       dockerfile: docker/Dockerfile.dev
     image: splitwise-dev
     ports:
-      - "4004:4004"
+      - "4002:4002"
     volumes:
       - ./:/app
       - /app/node_modules/
     environment:
       - NODE_ENV=development
-      - PORT=4004
+      - PORT=4002
 
   production:
     build:
@@ -19,8 +19,10 @@ services:
       dockerfile: docker/Dockerfile.prod
     image: splitwise-prod
     ports:
-      - "7002:7002"
+      - "4002:4002"
     restart: always
     environment:
       - NODE_ENV=production
-      - PORT=7002
+      - PORT=4002
+    env_file:
+      - /opt/apps/envs/splitwise-be/.env
