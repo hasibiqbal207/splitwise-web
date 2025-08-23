@@ -14,9 +14,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.prod
+      args:
+        - VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL}
     image: splitwise-frontend-prod
     ports:
       - "6002:6002"
     restart: always
-    env_file:
-      - /opt/apps/envs/splitwise-fe/.env
