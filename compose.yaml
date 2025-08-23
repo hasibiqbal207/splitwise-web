@@ -18,6 +18,5 @@ services:
     ports:
       - "6002:6002"
     restart: always
-    environment:
-      - NODE_ENV=production
-      - VITE_BACKEND_BASE_URL=http://localhost:4002/api/v1
+    env_file:
+      - /opt/apps/envs/splitwise-fe/.env
