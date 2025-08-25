@@ -9,6 +9,8 @@ services:
     volumes:
       - ../:/app
       - /app/node_modules/
+    networks:
+      - splitwise-network
 
   production:
     build:
@@ -20,3 +22,9 @@ services:
     ports:
       - "6002:6002"
     restart: always
+    networks:
+      - splitwise-network
+
+networks:
+  splitwise-network:
+    name: splitwise-network
