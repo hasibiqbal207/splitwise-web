@@ -17,11 +17,18 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-  origin: ['http://localhost:4002', 'http://0.0.0.0:4002', 'http://localhost:6002', 'http://0.0.0.0:6002'],
+  origin: [
+    'http://localhost:4002',
+    'http://0.0.0.0:4002',
+    'http://localhost:6002',
+    'http://0.0.0.0:6002',
+    'https://splitwise.hasibiqbal.dev'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
 
 const port: number = parseInt(process.env.PORT ?? "3000", 10);
 
