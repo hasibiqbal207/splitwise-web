@@ -12,6 +12,8 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4002
+    networks:
+      - splitwise-network
 
   production:
     build:
@@ -26,3 +28,9 @@ services:
       - PORT=4002
     env_file:
       - /opt/apps/envs/splitwise-be/.env
+    networks:
+      - splitwise-network
+
+networks:
+  splitwise-network:
+    name: splitwise-network
