@@ -15,7 +15,7 @@ COPY . .
 
 # Create a .env file with the environment variables
 ARG VITE_BACKEND_BASE_URL
-ENV VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL}
+ENV VITE_BACKEND_BASE_URL=$VITE_BACKEND_BASE_URL
 
 # Export it for Vite during build
 RUN export VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL} && \
