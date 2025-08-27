@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: Splitwise API Documentation
+  version: 1.0.0
+  description: |
+    Complete API documentation for the Splitwise-like Expense Sharing System.
+
+    This system provides:
+    - User authentication and management
+    - Group creation and management
+    - Expense tracking and splitting
+    - Group and user-wise expense analytics
+    - Secure JWT-based authentication
+    - Comprehensive error handling
+  contact:
+    name: API Support
+    email: hasibiqbal207@gmail.com
+
+servers:
+- url: https://splitwise.hasibiqbal.dev/api/v1
+  description: Production server
+- url: http://localhost:4002/api/v1
+  description: Development server
+- url: http://0.0.0.0:4002/api/v1
+  description: Docker Development server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Invalid request data"
+              errors:
+                type: array
+                items:
+                  type: string
+    Unauthorized:
+      description: Unauthorized access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Unauthorized access"
+    Forbidden:
+      description: Forbidden access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Access forbidden - insufficient permissions"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Resource not found"
+    Conflict:
+      description: Resource conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Resource conflict"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              message:
+                type: string
+                example: "Internal server error"
+
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 667d7bf8937dd0b603ac7495
+          description: The unique identifier for the user, used as userId.
+        firstName:
+          type: string
+          example: Hasib
+          description: The first name of the user.
+        lastName:
+          type: string
+          example: Iqbal
+          description: The last name of the user.
+        email:
+          type: string
+          format: email
+          example: test@gmail.com
+          description: The email address of the user.
+        password:
+          type: string
+          example: $2b$10$guyLB8ivrbO5cNC4mN/EyeEafMEiGSUjw2mnIbX97ZpKnRcvxEI4K
+          description: The hashed password of the user.
+        createdAt:
+          type: string
+          format: date-time
+          example: 2024-06-27T14:49:28.415Z
+          description: The timestamp when the user was created.
+        updatedAt:
+          type: string
+          format: date-time
+          example: 2024-10-06T12:53:01.757Z
+          description: The timestamp when the user's information was last updated.
+        __v:
+          type: integer
+          example: 0
+          description: The document version key.
+
+    Group:
+      type: object
+      properties:
+        groupName:
+          type: string
+          description: The name of the group.
+          example: "To check split"
+        groupDescription:
+          type: string
+          description: A brief description of the group.
+          example: "Sample group description"
+        groupCurrency:
+          type: string
+          description: The currency in which the group operates.
+          example: "EUR"
+        groupOwner:
+          type: string
+          description: The email of the group owner.
+          example: "test7@gmail.com"
+        groupMembers:
+          type: array
+          description: A list of email addresses of group members.
+          items:
+            type: string
+            example: "test@gmail.com"
+        groupCategory:
+          type: string
+          description: The category of the group.
+          example: "Others"
+        groupTotal:
+          type: number
+          description: The total amount of the group.
+          example: 0
+        split:
+          type: object
+          description: A mapping of emails to amounts.
+          additionalProperties:
+            type: number
+            example: 0
+
+    Expense:
+      type: object
+      properties:
+        groupId:
+          type: string
+          description: The id of the group to which the expense belongs.
+          example: "668ab2a826830e738cd1c108"
+        expenseName:
+          type: string
+          description: The name of the expense.
+          example: "Food"
+        expenseDescription:
+          type: string
+          description: A brief description of the expense.
+          example: "Fooding with Francis"
+        expenseAmount:
+          type: number
+          description: The amount of the expense.
+          example: 80
+        expenseCategory:
+          type: string
+          description: The category of the expense.
+          example: "Others"
+        expenseCurrency:
+          type: string
+          description: The currency of the expense.
+          example: "EUR"
+        expenseDate:
+          type: string
+          format: date
+          description: The date of the expense.
+          example: 2022-10-10
+        expenseOwner:
+          type: string
+          description: The email of the owner of the expense.
+          example: "test7@gmail.com"
+        expenseMembers:
+          type: array
+          description: A list of email addresses of the members associated with the expense.
+          items:
+            type: string
+            example: "test@gmail.com"
+        expensePerMember:
+          type: number
+          description: The amount per member of the expense.
+          example: 20
+        expenseType:
+          type: string
+          description: The type of the expense.
+          example: "Cash"
+
+tags:
+- name: Authentication
+  description: User authentication and authorization endpoints
+- name: Users
+  description: User profile and management endpoints
+- name: Groups
+  description: Group creation, management, and settlement endpoints
+- name: Expenses
+  description: Expense creation, editing, and analytics endpoints
+- name: Expenses - Group
+  description: Expense creation, editing, and analytics endpoints
+- name: Expenses - User
+  description: Expense creation, editing, and analytics endpoints
+paths: {}

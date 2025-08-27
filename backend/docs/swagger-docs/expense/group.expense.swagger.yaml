@@ -1,0 +1,227 @@
+#    Represents the Swagger documentation for the expense routes 
+#    in the form of ./backend/src/routes/expense/group.expense.route.ts
+
+paths:
+  # Get All of the group expenses by groupId.
+  /expense/group/:
+    post:
+      summary: Get All of the group expenses by groupId.
+      description: Get All of the group expenses by groupId.
+      tags:
+      - Expenses - Group
+      security:
+      - BearerAuth: []
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: Group Id of the group to which the expense will be added.
+                  example: "668ab2a826830e738cd1c108"
+      responses:
+        200:
+          description: Successfully fetched the group expenses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Success"
+                  total:
+                    type: number
+                    example: 2
+                  expenses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The unique identifier of the group.
+                          example: "6706f59fdca7f9feb4fb6c5e"
+                        allof:
+                        - $ref: '#/components/schemas/Expense'
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: The creation timestamp.
+                          example: "2024-10-09T21:29:03.767Z"
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: The last update timestamp.
+                          example: "2024-10-09T21:29:03.767Z"
+                        __v:
+                          type: number
+                          description: The version key for the group document.
+                          example: 0
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Get All of the group expenses by groupId made in a single day.
+  /expense/group/dailyExpense:
+    post:
+      summary:
+      description:
+      tags:
+      - Expenses - Group
+      security:
+      - BearerAuth: []
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: Group Id of the group to which the expense will be added.
+                  example: "668ab2a826830e738cd1c108"
+      responses:
+        '200':
+          description: Successful retrieval of response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  responseData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: object
+                          properties:
+                            date:
+                              type: integer
+                              example: 6
+                            month:
+                              type: integer
+                              example: 10
+                            year:
+                              type: integer
+                              example: 2024
+                        amount:
+                          type: number
+                          example: 8300
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Get All of the group expenses by groupId made in a single month.
+  /expense/group/monthlyExpense:
+    post:
+      summary: Get All of the group expenses by groupId made in a single month.
+      description: Get All of the group expenses by groupId made in a single month.
+      tags:
+      - Expenses - Group
+      security:
+      - BearerAuth: []
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: Group Id of the group to which the expense will be added.
+                  example: "668ab2a826830e738cd1c108"
+      responses:
+        '200':
+          description: Successful retrieval of response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  responseData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: object
+                          properties:
+                            month:
+                              type: integer
+                              example: 10
+                            year:
+                              type: integer
+                              example: 2024
+                        amount:
+                          type: number
+                          example: 8300
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.
+
+  # Get All of the group expenses by groupId sorted by category.
+  /expense/group/expenseByCategory:
+    post:
+      summary: Get All of the group expenses by groupId sorted by category.
+      description: Get All of the group expenses by groupId sorted by category.
+      tags:
+      - Expenses - Group
+      security:
+      - BearerAuth: []
+      requestBody:
+        description:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: Group Id of the group to which the expense will be added.
+                  example: "668ab2a826830e738cd1c108"
+      responses:
+        '200':
+          description: Successful retrieval of response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Success
+                  responseData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          example: "Others"
+                        amount:
+                          type: number
+                          example: 8300
+        400:
+          description: Bad request.
+        500:
+          description: Internal server error.

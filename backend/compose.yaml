@@ -1,0 +1,36 @@
+services:
+  development:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    image: splitwise-dev
+    ports:
+      - "4002:4002"
+    volumes:
+      - ./:/app
+      - /app/node_modules/
+    environment:
+      - NODE_ENV=development
+      - PORT=4002
+    networks:
+      - splitwise-network
+
+  production:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.prod
+    image: splitwise-prod
+    ports:
+      - "4002:4002"
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=4002
+    env_file:
+      - /opt/apps/envs/splitwise-be/.env
+    networks:
+      - splitwise-network
+
+networks:
+  splitwise-network:
+    name: splitwise-network
