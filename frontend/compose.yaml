@@ -1,0 +1,30 @@
+services:
+  development:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    image: splitwise-frontend-dev
+    ports:
+      - "6002:6002"
+    volumes:
+      - ../:/app
+      - /app/node_modules/
+    networks:
+      - splitwise-network
+
+  production:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.prod
+      args:
+        VITE_BACKEND_BASE_URL: ${VITE_BACKEND_BASE_URL}
+    image: splitwise-frontend-prod
+    ports:
+      - "6002:6002"
+    restart: always
+    networks:
+      - splitwise-network
+
+networks:
+  splitwise-network:
+    name: splitwise-network
