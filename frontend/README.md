@@ -1,73 +1,153 @@
-# Splitwise Application
+# Splitwise Frontend
 
-A modern expense sharing application built with React and Node.js that helps users manage and split expenses within groups.
+The frontend application for Splitwise built with React, Vite, and modern web technologies.
+
+## Technology Stack
+
+- React 18
+- Vite
+- React Router for navigation
+- Modern JavaScript (ES6+)
+- CSS Modules for styling
+- Axios for API communication
 
 ## Project Structure
 
-The project is organized into two main components:
+```
+frontend/
+├── src/
+│   ├── api/          # API integration and service calls
+│   ├── components/   # Reusable React components
+│   ├── config/       # Application configuration
+│   ├── services/     # Business logic and data processing
+│   ├── theme/        # UI theme and styling constants
+│   ├── utils/        # Utility functions and helpers
+│   ├── App.jsx       # Root application component
+│   ├── AppRoutes.jsx # Application routing configuration
+│   └── main.jsx      # Application entry point
+├── public/           # Static assets
+├── docker/          # Docker configuration files
+└── vite.config.js   # Vite configuration
+```
 
-- `frontend/`: React-based web application
-- `backend/`: Node.js/Express REST API server
-
-## Quick Start
+## Development
 
 ### Prerequisites
 
 - Node.js (v14 or higher)
 - npm or yarn
-- Docker (optional, for containerized deployment)
 
-### Running the Application
+### Installation
 
-1. Clone the repository:
+1. Install dependencies:
 ```bash
-git clone <repository-url>
-cd splitwise-web
+npm install
 ```
 
-2. Start the Backend:
+2. Start development server:
 ```bash
-cd backend
-npm install
 npm run dev
 ```
 
-3. Start the Frontend:
+The application will be available at http://localhost:5173
+
+### Building for Production
+
 ```bash
-cd frontend
-npm install
-npm run dev
+npm run build
 ```
 
-The application will be available at:
-- Frontend: http://localhost:5173
-- Backend: http://localhost:3000
+The built files will be in the `dist/` directory.
 
-## Features
+### Docker Support
 
-- User authentication and authorization
-- Create and manage groups
-- Add and split expenses
-- Multiple splitting options (equal, percentage, exact amounts)
-- Real-time expense calculations
-- Transaction history and summaries
-- User profile management
+For containerized deployment, use:
 
-## Documentation
+```bash
+docker build -t splitwise-frontend .
+docker run -p 80:80 splitwise-frontend
+```
 
-- [Frontend Documentation](frontend/README.md)
-- [Backend Documentation](backend/README.md)
-- [API Documentation](backend/docs/API.md)
-- [Docker Deployment](frontend/README.Docker.md)
+See [README.Docker.md](README.Docker.md) for detailed Docker instructions.
+
+## Available Scripts
+
+- `npm run dev`: Start development server
+- `npm run build`: Build for production
+- `npm run lint`: Run ESLint
+- `npm run preview`: Preview production build locally
+
+## Code Style
+
+We use ESLint and Prettier for code formatting. Configuration can be found in:
+- `.eslintrc.cjs`
+- `.prettierrc` (if used)
+
+## Component Guidelines
+
+1. Use functional components with hooks
+2. Keep components small and focused
+3. Use proper prop-types or TypeScript for type checking
+4. Follow the container/presenter pattern where applicable
+
+## State Management
+
+- Use React Context for global state
+- Use local state (useState) for component-specific state
+- Consider using React Query for server state management
+
+## Testing
+
+- Write unit tests for components and utilities
+- Use React Testing Library for component testing
+- Aim for good test coverage of business logic
+
+## Performance Considerations
+
+1. Use React.memo() for expensive computations
+2. Implement proper code splitting
+3. Optimize images and assets
+4. Use lazy loading for routes and components
+
+## Browser Support
+
+The application supports:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## Contributing
 
-We welcome contributions! Please read our contribution guidelines before submitting pull requests.
+1. Follow the code style guidelines
+2. Write meaningful commit messages
+3. Add tests for new features
+4. Update documentation as needed
+
+## Troubleshooting
+
+Common issues and solutions:
+
+1. **Build fails**: Clear node_modules and reinstall
+2. **Vite HMR issues**: Restart development server
+3. **API connection fails**: Check backend URL configuration
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-## Support
+```
+Copyright 2025 Splitwise Frontend Contributors
 
-For support, please open an issue in the repository or contact the maintainers.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
